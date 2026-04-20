@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html lang="es">
-<head>
+<html lang="es"><head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>JECWORKMED — Gestión de Instalaciones</title>
 <link rel="icon" type="image/png" href="data:image/png;base64,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">
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&amp;family=DM+Mono:wght@400;500&amp;family=DM+Sans:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>:root{--bg:#f0f7f7;--bg2:#e2f0f0;--surface:#fff;--border:#b8d8d8;--accent:#1a2e2e;--accent2:#c8392b;--teal:#5bbfb5;--text:#111c1c;--text2:#3a5050;--text3:#7a9090;--green:#2a8a7a;--green-bg:#e0f5f2;--orange:#b85c1a;--orange-bg:#fdf0e8;--radius:6px;--shadow:0 2px 12px rgba(28,26,22,.08);--shadow-lg:0 8px 32px rgba(28,26,22,.12);}*{box-sizing:border-box;margin:0;padding:0}body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:14px}header{background:linear-gradient(to right,#fff,#1a2e2e);padding:0 32px;display:flex;align-items:center;justify-content:space-between;height:90px;position:sticky;top:0;z-index:100;box-shadow:0 2px 16px rgba(0,0,0,.22)}.header-brand{display:flex;align-items:center;gap:14px}.header-sep{border-left:1px solid rgba(91,191,181,.35);padding-left:14px;margin-left:2px}.header-sub{font-size:11px;font-weight:700;letter-spacing:.1em;color:#111;text-transform:uppercase}.header-actions{display:flex;align-items:center;gap:10px}.btn{padding:8px 18px;border-radius:var(--radius);border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;transition:all .15s;display:inline-flex;align-items:center;gap:6px}.btn-primary{background:var(--green);color:#fff}.btn-primary:hover{background:#1f6b5e}.btn-outline{background:transparent;color:var(--accent);border:1.5px solid var(--accent)}.btn-outline:hover{background:var(--green-bg)}.btn-danger{background:var(--accent2);color:#fff}.btn-danger:hover{background:#a02e22}.btn-dark{background:#1a2e2e;color:#fff}.btn-dark:hover{background:#0f1e1e}.btn-green{background:var(--green);color:#fff}.btn-green:hover{background:#1f6b5e}.btn-sm{padding:5px 12px;font-size:12px}.layout{display:flex;height:calc(100vh - 90px)}.sidebar{width:240px;background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;overflow-y:auto;flex-shrink:0}.sidebar-section{padding:20px 16px 8px}.sidebar-label{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin-bottom:6px;padding-left:8px}.nav-item{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:var(--radius);cursor:pointer;color:var(--text2);font-size:13.5px;transition:all .12s;margin-bottom:1px}.nav-item:hover{background:var(--bg);color:var(--text)}.nav-item.active{background:var(--green-bg);color:var(--green);font-weight:600}.nav-item .icon{font-size:16px;width:20px;text-align:center}.main{flex:1;overflow-y:auto;background:var(--bg)}.page{display:none;padding:28px 32px}.page.active{display:block}.page-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:24px}.page-title{font-family:'DM Serif Display',serif;font-size:26px;color:var(--green)}.page-subtitle{font-size:13px;color:var(--text3);margin-top:2px}.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px}.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;box-shadow:var(--shadow)}.stat-label{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px}.stat-value{font-family:'DM Serif Display',serif;font-size:32px;color:var(--green)}.stat-detail{font-size:11px;color:var(--text3);margin-top:4px}.table-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}.table-toolbar{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;border-bottom:1px solid var(--border);gap:12px}.search-box{display:flex;align-items:center;gap:8px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);padding:7px 12px;flex:1;max-width:320px}.search-box input{border:none;background:transparent;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--text);outline:none;width:100%}table{width:100%;border-collapse:collapse}thead{background:var(--bg2)}th{text-align:left;padding:10px 16px;font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--text3);border-bottom:1px solid var(--border)}td{padding:12px 16px;border-bottom:1px solid var(--bg2);font-size:13px;vertical-align:middle}tr:last-child td{border-bottom:none}tr:hover td{background:var(--bg)}.actions-cell{display:flex;gap:6px;flex-wrap:wrap}.badge{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600}.badge-green{background:var(--green-bg);color:var(--green)}.badge-orange{background:var(--orange-bg);color:var(--orange)}.modal-overlay{display:none;position:fixed;inset:0;background:rgba(28,26,22,.45);z-index:200;align-items:flex-start;justify-content:center;padding:24px;overflow-y:auto}#modal-preview{z-index:9999}.modal-overlay.open{display:flex}.modal{background:var(--surface);border-radius:10px;box-shadow:var(--shadow-lg);width:100%;max-width:840px;margin:auto;animation:modalIn .18s ease}@keyframes modalIn{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}.modal-header{display:flex;align-items:center;justify-content:space-between;padding:20px 28px 16px;border-bottom:1px solid var(--border)}.modal-title{font-family:'DM Serif Display',serif;font-size:20px;color:var(--green)}.modal-close{background:none;border:none;cursor:pointer;font-size:20px;color:var(--text3);padding:4px 8px;border-radius:4px}.modal-close:hover{background:var(--bg)}.modal-body{padding:24px 28px}.modal-footer{padding:16px 28px;border-top:1px solid var(--border);display:flex;justify-content:flex-end;gap:10px}.form-section{margin-bottom:24px}.form-section-title{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:14px;padding-bottom:6px;border-bottom:1px solid var(--border)}.form-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.form-grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.form-group{display:flex;flex-direction:column;gap:5px}.form-group.span2{grid-column:span 2}.form-group label{font-size:12px;font-weight:500;color:var(--text2)}.form-group input,.form-group select{color:var(--text)}input,select,textarea{padding:8px 11px;border:1.5px solid var(--border);border-radius:var(--radius);font-family:'DM Sans',sans-serif;font-size:13px;color:var(--text);background:var(--bg);outline:none;transition:border-color .15s;width:100%}input:focus,select:focus,textarea:focus{border-color:var(--green);background:#fff}textarea{resize:vertical;min-height:60px}select{cursor:pointer}.tabs{display:flex;border-bottom:2px solid var(--border);margin-bottom:22px}.tab-btn{padding:10px 20px;font-size:13px;font-weight:500;color:var(--text3);border:none;background:none;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .15s}.tab-btn:hover{color:var(--green)}.tab-btn.active{color:var(--green);border-bottom-color:var(--green);font-weight:600}.tab-btn.incomplete{background:rgba(224,123,57,0.15);color:var(--orange,#e07b39);border-radius:6px 6px 0 0}.tab-btn.incomplete.active{color:var(--orange,#e07b39);border-bottom-color:var(--orange,#e07b39)}.tab-content{display:none}.tab-content.active{display:block}.progress-checks{display:flex;gap:8px;flex-wrap:wrap}.check-item{display:flex;align-items:center;gap:5px;font-size:12px;padding:4px 10px;border-radius:20px;background:var(--bg2);color:var(--text3)}.check-item.done{background:var(--green-bg);color:var(--green)}.check-item.warn{background:rgba(224,123,57,0.15);color:#e07b39;}
 
@@ -121,7 +120,28 @@
 /* Input verde solo cuando tiene contenido */
 #modal-inst input[style*="color:var(--green)"]:placeholder-shown { color: var(--text3) !important; }
 #modal-inst input[style*="color:#000"]:placeholder-shown { color: var(--text3) !important; }@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}.cli-hist-row td{border-bottom:none;}.cli-hist-panel{display:none;background:var(--bg2);border-radius:0 0 8px 8px;padding:12px 16px 12px 38px;}.cli-hist-panel.open{display:block;}.cli-hist-item{display:flex;align-items:center;gap:10px;padding:6px 0;border-bottom:1px solid var(--border);font-size:12px;}.cli-hist-item:last-child{border-bottom:none;}.cli-hist-badge{font-size:10px;padding:2px 8px;border-radius:10px;font-weight:600;white-space:nowrap;}.cli-hist-badge.inst{background:var(--green-bg);color:var(--green);}.cli-hist-badge.baja{background:rgba(224,123,57,0.15);color:#e07b39;}.cli-hist-empty{color:var(--text3);font-size:12px;font-style:italic;padding:8px 0;}.config-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}.config-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}.config-card-header{padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:var(--bg2)}.config-card-title{font-weight:600;font-size:14px;color:var(--green)}.config-item{display:flex;align-items:center;justify-content:space-between;padding:9px 20px;border-bottom:1px solid var(--bg2);font-size:13px}.config-item:last-child{border-bottom:none}.config-item-sub{color:var(--text3);font-size:11px;font-family:'DM Mono',monospace}.mini-add-row{display:flex;gap:8px;padding:12px 20px;border-top:1px solid var(--border)}.mini-add-row input{flex:1}.ficha-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}.ficha-section{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}.ficha-section.full{grid-column:span 2}.ficha-section-header{background:var(--green);color:#fff;padding:10px 16px;font-size:12px;font-weight:600;letter-spacing:.07em;text-transform:uppercase}.ficha-row{display:flex;padding:7px 16px;border-bottom:1px solid var(--bg2);font-size:13px}.ficha-row:last-child{border-bottom:none}.ficha-key{color:var(--text3);width:140px;flex-shrink:0;font-size:12px}.ficha-val{color:var(--text);font-weight:500;word-break:break-all;flex:1}.detail-actions{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;align-items:center}.radio-group{display:flex;gap:16px;align-items:center;padding:4px 0}.radio-group label{display:flex;align-items:center;gap:5px;cursor:pointer;font-weight:400}.radio-group input[type=radio]{width:auto}.procedencia-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:4px}.proc-option{border:2px solid var(--border);border-radius:var(--radius);padding:10px 14px;cursor:pointer;text-align:center;font-size:12px;font-weight:500;color:var(--text3);transition:all .15s;background:var(--bg)}.proc-option:hover{border-color:var(--green);color:var(--green)}.proc-option.selected{border-color:var(--green);background:var(--green-bg);color:var(--green);font-weight:600}.notification{position:fixed;bottom:24px;right:24px;color:#fff;padding:12px 20px;border-radius:var(--radius);font-size:13px;font-weight:500;box-shadow:var(--shadow-lg);z-index:999;display:none;animation:slideUp .2s ease}@keyframes slideUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}.notification.show{display:block}.notification.success{background:var(--green)}.notification.error{background:var(--accent2)}.notification.info{background:#1a2e2e}.empty-state{text-align:center;padding:60px 20px;color:var(--text3)}.empty-state .icon{font-size:48px;margin-bottom:12px}input select .empty-state h3{font-family:'DM Serif Display',serif;font-size:20px;color:var(--text2);margin-bottom:6px}input.fre,select.fre{border:2px solid #e53935 !important;background-color:#fff5f5 !important;}input.fre{border:2px solid #e53935 !important;background-color:#fff5f5 !important;border-radius:4px !important;}select.fre{border:2px solid #e53935 !important;background-color:#fff5f5 !important;border-radius:4px !important;}</style>
-</head>
+<style id="claude-agent-animation-styles">
+      @keyframes claude-pulse {
+        0% {
+          box-shadow: 
+            inset 0 0 10px rgba(217, 119, 87, 0.5),
+            inset 0 0 20px rgba(217, 119, 87, 0.3),
+            inset 0 0 30px rgba(217, 119, 87, 0.1);
+        }
+        50% {
+          box-shadow: 
+            inset 0 0 15px rgba(217, 119, 87, 0.7),
+            inset 0 0 25px rgba(217, 119, 87, 0.5),
+            inset 0 0 35px rgba(217, 119, 87, 0.2);
+        }
+        100% {
+          box-shadow: 
+            inset 0 0 10px rgba(217, 119, 87, 0.5),
+            inset 0 0 20px rgba(217, 119, 87, 0.3),
+            inset 0 0 30px rgba(217, 119, 87, 0.1);
+        }
+      }
+    </style><style>@media(max-width:768px){#page-clientes .table-card table{display:none;}#mob-cards-clientes{display:flex!important;}}</style></head>
 <body>
 
 <div class="notification" id="notification"></div>
@@ -135,14 +155,10 @@
     </div>
   </div>
   <div class="header-actions">
-    <span id="sync-indicator" style="font-size:11px;color:#888;font-weight:500;white-space:nowrap">⏳ Conectando…</span>
+    <span id="sync-indicator" style="font-size: 11px; color: rgb(42, 138, 122); font-weight: 500; white-space: nowrap;">☁ Sincronizado</span>
     <input type="file" id="importFile" accept=".json" style="display:none" onchange="importData(event)">
     <button id="help-btn-mobile" onclick="document.getElementById('modal-ayuda').classList.add('open')" style="display:none;width:34px;height:34px;border-radius:50%;background:var(--green);color:#fff;border:none;font-size:17px;font-weight:700;cursor:pointer;align-items:center;justify-content:center;flex-shrink:0" title="Guía de uso">?</button>
-    <button onclick="cerrarSesion()" 
-    style="background:none;border:1px solid var(--border);color:var(--text3);padding:6px 12px;border-radius:6px;font-size:12px;cursor:pointer;transition:all .15s"
-    onmouseover="this.style.color='var(--green)';this.style.borderColor='var(--green)'"
-    onmouseout="this.style.color='var(--text3)';this.style.borderColor='var(--border)'"
-    title="Cerrar sesión">⏻ Salir</button>
+    <button onclick="cerrarSesion()" style="background:none;border:1px solid var(--border);color:var(--text3);padding:6px 12px;border-radius:6px;font-size:12px;cursor:pointer;transition:all .15s" onmouseover="this.style.color='var(--green)';this.style.borderColor='var(--green)'" onmouseout="this.style.color='var(--text3)';this.style.borderColor='var(--border)'" title="Cerrar sesión">⏻ Salir</button>
 </div>
 </header>
 
@@ -156,26 +172,18 @@
 
     <div style="text-align:left;margin-bottom:16px">
       <label style="font-size:12px;font-weight:600;color:var(--text2);display:block;margin-bottom:6px">Usuario</label>
-      <input type="text" id="login-user" placeholder="Usuario"
-        style="width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:8px;font-size:14px;outline:none;box-sizing:border-box"
-        onfocus="this.style.borderColor='var(--green)'" onblur="this.style.borderColor='var(--border)'"
-        onkeydown="if(event.key==='Enter')document.getElementById('login-pass').focus()">
+      <input type="text" id="login-user" placeholder="Usuario" style="width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:8px;font-size:14px;outline:none;box-sizing:border-box" onfocus="this.style.borderColor='var(--green)'" onblur="this.style.borderColor='var(--border)'" onkeydown="if(event.key==='Enter')document.getElementById('login-pass').focus()">
     </div>
     <div style="text-align:left;margin-bottom:8px">
       <label style="font-size:12px;font-weight:600;color:var(--text2);display:block;margin-bottom:6px">Contraseña</label>
-      <input type="password" id="login-pass" placeholder="Contraseña"
-        style="width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:8px;font-size:14px;outline:none;box-sizing:border-box"
-        onfocus="this.style.borderColor='var(--green)'" onblur="this.style.borderColor='var(--border)'"
-        onkeydown="if(event.key==='Enter')doLogin()">
+      <input type="password" id="login-pass" placeholder="Contraseña" style="width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:8px;font-size:14px;outline:none;box-sizing:border-box" onfocus="this.style.borderColor='var(--green)'" onblur="this.style.borderColor='var(--border)'" onkeydown="if(event.key==='Enter')doLogin()">
     </div>
     <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
       <input type="checkbox" id="remember-me" style="width:16px;height:16px;accent-color:var(--green);cursor:pointer">
       <label for="remember-me" style="font-size:13px;color:var(--text2);cursor:pointer">Recordar usuario</label>
     </div>
     <div id="login-error" style="font-size:12px;color:#e05;margin-bottom:12px;min-height:18px"></div>
-    <button onclick="doLogin()"
-      style="width:100%;padding:12px;background:var(--green);color:white;border:none;border-radius:8px;font-size:15px;font-weight:600;cursor:pointer;transition:opacity .15s"
-      onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
+    <button onclick="doLogin()" style="width:100%;padding:12px;background:var(--green);color:white;border:none;border-radius:8px;font-size:15px;font-weight:600;cursor:pointer;transition:opacity .15s" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
       Entrar
     </button>
     
@@ -194,7 +202,7 @@
     </div>
     <div class="sidebar-section">
       <div class="sidebar-label">Configuración</div>
-      <div class="nav-item" onclick="showPage('config')" data-page="config"><span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span> Parámetros</div>
+      <div class="nav-item" onclick="showPage('config')" data-page="config"><span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg></span> Parámetros</div>
     </div>
   </nav>
 
@@ -206,16 +214,46 @@
         <div><div class="page-title">Inicio</div><div class="page-subtitle">Resumen de actividad</div></div>
       </div>
       <div class="stats-grid">
-        <div class="stat-card"><div class="stat-label">Total Instalaciones</div><div class="stat-value" id="stat-total">0</div><div class="stat-detail">registradas</div></div>
+        <div class="stat-card"><div class="stat-label">Total Instalaciones</div><div class="stat-value" id="stat-total">2</div><div class="stat-detail">registradas</div></div>
         <div class="stat-card"><div class="stat-label">Completadas</div><div class="stat-value" id="stat-completadas" style="color:var(--green)">0</div><div class="stat-detail">expedientes cerrados</div></div>
-        <div class="stat-card"><div class="stat-label">En Proceso</div><div class="stat-value" id="stat-proceso" style="color:var(--orange)">0</div><div class="stat-detail">pendientes</div></div>
-        <div class="stat-card"><div class="stat-label">Clientes</div><div class="stat-value" id="stat-clientes">0</div><div class="stat-detail">centros</div></div>
+        <div class="stat-card"><div class="stat-label">En Proceso</div><div class="stat-value" id="stat-proceso" style="color:var(--orange)">2</div><div class="stat-detail">pendientes</div></div>
+        <div class="stat-card"><div class="stat-label">Clientes</div><div class="stat-value" id="stat-clientes">3</div><div class="stat-detail">centros</div></div>
       </div>
       <div class="table-card">
         <div class="table-toolbar"><span style="font-weight:600;color:var(--green)">Últimas instalaciones</span></div>
         <table><thead><tr><th>Fecha</th><th>Cliente</th><th>Localidad</th><th>Tipo equipo</th><th>Fabricante</th><th>Estado</th></tr></thead>
-        <tbody id="dashboard-table"></tbody></table>
-        <div class="mob-cards" id="mob-cards-dashboard" style="display:none"></div>
+        <tbody id="dashboard-table"><tr><td>01/04/2026</td><td><strong>Hospital La Paloma</strong></td><td>Las Palmas de Gran Canaria</td><td>Mamografo</td><td>HOLOGIC, INC.</td><td><span class="badge" style="background:#888;color:#fff">⊗ Baja</span></td></tr><tr><td>31/03/2026</td><td><strong>Clinica Dr. Mager</strong></td><td>Playa Blanca</td><td>Equipo de RX</td><td>Sangsun</td><td><span class="badge badge-orange">1/3 secciones</span></td></tr><tr><td>28/03/2026</td><td><strong>Clínica Can S.L</strong></td><td>Las Palmas de Gran Canaria</td><td>CT</td><td>General Electric</td><td><span class="badge badge-orange">2/3 secciones</span></td></tr></tbody></table>
+        <div class="mob-cards" id="mob-cards-dashboard" style="display:none"><div class="mob-card">
+      <div class="mob-card-top"><div class="mob-card-nombre">Hospital La Paloma</div><div class="mob-card-fecha">01/04/2026</div></div>
+      <div class="mob-card-tags">
+        <span class="mob-card-tag">📡 Mamografo</span>
+        <span class="mob-card-tag">🏭 HOLOGIC, INC.</span>
+        <span class="mob-card-tag gris">⊗ Baja</span>
+      </div>
+      <div class="mob-card-actions">
+        <button class="btn btn-sm btn-outline" data-id="1775074220246" onclick="verInstalacion(this.dataset.id)">Ver / PDF</button>
+      </div>
+    </div><div class="mob-card">
+      <div class="mob-card-top"><div class="mob-card-nombre">Clinica Dr. Mager</div><div class="mob-card-fecha">31/03/2026</div></div>
+      <div class="mob-card-tags">
+        <span class="mob-card-tag">📡 Equipo de RX</span>
+        <span class="mob-card-tag">🏭 Sangsun</span>
+        <span class="mob-card-tag naranja">⏳ En proceso</span>
+      </div>
+      <div class="mob-card-actions">
+        <button class="btn btn-sm btn-outline" data-id="1774970355564" onclick="verInstalacion(this.dataset.id)">Ver / PDF</button>
+      </div>
+    </div><div class="mob-card">
+      <div class="mob-card-top"><div class="mob-card-nombre">Clínica Can S.L</div><div class="mob-card-fecha">28/03/2026</div></div>
+      <div class="mob-card-tags">
+        <span class="mob-card-tag">📡 CT</span>
+        <span class="mob-card-tag">🏭 General Electric</span>
+        <span class="mob-card-tag naranja">⏳ En proceso</span>
+      </div>
+      <div class="mob-card-actions">
+        <button class="btn btn-sm btn-outline" data-id="1774657506280" onclick="verInstalacion(this.dataset.id)">Ver / PDF</button>
+      </div>
+    </div></div>
       </div>
     </div>
 
@@ -233,8 +271,80 @@
           </select>
         </div>
         <table><thead><tr><th>Fecha</th><th>Cliente</th><th>Localidad</th><th>Tipo</th><th>Fabricante / Modelo</th><th>Estado</th><th>Acciones</th></tr></thead>
-        <tbody id="table-instalaciones"></tbody></table>
-        <div class="mob-cards" id="mob-cards-instalaciones" style="display:none"></div>
+        <tbody id="table-instalaciones"><tr>
+<td>01/04/2026</td>
+<td><strong>Hospital La Paloma</strong><br><small style="color:var(--text3)">Proser Sistemas Medicos S.L</small></td>
+<td>Las Palmas de Gran Canaria</td><td>Mamografo</td>
+<td>HOLOGIC, INC.<br><small style="color:var(--text3)">010-1547</small></td>
+<td style="font-size:12px">Guillermo Javier Cabrera Valdés</td>
+<td><span class="badge" style="background:#888;color:#fff">⊗ Baja</span></td>
+<td><div class="actions-cell">
+<button class="btn btn-sm btn-outline" onclick="verInstalacion('1775074220246')">Ver</button>
+<button class="btn btn-sm" style="background:var(--green-dark,#1f6b5e);color:#fff;border:none" onclick="editInstalacion('1775074220246')" title="Editar instalación"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg></button>
+<button class="btn btn-sm" onclick="darDeBaja('1775074220246')" style="background:#e07b39;color:#fff;border:none" title="Dar de baja"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="5" rx="1"></rect><path d="M4 9v10a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V9"></path><path d="M10 13h4"></path></svg></button>
+<button class="btn btn-sm btn-danger" onclick="deleteInstalacion('1775074220246')" title="Eliminar instalación"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path><path d="M10 11v6"></path><path d="M14 11v6"></path><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"></path></svg></button>
+</div></td>
+</tr><tr>
+<td>31/03/2026</td>
+<td><strong>Clinica Dr. Mager</strong><br><small style="color:var(--text3)"></small></td>
+<td>Playa Blanca</td><td>Equipo de RX</td>
+<td>Sangsun<br><small style="color:var(--text3)">XGEO GU60A</small></td>
+<td style="font-size:12px">Guillermo Javier Cabrera Valdés</td>
+<td><span class="badge badge-orange">1/3 secciones</span></td>
+<td><div class="actions-cell">
+<button class="btn btn-sm btn-outline" onclick="verInstalacion('1774970355564')">Ver</button>
+<button class="btn btn-sm" style="background:var(--green-dark,#1f6b5e);color:#fff;border:none" onclick="editInstalacion('1774970355564')" title="Editar instalación"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg></button>
+<button class="btn btn-sm" onclick="darDeBaja('1774970355564')" style="background:#e07b39;color:#fff;border:none" title="Dar de baja"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="5" rx="1"></rect><path d="M4 9v10a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V9"></path><path d="M10 13h4"></path></svg></button>
+<button class="btn btn-sm btn-danger" onclick="deleteInstalacion('1774970355564')" title="Eliminar instalación"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path><path d="M10 11v6"></path><path d="M14 11v6"></path><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"></path></svg></button>
+</div></td>
+</tr><tr>
+<td>28/03/2026</td>
+<td><strong>Clínica Can S.L</strong><br><small style="color:var(--text3)">Proser Sistemas Medicos S.L</small></td>
+<td>Las Palmas de Gran Canaria</td><td>CT</td>
+<td>General Electric<br><small style="color:var(--text3)">5324907-1</small></td>
+<td style="font-size:12px">Guillermo Javier Cabrera Valdés</td>
+<td><span class="badge badge-orange">2/3 secciones</span></td>
+<td><div class="actions-cell">
+<button class="btn btn-sm btn-outline" onclick="verInstalacion('1774657506280')">Ver</button>
+<button class="btn btn-sm" style="background:var(--green-dark,#1f6b5e);color:#fff;border:none" onclick="editInstalacion('1774657506280')" title="Editar instalación"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg></button>
+<button class="btn btn-sm" onclick="darDeBaja('1774657506280')" style="background:#e07b39;color:#fff;border:none" title="Dar de baja"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="5" rx="1"></rect><path d="M4 9v10a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V9"></path><path d="M10 13h4"></path></svg></button>
+<button class="btn btn-sm btn-danger" onclick="deleteInstalacion('1774657506280')" title="Eliminar instalación"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path><path d="M10 11v6"></path><path d="M14 11v6"></path><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"></path></svg></button>
+</div></td>
+</tr></tbody></table>
+        <div class="mob-cards" id="mob-cards-instalaciones" style="display:none"><div class="mob-card">
+      <div class="mob-card-top"><div class="mob-card-nombre">Hospital La Paloma</div><div class="mob-card-fecha">01/04/2026</div></div>
+      <div class="mob-card-tags">
+        <span class="mob-card-tag">📡 Mamografo</span>
+        <span class="mob-card-tag">🏭 HOLOGIC, INC.</span>
+        <span class="mob-card-tag gris">⊗ Baja</span>
+      </div>
+      <div class="mob-card-actions">
+        <button class="btn btn-sm btn-outline" style="flex:1" data-id="1775074220246" onclick="verInstalacion(this.dataset.id)">Ver / PDF</button>
+        <button class="btn btn-sm" style="background:var(--green);color:#fff;border:none;padding:5px 12px" data-id="1775074220246" onclick="editInstalacion(this.dataset.id)" title="Editar">✏️</button>
+      </div>
+    </div><div class="mob-card">
+      <div class="mob-card-top"><div class="mob-card-nombre">Clinica Dr. Mager</div><div class="mob-card-fecha">31/03/2026</div></div>
+      <div class="mob-card-tags">
+        <span class="mob-card-tag">📡 Equipo de RX</span>
+        <span class="mob-card-tag">🏭 Sangsun</span>
+        <span class="mob-card-tag naranja">⏳ En proceso</span>
+      </div>
+      <div class="mob-card-actions">
+        <button class="btn btn-sm btn-outline" style="flex:1" data-id="1774970355564" onclick="verInstalacion(this.dataset.id)">Ver / PDF</button>
+        <button class="btn btn-sm" style="background:var(--green);color:#fff;border:none;padding:5px 12px" data-id="1774970355564" onclick="editInstalacion(this.dataset.id)" title="Editar">✏️</button>
+      </div>
+    </div><div class="mob-card">
+      <div class="mob-card-top"><div class="mob-card-nombre">Clínica Can S.L</div><div class="mob-card-fecha">28/03/2026</div></div>
+      <div class="mob-card-tags">
+        <span class="mob-card-tag">📡 CT</span>
+        <span class="mob-card-tag">🏭 General Electric</span>
+        <span class="mob-card-tag naranja">⏳ En proceso</span>
+      </div>
+      <div class="mob-card-actions">
+        <button class="btn btn-sm btn-outline" style="flex:1" data-id="1774657506280" onclick="verInstalacion(this.dataset.id)">Ver / PDF</button>
+        <button class="btn btn-sm" style="background:var(--green);color:#fff;border:none;padding:5px 12px" data-id="1774657506280" onclick="editInstalacion(this.dataset.id)" title="Editar">✏️</button>
+      </div>
+    </div></div>
       </div>
     </div>
 
@@ -249,7 +359,93 @@
           <div class="search-box"><span>🔍</span><input type="text" id="search-cli" placeholder="Buscar cliente…" oninput="renderClientes()"></div>
         </div>
         <table><thead><tr><th>Nombre</th><th>NIF</th><th>Nº IRX</th><th>Localidad</th><th>Provincia</th><th>Teléfono</th><th>Contacto</th><th>Acciones</th></tr></thead>
-        <tbody id="table-clientes"></tbody></table>
+        <tbody id="table-clientes"><tr class="cli-hist-row" style="cursor:pointer" onclick="toggleCliHist('1774655077264')">
+<td><strong>Hospital La Paloma</strong> <span id="cli-arrow-1774655077264" style="color:var(--text3);font-size:11px">▸</span>
+<span style="margin-left:6px;font-size:11px;color:var(--text3)">3 registros</span>
+</td>
+<td><span style="font-family:'DM Mono',monospace;font-size:12px">A35005842</span></td>
+<td><span style="font-family:'DM Mono',monospace;font-size:12px;color:var(--green)">IRX/GC-2112</span></td>
+<td>Las Palmas de Gran Canaria</td>
+<td>Las Palmas</td>
+<td>+34 629690034</td>
+<td>fernandojimenezdelcampo@hospitallapaloma.com</td>
+<td onclick="event.stopPropagation()"><div class="actions-cell">
+<button class="btn btn-sm btn-outline" onclick="verCliente('1774655077264')" title="Ver cliente">Ver</button>
+        <button class="btn btn-sm" style="background:var(--green-dark,#1f6b5e);color:#fff;border:none" onclick="editCliente('1774655077264')" title="Editar cliente"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg> Editar</button>
+<button class="btn btn-sm btn-danger" onclick="deleteCliente('1774655077264')" title="Eliminar cliente"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path><path d="M10 11v6"></path><path d="M14 11v6"></path><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"></path></svg></button>
+</div></td>
+</tr>
+<tr><td colspan="8" style="padding:0;border-top:none"><div class="cli-hist-panel" id="cli-hist-1774655077264">
+<div class="cli-hist-item">
+<span style="font-weight:500">Mamografo</span>
+<span style="color:var(--text3)">HOLOGIC, INC. 010-1547</span>
+<span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text3)">14150</span>
+<span style="margin-left:auto;color:var(--text3)">2026-04-01</span>
+<span class="cli-hist-badge baja">Baja</span>
+<button class="btn btn-sm btn-outline" style="font-size:11px;padding:2px 8px" onclick="verInstalacion('1775074220246')">Ver</button>
+</div>
+<div class="cli-hist-item">
+<span style="font-weight:500">Equipo de RX</span>
+<span style="color:var(--text3)">Siemens fdhbnx</span>
+<span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text3)">zxb x</span>
+<span style="margin-left:auto;color:var(--text3)">2026-03-28</span>
+<span class="cli-hist-badge baja">Retirada</span>
+</div>
+<div class="cli-hist-item">
+<span style="font-weight:500">Mamografo</span>
+<span style="color:var(--text3)">HOLOGIC, INC. 010-1547</span>
+<span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text3)">14150</span>
+<span style="margin-left:auto;color:var(--text3)">2026-04-05</span>
+<span class="cli-hist-badge baja">Retirada</span>
+</div></div></td></tr><tr class="cli-hist-row" style="cursor:pointer" onclick="toggleCliHist('1774656044411')">
+<td><strong>Clínica Can S.L</strong> <span id="cli-arrow-1774656044411" style="color:var(--text3);font-size:11px">▸</span>
+<span style="margin-left:6px;font-size:11px;color:var(--text3)">1 registro</span>
+</td>
+<td><span style="font-family:'DM Mono',monospace;font-size:12px">B76335173</span></td>
+<td><span style="font-family:'DM Mono',monospace;font-size:12px;color:var(--green)">—</span></td>
+<td>Las Palmas de Gran Canaria</td>
+<td>Las Palmas</td>
+<td>+34 928240773</td>
+<td>clinicacan@gmail.com</td>
+<td onclick="event.stopPropagation()"><div class="actions-cell">
+<button class="btn btn-sm btn-outline" onclick="verCliente('1774656044411')" title="Ver cliente">Ver</button>
+        <button class="btn btn-sm" style="background:var(--green-dark,#1f6b5e);color:#fff;border:none" onclick="editCliente('1774656044411')" title="Editar cliente"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg> Editar</button>
+<button class="btn btn-sm btn-danger" onclick="deleteCliente('1774656044411')" title="Eliminar cliente"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path><path d="M10 11v6"></path><path d="M14 11v6"></path><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"></path></svg></button>
+</div></td>
+</tr>
+<tr><td colspan="8" style="padding:0;border-top:none"><div class="cli-hist-panel" id="cli-hist-1774656044411">
+<div class="cli-hist-item">
+<span style="font-weight:500">CT</span>
+<span style="color:var(--text3)">General Electric 5324907-1</span>
+<span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text3)">340938HM0</span>
+<span style="margin-left:auto;color:var(--text3)">2026-03-28</span>
+<span class="cli-hist-badge inst">Activa</span>
+<button class="btn btn-sm btn-outline" style="font-size:11px;padding:2px 8px" onclick="verInstalacion('1774657506280')">Ver</button>
+</div></div></td></tr><tr class="cli-hist-row" style="cursor:pointer" onclick="toggleCliHist('1774969704270')">
+<td><strong>Clinica Dr. Mager</strong> <span id="cli-arrow-1774969704270" style="color:var(--text3);font-size:11px">▸</span>
+<span style="margin-left:6px;font-size:11px;color:var(--text3)">1 registro</span>
+</td>
+<td><span style="font-family:'DM Mono',monospace;font-size:12px">B35488378</span></td>
+<td><span style="font-family:'DM Mono',monospace;font-size:12px;color:var(--green)">—</span></td>
+<td>Playa Blanca</td>
+<td>Las Palmas</td>
+<td>+34 928517938</td>
+<td>blanca@lanzamedic.com</td>
+<td onclick="event.stopPropagation()"><div class="actions-cell">
+<button class="btn btn-sm btn-outline" onclick="verCliente('1774969704270')" title="Ver cliente">Ver</button>
+        <button class="btn btn-sm" style="background:var(--green-dark,#1f6b5e);color:#fff;border:none" onclick="editCliente('1774969704270')" title="Editar cliente"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg> Editar</button>
+<button class="btn btn-sm btn-danger" onclick="deleteCliente('1774969704270')" title="Eliminar cliente"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path><path d="M10 11v6"></path><path d="M14 11v6"></path><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"></path></svg></button>
+</div></td>
+</tr>
+<tr><td colspan="8" style="padding:0;border-top:none"><div class="cli-hist-panel" id="cli-hist-1774969704270">
+<div class="cli-hist-item">
+<span style="font-weight:500">Equipo de RX</span>
+<span style="color:var(--text3)">Sangsun XGEO GU60A</span>
+<span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text3)">S018M3BDA00001T</span>
+<span style="margin-left:auto;color:var(--text3)">2026-03-31</span>
+<span class="cli-hist-badge inst">Activa</span>
+<button class="btn btn-sm btn-outline" style="font-size:11px;padding:2px 8px" onclick="verInstalacion('1774970355564')">Ver</button>
+</div></div></td></tr></tbody></table><div class="mob-cards" id="mob-cards-clientes" style="display: none;"></div>
       </div>
     </div>
 
@@ -281,7 +477,20 @@
       <div class="config-grid">
         <div class="config-card">
           <div class="config-card-header"><span class="config-card-title">🏢 Empresas</span><button class="btn btn-sm btn-outline" onclick="showAddConfig('empresa')">＋ Añadir</button></div>
-          <div class="config-list" id="cfg-empresas"></div>
+          <div class="config-list" id="cfg-empresas">
+<div class="config-item" style="background:var(--green-bg)">
+<div style="flex:1">
+<div style="display:flex;align-items:center;gap:8px">
+<span>Proser Sistemas Medicos S.L</span>
+<span style="background:var(--green);color:#fff;font-size:10px;padding:1px 7px;border-radius:10px;font-weight:600">Principal</span>
+</div>
+<div class="config-item-sub">839545678 · ERX/S-0002</div>
+</div>
+<div style="display:flex;gap:6px">
+
+<button class="btn btn-sm btn-danger" onclick="deleteConfigEmpresa(0)">✕</button>
+</div>
+</div></div>
           <div class="mini-add-row" id="add-empresa" style="display:none">
             <input type="text" id="new-empresa-nombre" placeholder="Nombre empresa">
             <input type="text" id="new-empresa-cif" placeholder="CIF">
@@ -291,7 +500,7 @@
         </div>
         <div class="config-card">
           <div class="config-card-header"><span class="config-card-title">👷 Técnicos</span><button class="btn btn-sm btn-outline" onclick="showAddConfig('tecnico')">＋ Añadir</button></div>
-          <div class="config-list" id="cfg-tecnicos"></div>
+          <div class="config-list" id="cfg-tecnicos"><div class="config-item"><div><div>Juan Eugenio Cabrera Fagundo</div><div class="config-item-sub">45351305C · 01/07/1965</div></div><button class="btn btn-sm btn-danger" onclick="deleteConfigTecnico(0)">✕</button></div><div class="config-item"><div><div>Guillermo Javier Cabrera Valdés</div><div class="config-item-sub">42271850N · 12/11/1991</div></div><button class="btn btn-sm btn-danger" onclick="deleteConfigTecnico(1)">✕</button></div></div>
           <div class="mini-add-row" id="add-tecnico" style="display:none">
             <input type="text" id="new-tec-nombre" placeholder="Nombre técnico">
             <input type="text" id="new-tec-dni" placeholder="DNI">
@@ -301,7 +510,7 @@
         </div>
         <div class="config-card">
           <div class="config-card-header"><span class="config-card-title">👔 Directores</span><button class="btn btn-sm btn-outline" onclick="showAddConfig('director')">＋ Añadir</button></div>
-          <div class="config-list" id="cfg-directores"></div>
+          <div class="config-list" id="cfg-directores"><div class="config-item"><div>Fco. Jesús García Cuevas</div><button class="btn btn-sm btn-danger" onclick="deleteConfigDirector(0)">✕</button></div></div>
           <div class="mini-add-row" id="add-director" style="display:none">
             <input type="text" id="new-dir-nombre" placeholder="Nombre director">
             <button class="btn btn-sm btn-green" onclick="saveConfigDirector()">✓</button>
@@ -309,7 +518,7 @@
         </div>
         <div class="config-card">
           <div class="config-card-header"><span class="config-card-title">🌍 Países</span><button class="btn btn-sm btn-outline" onclick="showAddConfig('pais')">＋ Añadir</button></div>
-          <div class="config-list" id="cfg-paises"></div>
+          <div class="config-list" id="cfg-paises"><div class="config-item"><div>Alemania</div><button class="btn btn-sm btn-danger" onclick="deleteConfigPais(0)">✕</button></div><div class="config-item"><div>China</div><button class="btn btn-sm btn-danger" onclick="deleteConfigPais(1)">✕</button></div><div class="config-item"><div>Corea</div><button class="btn btn-sm btn-danger" onclick="deleteConfigPais(2)">✕</button></div><div class="config-item"><div>España</div><button class="btn btn-sm btn-danger" onclick="deleteConfigPais(3)">✕</button></div><div class="config-item"><div>Estados Unidos</div><button class="btn btn-sm btn-danger" onclick="deleteConfigPais(4)">✕</button></div><div class="config-item"><div>Italia</div><button class="btn btn-sm btn-danger" onclick="deleteConfigPais(5)">✕</button></div><div class="config-item"><div>Japón</div><button class="btn btn-sm btn-danger" onclick="deleteConfigPais(6)">✕</button></div><div class="config-item"><div>Países Bajos</div><button class="btn btn-sm btn-danger" onclick="deleteConfigPais(7)">✕</button></div><div class="config-item"><div>KOREA</div><button class="btn btn-sm btn-danger" onclick="deleteConfigPais(8)">✕</button></div><div class="config-item"><div>USA</div><button class="btn btn-sm btn-danger" onclick="deleteConfigPais(9)">✕</button></div></div>
           <div class="mini-add-row" id="add-pais" style="display:none">
             <input type="text" id="new-pais" placeholder="País">
             <button class="btn btn-sm btn-green" onclick="saveConfigPais()">✓</button>
@@ -317,7 +526,7 @@
         </div>
         <div class="config-card">
           <div class="config-card-header"><span class="config-card-title">🏭 Marcas de equipo</span><button class="btn btn-sm btn-outline" onclick="showAddConfig('marca')">＋ Añadir</button></div>
-          <div class="config-list" id="cfg-marcas"></div>
+          <div class="config-list" id="cfg-marcas"><div class="config-item"><div>Siemens</div><button class="btn btn-sm btn-danger" onclick="deleteConfigMarca(0)">✕</button></div><div class="config-item"><div>Hologic</div><button class="btn btn-sm btn-danger" onclick="deleteConfigMarca(1)">✕</button></div><div class="config-item"><div>General Electric</div><button class="btn btn-sm btn-danger" onclick="deleteConfigMarca(2)">✕</button></div><div class="config-item"><div>Samsung</div><button class="btn btn-sm btn-danger" onclick="deleteConfigMarca(3)">✕</button></div></div>
           <div class="mini-add-row" id="add-marca" style="display:none">
             <input type="text" id="new-marca" placeholder="Marca / Fabricante">
             <button class="btn btn-sm btn-green" onclick="saveConfigMarca()">✓</button>
@@ -325,7 +534,7 @@
         </div>
         <div class="config-card">
           <div class="config-card-header"><span class="config-card-title">🩻 Tipos de equipo</span><button class="btn btn-sm btn-outline" onclick="showAddConfig('tipo')">＋ Añadir</button></div>
-          <div class="config-list" id="cfg-tipos"></div>
+          <div class="config-list" id="cfg-tipos"><div class="config-item"><div>Equipo de RX</div><button class="btn btn-sm btn-danger" onclick="deleteConfigTipo(0)">✕</button></div><div class="config-item"><div>CT</div><button class="btn btn-sm btn-danger" onclick="deleteConfigTipo(1)">✕</button></div><div class="config-item"><div>Mamografo</div><button class="btn btn-sm btn-danger" onclick="deleteConfigTipo(2)">✕</button></div><div class="config-item"><div>Arco en C</div><button class="btn btn-sm btn-danger" onclick="deleteConfigTipo(3)">✕</button></div><div class="config-item"><div>CT Dental</div><button class="btn btn-sm btn-danger" onclick="deleteConfigTipo(4)">✕</button></div><div class="config-item"><div>Hortopanto</div><button class="btn btn-sm btn-danger" onclick="deleteConfigTipo(5)">✕</button></div></div>
           <div class="mini-add-row" id="add-tipo" style="display:none">
             <input type="text" id="new-tipo" placeholder="Tipo de equipo">
             <button class="btn btn-sm btn-green" onclick="saveConfigTipo()">✓</button>
@@ -333,14 +542,18 @@
         </div>
         <div class="config-card">
           <div class="config-card-header"><span class="config-card-title">🔬 Equipos de medida</span><button class="btn btn-sm btn-outline" onclick="showAddConfig('eqmedida')">＋ Añadir</button></div>
-          <div class="config-list" id="cfg-eqmedida"></div>
+          <div class="config-list" id="cfg-eqmedida">
+<div class="config-item">
+<div><div style="font-weight:500">COIBA</div><div class="config-item-sub">RTI · COIBA · CB3-16025 302 · 2016 · FAB</div></div>
+<button class="btn btn-sm btn-danger" onclick="deleteConfigEqMedida(0)">✕</button>
+</div></div>
           <div class="mini-add-row" id="add-eqmedida" style="display:none;flex-wrap:wrap;gap:6px">
-            <input type="text" id="new-eqm-desc"   placeholder="Descripción" style="flex:1;min-width:100px">
-            <input type="text" id="new-eqm-marca"  placeholder="Marca" style="width:70px">
+            <input type="text" id="new-eqm-desc" placeholder="Descripción" style="flex:1;min-width:100px">
+            <input type="text" id="new-eqm-marca" placeholder="Marca" style="width:70px">
             <input type="text" id="new-eqm-modelo" placeholder="Modelo" style="width:70px">
-            <input type="text" id="new-eqm-serie"  placeholder="Nº Serie" style="width:100px">
-            <input type="text" id="new-eqm-fcal"   placeholder="F. Calibración" style="width:90px">
-            <input type="text" id="new-eqm-org"    placeholder="Organismo" style="width:70px">
+            <input type="text" id="new-eqm-serie" placeholder="Nº Serie" style="width:100px">
+            <input type="text" id="new-eqm-fcal" placeholder="F. Calibración" style="width:90px">
+            <input type="text" id="new-eqm-org" placeholder="Organismo" style="width:70px">
             <button class="btn btn-sm btn-green" onclick="saveConfigEqMedida()">✓</button>
           </div>
         </div>
@@ -371,7 +584,7 @@
               <input type="password" id="cfg-gemini-key" placeholder="AIza...">
             </div>
             <button class="btn btn-green btn-sm" onclick="saveGeminiKey()" style="align-self:flex-start">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
               Guardar API Key
             </button>
           </div>
@@ -414,7 +627,7 @@
     <div class="modal-header">
       <div class="modal-title" id="modal-inst-title">Nueva Instalación</div>
       <div style="display:flex;align-items:center;gap:10px">
-        <button class="btn btn-green btn-sm" onclick="saveInstalacion()"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg> Guardar instalación</button>
+        <button class="btn btn-green btn-sm" onclick="saveInstalacion()"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg> Guardar instalación</button>
         <button class="modal-close" onclick="closeModal('modal-inst')">✕</button>
       </div>
     </div>
@@ -444,14 +657,14 @@
             <div class="form-group"><label>Nº de equipos</label><input type="number" id="f-neq" min="1" value="1"></div>
           </div>
           <div style="margin-top:12px"><label style="font-size:12px;font-weight:500;color:var(--text2);display:block;margin-bottom:6px">Fijo / Móvil</label>
-            <div class="radio-group"><label><input type="radio" name="fijomovil" value="Fijo" checked> Fijo</label><label><input type="radio" name="fijomovil" value="Móvil"> Móvil</label></div>
+            <div class="radio-group"><label><input type="radio" name="fijomovil" value="Fijo" checked=""> Fijo</label><label><input type="radio" name="fijomovil" value="Móvil"> Móvil</label></div>
           </div>
         </div>
         <div class="form-section">
           <div style="display:flex;align-items:center;justify-content:space-between">
             <div class="form-section-title" style="margin-bottom:0">Equipo de Rayos X</div>
             <label class="btn btn-green btn-sm" style="cursor:pointer;display:inline-flex;align-items:center;gap:6px;margin-bottom:14px" title="Escanear etiqueta del equipo">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><line x1="4" y1="12" x2="20" y2="12"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7V5a2 2 0 0 1 2-2h2"></path><path d="M17 3h2a2 2 0 0 1 2 2v2"></path><path d="M21 17v2a2 2 0 0 1-2 2h-2"></path><path d="M7 21H5a2 2 0 0 1-2-2v-2"></path><line x1="4" y1="12" x2="20" y2="12"></line></svg>
               Equipo
               <input type="file" accept="image/*" capture="environment" style="display:none" onchange="escanearEtiqueta(this,'equipo')">
             </label>
@@ -474,7 +687,7 @@
           <div style="display:flex;align-items:center;justify-content:space-between">
             <div class="form-section-title" style="margin-bottom:0">Tubo de Rayos X</div>
             <label class="btn btn-green btn-sm" style="cursor:pointer;display:inline-flex;align-items:center;gap:6px;margin-bottom:14px" title="Escanear etiqueta del tubo">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><line x1="4" y1="12" x2="20" y2="12"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7V5a2 2 0 0 1 2-2h2"></path><path d="M17 3h2a2 2 0 0 1 2 2v2"></path><path d="M21 17v2a2 2 0 0 1-2 2h-2"></path><path d="M7 21H5a2 2 0 0 1-2-2v-2"></path><line x1="4" y1="12" x2="20" y2="12"></line></svg>
               Tubo
               <input type="file" accept="image/*" capture="environment" style="display:none" onchange="escanearEtiqueta(this,'tubo')">
             </label>
@@ -640,14 +853,14 @@
                   <td style="padding:4px 8px;border:1px solid var(--border);font-size:11px">Mínima distancia foco-piel</td>
                   <td style="padding:2px 4px;border:1px solid var(--border);width:110px"><input type="text" id="pr-dl001" placeholder="OK" style="width:100%;border:none;background:transparent;color:var(--green);font-size:12px;padding:4px;text-align:center"></td>
                   <td style="padding:4px 8px;border:1px solid var(--border);font-size:10px;width:150px">20cm Tp&gt;60kV / 10cm Tp≤60kV</td>
-                  <td style="padding:4px;border:1px solid var(--border);text-align:center;width:60px"><input type="checkbox" id="pdf-dl001" checked style="width:16px;height:16px;accent-color:var(--green)"></td>
+                  <td style="padding:4px;border:1px solid var(--border);text-align:center;width:60px"><input type="checkbox" id="pdf-dl001" checked="" style="width:16px;height:16px;accent-color:var(--green)"></td>
                 </tr>
                 <tr>
                   <td style="padding:4px 8px;border:1px solid var(--border);font-weight:600;text-align:center;width:75px">DL002</td>
                   <td style="padding:4px 8px;border:1px solid var(--border);font-size:11px">Tamaño del campo en el extremo del localizador</td>
                   <td style="padding:2px 4px;border:1px solid var(--border);width:110px"><input type="text" id="pr-dl002" placeholder="OK" style="width:100%;border:none;background:transparent;color:var(--green);font-size:12px;padding:4px;text-align:center"></td>
                   <td style="padding:4px 8px;border:1px solid var(--border);font-size:10px;width:150px">≤ 6cm</td>
-                  <td style="padding:4px;border:1px solid var(--border);text-align:center;width:60px"><input type="checkbox" id="pdf-dl002" checked style="width:16px;height:16px;accent-color:var(--green)"></td>
+                  <td style="padding:4px;border:1px solid var(--border);text-align:center;width:60px"><input type="checkbox" id="pdf-dl002" checked="" style="width:16px;height:16px;accent-color:var(--green)"></td>
                 </tr>
                 <tr style="background:var(--bg2)"><td colspan="5" style="padding:6px 10px;border:1px solid var(--border);font-weight:700;font-size:11px;text-align:center;letter-spacing:0.05em">CALIDAD DEL HAZ</td></tr>
                 <tr>
@@ -655,14 +868,14 @@
                   <td style="padding:4px 8px;border:1px solid var(--border);font-size:11px">Exactitud y reproducibilidad de la tensión</td>
                   <td style="padding:2px 4px;border:1px solid var(--border);width:110px"><input type="text" id="pr-dl003" placeholder="Ver ANEXO I" style="width:100%;border:none;background:transparent;color:var(--green);font-size:12px;padding:4px;text-align:center"></td>
                   <td style="padding:4px 8px;border:1px solid var(--border);font-size:10px;width:150px">Exactitud ≤±10%</td>
-                  <td style="padding:4px;border:1px solid var(--border);text-align:center;width:60px"><input type="checkbox" id="pdf-dl003" checked style="width:16px;height:16px;accent-color:var(--green)"></td>
+                  <td style="padding:4px;border:1px solid var(--border);text-align:center;width:60px"><input type="checkbox" id="pdf-dl003" checked="" style="width:16px;height:16px;accent-color:var(--green)"></td>
                 </tr>
                 <tr>
                   <td style="padding:4px 8px;border:1px solid var(--border);font-weight:600;text-align:center;width:75px">DL004</td>
                   <td style="padding:4px 8px;border:1px solid var(--border);font-size:11px">Filtración. Capa Hemirreductora</td>
                   <td style="padding:2px 4px;border:1px solid var(--border);width:110px"><input type="text" id="pr-dl004" placeholder="2,8mm Al" style="width:100%;border:none;background:transparent;color:var(--green);font-size:12px;padding:4px;text-align:center"></td>
                   <td style="padding:4px 8px;border:1px solid var(--border);font-size:10px;width:150px">≥1,5mmAl (TP≤70Kv) / ≥2,5mmAl (TP&gt;70Kv)</td>
-                  <td style="padding:4px;border:1px solid var(--border);text-align:center;width:60px"><input type="checkbox" id="pdf-dl004" checked style="width:16px;height:16px;accent-color:var(--green)"></td>
+                  <td style="padding:4px;border:1px solid var(--border);text-align:center;width:60px"><input type="checkbox" id="pdf-dl004" checked="" style="width:16px;height:16px;accent-color:var(--green)"></td>
                 </tr>
                 <tr style="background:var(--bg2)"><td colspan="5" style="padding:6px 10px;border:1px solid var(--border);font-weight:700;font-size:11px;text-align:center;letter-spacing:0.05em">TIEMPO DE EXPOSICIÓN</td></tr>
                 <tr>
@@ -670,22 +883,22 @@
                   <td style="padding:4px 8px;border:1px solid var(--border);font-size:11px">Exactitud y reproducibilidad del tiempo de exposición</td>
                   <td style="padding:2px 4px;border:1px solid var(--border);width:110px"><input type="text" id="pr-dl006" placeholder="Ver ANEXO I" style="width:100%;border:none;background:transparent;color:var(--green);font-size:12px;padding:4px;text-align:center"></td>
                   <td style="padding:4px 8px;border:1px solid var(--border);font-size:10px;width:150px">Exactitud ≤±20% / Reprod.≤10%</td>
-                  <td style="padding:4px;border:1px solid var(--border);text-align:center;width:60px"><input type="checkbox" id="pdf-dl006" checked style="width:16px;height:16px;accent-color:var(--green)"></td>
+                  <td style="padding:4px;border:1px solid var(--border);text-align:center;width:60px"><input type="checkbox" id="pdf-dl006" checked="" style="width:16px;height:16px;accent-color:var(--green)"></td>
                 </tr>
                 <tr style="background:var(--bg2)"><td colspan="5" style="padding:6px 10px;border:1px solid var(--border);font-weight:700;font-size:11px;text-align:center;letter-spacing:0.05em">RENDIMIENTO</td></tr>
                 <tr>
                   <td style="padding:4px 8px;border:1px solid var(--border);font-weight:600;text-align:center;width:75px">*DL007</td>
                   <td style="padding:4px 8px;border:1px solid var(--border);font-size:11px">Reproducibilidad</td>
-                  <td style="padding:2px 4px;border:1px solid var(--border);width:110px"><input type="text" id="pr-dl007" value="Ver ANEXO I" readonly style="width:100%;border:none;background:transparent;color:var(--text3);font-size:12px;padding:4px;text-align:center;cursor:default"></td>
+                  <td style="padding:2px 4px;border:1px solid var(--border);width:110px"><input type="text" id="pr-dl007" value="Ver ANEXO I" readonly="" style="width:100%;border:none;background:transparent;color:var(--text3);font-size:12px;padding:4px;text-align:center;cursor:default"></td>
                   <td style="padding:4px 8px;border:1px solid var(--border);font-size:10px;width:150px">&lt;10%</td>
-                  <td style="padding:4px;border:1px solid var(--border);text-align:center;width:60px"><input type="checkbox" id="pdf-dl007" checked style="width:16px;height:16px;accent-color:var(--green)"></td>
+                  <td style="padding:4px;border:1px solid var(--border);text-align:center;width:60px"><input type="checkbox" id="pdf-dl007" checked="" style="width:16px;height:16px;accent-color:var(--green)"></td>
                 </tr>
                 <tr>
                   <td style="padding:4px 8px;border:1px solid var(--border);font-weight:600;text-align:center;width:75px">DL008</td>
                   <td style="padding:4px 8px;border:1px solid var(--border);font-size:11px">Linealidad dosis con tiempo</td>
                   <td style="padding:2px 4px;border:1px solid var(--border);width:110px"><input type="text" id="pr-dl008" placeholder="Ver ANEXO I" style="width:100%;border:none;background:transparent;color:var(--green);font-size:12px;padding:4px;text-align:center"></td>
                   <td style="padding:4px 8px;border:1px solid var(--border);font-size:10px;width:150px">10%</td>
-                  <td style="padding:4px;border:1px solid var(--border);text-align:center;width:60px"><input type="checkbox" id="pdf-dl008" checked style="width:16px;height:16px;accent-color:var(--green)"></td>
+                  <td style="padding:4px;border:1px solid var(--border);text-align:center;width:60px"><input type="checkbox" id="pdf-dl008" checked="" style="width:16px;height:16px;accent-color:var(--green)"></td>
                 </tr>
               </tbody>
             </table>
@@ -697,7 +910,7 @@
           <div class="form-section-title" style="display:flex;align-items:center;justify-content:space-between">
               <span>Anexo I — Control de calidad de contraste</span>
               <label style="display:inline-flex;align-items:center;gap:8px;cursor:pointer;user-select:none">
-                <input type="checkbox" id="chk-cont" checked style="width:16px;height:16px;cursor:pointer;accent-color:var(--green)">
+                <input type="checkbox" id="chk-cont" checked="" style="width:16px;height:16px;cursor:pointer;accent-color:var(--green)">
                 <span style="font-size:11px;font-weight:400;color:var(--text3)">Incluir en PDF</span>
               </label>
             </div>
@@ -743,7 +956,7 @@
           <div class="form-section-title" style="display:flex;align-items:center;justify-content:space-between">
               <span>Anexo I — Control de calidad de ruido</span>
               <label style="display:inline-flex;align-items:center;gap:8px;cursor:pointer;user-select:none">
-                <input type="checkbox" id="chk-ruido" checked style="width:16px;height:16px;cursor:pointer;accent-color:var(--green)">
+                <input type="checkbox" id="chk-ruido" checked="" style="width:16px;height:16px;cursor:pointer;accent-color:var(--green)">
                 <span style="font-size:11px;font-weight:400;color:var(--text3)">Incluir en PDF</span>
               </label>
             </div>
@@ -828,7 +1041,7 @@
           <div class="form-section-title" style="display:flex;align-items:center;justify-content:space-between">
               <span>Anexo I — Control de centraje de colimación</span>
               <label style="display:inline-flex;align-items:center;gap:8px;cursor:pointer;user-select:none">
-                <input type="checkbox" id="chk-centr" checked style="width:16px;height:16px;cursor:pointer;accent-color:var(--green)">
+                <input type="checkbox" id="chk-centr" checked="" style="width:16px;height:16px;cursor:pointer;accent-color:var(--green)">
                 <span style="font-size:11px;font-weight:400;color:var(--text3)">Incluir en PDF</span>
               </label>
             </div>
@@ -857,7 +1070,7 @@
           <div class="form-section-title" style="display:flex;align-items:center;justify-content:space-between">
               <span>Anexo I — Resultado de Aire CTDI</span>
               <label style="display:inline-flex;align-items:center;gap:8px;cursor:pointer;user-select:none">
-                <input type="checkbox" id="chk-ctdi" checked style="width:16px;height:16px;cursor:pointer;accent-color:var(--green)">
+                <input type="checkbox" id="chk-ctdi" checked="" style="width:16px;height:16px;cursor:pointer;accent-color:var(--green)">
                 <span style="font-size:11px;font-weight:400;color:var(--text3)">Incluir en PDF</span>
               </label>
             </div>
@@ -1022,7 +1235,7 @@
           <div class="form-section-title" style="display:flex;align-items:center;justify-content:space-between">
             <span>Anexo I — Exactitud de la tensión</span>
             <label style="display:inline-flex;align-items:center;gap:8px;cursor:pointer">
-              <input type="checkbox" id="chk-pch1" checked style="width:16px;height:16px;accent-color:var(--green)">
+              <input type="checkbox" id="chk-pch1" checked="" style="width:16px;height:16px;accent-color:var(--green)">
               <span style="font-size:11px;font-weight:400;color:var(--text3)">Incluir en PDF</span>
             </label>
           </div>
@@ -1044,7 +1257,7 @@
                   <td style="padding:2px 4px;border:1px solid var(--border)"><input type="text" id="pch1-1-medido" style="width:100%;border:none;background:transparent;color:var(--green);font-size:12px;padding:4px;text-align:center" value="70,1KV"></td>
                   <td style="padding:4px;border:1px solid var(--border);text-align:center">
                     <label style="display:inline-flex;align-items:center;gap:6px;cursor:pointer">
-                      <input type="checkbox" id="pch1-1-ok" checked style="width:18px;height:18px;cursor:pointer;accent-color:var(--green)">
+                      <input type="checkbox" id="pch1-1-ok" checked="" style="width:18px;height:18px;cursor:pointer;accent-color:var(--green)">
                       <span id="pch1-1-ok-lbl" style="font-size:11px;font-weight:600;color:var(--green)">OK</span>
                     </label>
                   </td>
@@ -1054,7 +1267,7 @@
                   <td style="padding:2px 4px;border:1px solid var(--border)"><input type="text" id="pch1-2-medido" style="width:100%;border:none;background:transparent;color:var(--green);font-size:12px;padding:4px;text-align:center" value="80,1"></td>
                   <td style="padding:4px;border:1px solid var(--border);text-align:center">
                     <label style="display:inline-flex;align-items:center;gap:6px;cursor:pointer">
-                      <input type="checkbox" id="pch1-2-ok" checked style="width:18px;height:18px;cursor:pointer;accent-color:var(--green)">
+                      <input type="checkbox" id="pch1-2-ok" checked="" style="width:18px;height:18px;cursor:pointer;accent-color:var(--green)">
                       <span id="pch1-2-ok-lbl" style="font-size:11px;font-weight:600;color:var(--green)">OK</span>
                     </label>
                   </td>
@@ -1064,7 +1277,7 @@
                   <td style="padding:2px 4px;border:1px solid var(--border)"><input type="text" id="pch1-3-medido" style="width:100%;border:none;background:transparent;color:var(--green);font-size:12px;padding:4px;text-align:center" value="92 KV"></td>
                   <td style="padding:4px;border:1px solid var(--border);text-align:center">
                     <label style="display:inline-flex;align-items:center;gap:6px;cursor:pointer">
-                      <input type="checkbox" id="pch1-3-ok" checked style="width:18px;height:18px;cursor:pointer;accent-color:var(--green)">
+                      <input type="checkbox" id="pch1-3-ok" checked="" style="width:18px;height:18px;cursor:pointer;accent-color:var(--green)">
                       <span id="pch1-3-ok-lbl" style="font-size:11px;font-weight:600;color:var(--green)">OK</span>
                     </label>
                   </td>
@@ -1074,17 +1287,17 @@
                   <td style="padding:2px 4px;border:1px solid var(--border)"><input type="text" id="pch1-4-medido" style="width:100%;border:none;background:transparent;color:var(--green);font-size:12px;padding:4px;text-align:center" value="101 KV"></td>
                   <td style="padding:4px;border:1px solid var(--border);text-align:center">
                     <label style="display:inline-flex;align-items:center;gap:6px;cursor:pointer">
-                      <input type="checkbox" id="pch1-4-ok" checked style="width:18px;height:18px;cursor:pointer;accent-color:var(--green)">
+                      <input type="checkbox" id="pch1-4-ok" checked="" style="width:18px;height:18px;cursor:pointer;accent-color:var(--green)">
                       <span id="pch1-4-ok-lbl" style="font-size:11px;font-weight:600;color:var(--green)">OK</span>
                     </label>
                   </td>
                 </tr>
                 <tr>
                   <td style="padding:5px 8px;border:1px solid var(--border);background:var(--bg2);font-weight:600;font-size:11px"></td>
-                  <td style="padding:2px 4px;border:1px solid var(--border)"><input type="text" id="pch1-5-medido" style="width:100%;border:none;background:transparent;color:var(--green);font-size:12px;padding:4px;text-align:center" ></td>
+                  <td style="padding:2px 4px;border:1px solid var(--border)"><input type="text" id="pch1-5-medido" style="width:100%;border:none;background:transparent;color:var(--green);font-size:12px;padding:4px;text-align:center"></td>
                   <td style="padding:4px;border:1px solid var(--border);text-align:center">
                     <label style="display:inline-flex;align-items:center;gap:6px;cursor:pointer">
-                      <input type="checkbox" id="pch1-5-ok"  style="width:18px;height:18px;cursor:pointer;accent-color:var(--green)">
+                      <input type="checkbox" id="pch1-5-ok" style="width:18px;height:18px;cursor:pointer;accent-color:var(--green)">
                       <span id="pch1-5-ok-lbl" style="font-size:11px;font-weight:600;color:var(--text3)">NO OK</span>
                     </label>
                   </td>
@@ -1103,7 +1316,7 @@
           <div class="form-section-title" style="display:flex;align-items:center;justify-content:space-between">
             <span>Anexo I — Reproductividad de la tensión</span>
             <label style="display:inline-flex;align-items:center;gap:8px;cursor:pointer">
-              <input type="checkbox" id="chk-repr" checked style="width:16px;height:16px;accent-color:var(--green)">
+              <input type="checkbox" id="chk-repr" checked="" style="width:16px;height:16px;accent-color:var(--green)">
               <span style="font-size:11px;font-weight:400;color:var(--text3)">Incluir en PDF</span>
             </label>
           </div>
@@ -1178,7 +1391,7 @@
           <div class="form-section-title" style="display:flex;align-items:center;justify-content:space-between">
             <span>Anexo I — Filtración Capa Hemirreductora</span>
             <label style="display:inline-flex;align-items:center;gap:8px;cursor:pointer">
-              <input type="checkbox" id="chk-filtr" checked style="width:16px;height:16px;accent-color:var(--green)">
+              <input type="checkbox" id="chk-filtr" checked="" style="width:16px;height:16px;accent-color:var(--green)">
               <span style="font-size:11px;font-weight:400;color:var(--text3)">Incluir en PDF</span>
             </label>
           </div>
@@ -1201,8 +1414,7 @@
                   <td style="padding:4px 10px;border:1px solid var(--border)">
                     <div style="display:flex;align-items:center;justify-content:center;gap:0">
                       <span style="font-size:12px;font-weight:600;color:var(--text)">2,</span>
-                      <input type="text" id="filtr-75-dec" value="5"
-                        style="width:36px;border:none;border-bottom:1.5px solid var(--green);background:transparent;font-size:12px;padding:2px 4px;text-align:center;color:var(--green);font-weight:600">
+                      <input type="text" id="filtr-75-dec" value="5" style="width:36px;border:none;border-bottom:1.5px solid var(--green);background:transparent;font-size:12px;padding:2px 4px;text-align:center;color:var(--green);font-weight:600">
                     </div>
                   </td>
                 </tr>
@@ -1211,8 +1423,7 @@
                   <td style="padding:4px 10px;border:1px solid var(--border)">
                     <div style="display:flex;align-items:center;justify-content:center;gap:0">
                       <span style="font-size:12px;font-weight:600;color:var(--text)">3,</span>
-                      <input type="text" id="filtr-100-dec" value="7"
-                        style="width:36px;border:none;border-bottom:1.5px solid var(--green);background:transparent;font-size:12px;padding:2px 4px;text-align:center;color:var(--green);font-weight:600">
+                      <input type="text" id="filtr-100-dec" value="7" style="width:36px;border:none;border-bottom:1.5px solid var(--green);background:transparent;font-size:12px;padding:2px 4px;text-align:center;color:var(--green);font-weight:600">
                     </div>
                   </td>
                 </tr>
@@ -1221,8 +1432,7 @@
                   <td style="padding:4px 10px;border:1px solid var(--border)">
                     <div style="display:flex;align-items:center;justify-content:center;gap:0">
                       <span style="font-size:12px;font-weight:600;color:var(--text)">4,</span>
-                      <input type="text" id="filtr-125-dec" value="5"
-                        style="width:36px;border:none;border-bottom:1.5px solid var(--green);background:transparent;font-size:12px;padding:2px 4px;text-align:center;color:var(--green);font-weight:600">
+                      <input type="text" id="filtr-125-dec" value="5" style="width:36px;border:none;border-bottom:1.5px solid var(--green);background:transparent;font-size:12px;padding:2px 4px;text-align:center;color:var(--green);font-weight:600">
                     </div>
                   </td>
                 </tr>
@@ -1231,8 +1441,7 @@
                   <td style="padding:4px 10px;border:1px solid var(--border)">
                     <div style="display:flex;align-items:center;justify-content:center;gap:0">
                       <span style="font-size:12px;font-weight:600;color:var(--text)">5,</span>
-                      <input type="text" id="filtr-150-dec" value="5"
-                        style="width:36px;border:none;border-bottom:1.5px solid var(--green);background:transparent;font-size:12px;padding:2px 4px;text-align:center;color:var(--green);font-weight:600">
+                      <input type="text" id="filtr-150-dec" value="5" style="width:36px;border:none;border-bottom:1.5px solid var(--green);background:transparent;font-size:12px;padding:2px 4px;text-align:center;color:var(--green);font-weight:600">
                     </div>
                   </td>
                 </tr>
@@ -1250,7 +1459,7 @@
           <div class="form-section-title" style="display:flex;align-items:center;justify-content:space-between">
             <span>Anexo I — Valor del rendimiento</span>
             <label style="display:inline-flex;align-items:center;gap:8px;cursor:pointer">
-              <input type="checkbox" id="chk-rend" checked style="width:16px;height:16px;accent-color:var(--green)">
+              <input type="checkbox" id="chk-rend" checked="" style="width:16px;height:16px;accent-color:var(--green)">
               <span style="font-size:11px;font-weight:400;color:var(--text3)">Incluir en PDF</span>
             </label>
           </div>
@@ -1269,8 +1478,7 @@
                   <td style="padding:4px 10px;border:1px solid var(--border)">
                     <div style="display:flex;align-items:center;justify-content:center;gap:0">
                       <span style="font-size:12px;font-weight:600;color:var(--text)">5,</span>
-                      <input type="text" id="rend-dec" value="2"
-                        style="width:36px;border:none;border-bottom:1.5px solid var(--green);background:transparent;font-size:12px;padding:2px 4px;text-align:center;color:var(--green);font-weight:600">
+                      <input type="text" id="rend-dec" value="2" style="width:36px;border:none;border-bottom:1.5px solid var(--green);background:transparent;font-size:12px;padding:2px 4px;text-align:center;color:var(--green);font-weight:600">
                       <span style="font-size:12px;font-weight:600;color:var(--text);margin-left:4px">UGY /MA</span>
                     </div>
                   </td>
@@ -1289,7 +1497,7 @@
           <div class="form-section-title" style="display:flex;align-items:center;justify-content:space-between">
             <span>Anexo I — Exactitud del tiempo de exposición</span>
             <label style="display:inline-flex;align-items:center;gap:8px;cursor:pointer">
-              <input type="checkbox" id="chk-texp" checked style="width:16px;height:16px;accent-color:var(--green)">
+              <input type="checkbox" id="chk-texp" checked="" style="width:16px;height:16px;accent-color:var(--green)">
               <span style="font-size:11px;font-weight:400;color:var(--text3)">Incluir en PDF</span>
             </label>
           </div>
@@ -1319,7 +1527,7 @@
                   <td style="padding:2px 4px;border:1px solid var(--border)"><input type="text" id="texp-1-ms" value="1001" style="width:100%;border:none;background:transparent;font-size:12px;padding:4px;text-align:center;color:var(--green);font-weight:600"></td>
                   <td style="padding:4px;border:1px solid var(--border);text-align:center">
                     <label style="display:inline-flex;align-items:center;gap:6px;cursor:pointer">
-                      <input type="checkbox" id="texp-1-apto" checked style="width:16px;height:16px;accent-color:var(--green)">
+                      <input type="checkbox" id="texp-1-apto" checked="" style="width:16px;height:16px;accent-color:var(--green)">
                       <span id="texp-1-apto-lbl" style="font-size:11px;font-weight:600;color:var(--green)">apto</span>
                     </label>
                   </td>
@@ -1330,7 +1538,7 @@
                   <td style="padding:2px 4px;border:1px solid var(--border)"><input type="text" id="texp-2-ms" value="401" style="width:100%;border:none;background:transparent;font-size:12px;padding:4px;text-align:center;color:var(--green);font-weight:600"></td>
                   <td style="padding:4px;border:1px solid var(--border);text-align:center">
                     <label style="display:inline-flex;align-items:center;gap:6px;cursor:pointer">
-                      <input type="checkbox" id="texp-2-apto" checked style="width:16px;height:16px;accent-color:var(--green)">
+                      <input type="checkbox" id="texp-2-apto" checked="" style="width:16px;height:16px;accent-color:var(--green)">
                       <span id="texp-2-apto-lbl" style="font-size:11px;font-weight:600;color:var(--green)">apto</span>
                     </label>
                   </td>
@@ -1341,7 +1549,7 @@
                   <td style="padding:2px 4px;border:1px solid var(--border)"><input type="text" id="texp-3-ms" value="41" style="width:100%;border:none;background:transparent;font-size:12px;padding:4px;text-align:center;color:var(--green);font-weight:600"></td>
                   <td style="padding:4px;border:1px solid var(--border);text-align:center">
                     <label style="display:inline-flex;align-items:center;gap:6px;cursor:pointer">
-                      <input type="checkbox" id="texp-3-apto" checked style="width:16px;height:16px;accent-color:var(--green)">
+                      <input type="checkbox" id="texp-3-apto" checked="" style="width:16px;height:16px;accent-color:var(--green)">
                       <span id="texp-3-apto-lbl" style="font-size:11px;font-weight:600;color:var(--green)">apto</span>
                     </label>
                   </td>
@@ -1352,7 +1560,7 @@
                   <td style="padding:2px 4px;border:1px solid var(--border)"><input type="text" id="texp-4-ms" value="10.2" style="width:100%;border:none;background:transparent;font-size:12px;padding:4px;text-align:center;color:var(--green);font-weight:600"></td>
                   <td style="padding:4px;border:1px solid var(--border);text-align:center">
                     <label style="display:inline-flex;align-items:center;gap:6px;cursor:pointer">
-                      <input type="checkbox" id="texp-4-apto" checked style="width:16px;height:16px;accent-color:var(--green)">
+                      <input type="checkbox" id="texp-4-apto" checked="" style="width:16px;height:16px;accent-color:var(--green)">
                       <span id="texp-4-apto-lbl" style="font-size:11px;font-weight:600;color:var(--green)">apto</span>
                     </label>
                   </td>
@@ -1363,7 +1571,7 @@
                   <td style="padding:2px 4px;border:1px solid var(--border)"><input type="text" id="texp-5-ms" value="" style="width:100%;border:none;background:transparent;font-size:12px;padding:4px;text-align:center;color:var(--green);font-weight:600"></td>
                   <td style="padding:4px;border:1px solid var(--border);text-align:center">
                     <label style="display:inline-flex;align-items:center;gap:6px;cursor:pointer">
-                      <input type="checkbox" id="texp-5-apto"  style="width:16px;height:16px;accent-color:var(--green)">
+                      <input type="checkbox" id="texp-5-apto" style="width:16px;height:16px;accent-color:var(--green)">
                       <span id="texp-5-apto-lbl" style="font-size:11px;font-weight:600;color:var(--text3)"></span>
                     </label>
                   </td>
@@ -1390,8 +1598,8 @@
       </div>      </div>
     </div>
     
-  </div>
-</div>
+  
+
 
 <!-- MODAL NUEVA RETIRADA -->
 <div class="modal-overlay" id="modal-retirada">
@@ -1399,7 +1607,7 @@
     <div class="modal-header">
       <div class="modal-title">Nueva Retirada</div>
       <div style="display:flex;gap:10px;align-items:center">
-        <button class="btn btn-green btn-sm" onclick="saveRetirada()"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg> Guardar</button>
+        <button class="btn btn-green btn-sm" onclick="saveRetirada()"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg> Guardar</button>
         <button class="btn btn-outline btn-sm" onclick="generarCertificadoRetirada()">📄 Generar certificado</button>
         <button class="modal-close" onclick="closeModal('modal-retirada')">✕</button>
       </div>
@@ -1533,7 +1741,7 @@
     <div class="modal-footer">
       <input type="hidden" id="c-editing-id">
       <button class="btn btn-outline" onclick="closeModal('modal-cli')">Cancelar</button>
-      <button class="btn btn-primary" onclick="saveCliente()"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg> Guardar</button>
+      <button class="btn btn-primary" onclick="saveCliente()"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg> Guardar</button>
     </div>
   </div>
 </div>
@@ -4588,11 +4796,10 @@ if (rEl) rEl.checked = true;
       </p>
       <div class="form-group">
         <label>API Key (AIza...)</label>
-        <input type="password" id="modal-apikey-input" placeholder="AIzaSy..." style="width:100%"
-          onkeydown="if(event.key==='Enter') confirmarApiKey()">
+        <input type="password" id="modal-apikey-input" placeholder="AIzaSy..." style="width:100%" onkeydown="if(event.key==='Enter') confirmarApiKey()">
       </div>
       <label style="display:flex;align-items:center;gap:8px;margin-top:8px;cursor:pointer;font-size:13px">
-        <input type="checkbox" id="modal-apikey-save" checked style="accent-color:var(--green)">
+        <input type="checkbox" id="modal-apikey-save" checked="" style="accent-color:var(--green)">
         Recordar API key en este dispositivo
       </label>
       <div style="display:flex;gap:8px;margin-top:20px">
@@ -4624,13 +4831,10 @@ if (rEl) rEl.checked = true;
 </div>
 
 <!-- BOTÓN AYUDA FIJO -->
-  <button onclick="document.getElementById('modal-ayuda').classList.add('open')"
-    id="help-btn-float" style="position:fixed;bottom:24px;right:24px;width:44px;height:44px;border-radius:50%;
+  <button onclick="document.getElementById('modal-ayuda').classList.add('open')" id="help-btn-float" style="position:fixed;bottom:24px;right:24px;width:44px;height:44px;border-radius:50%;
            background:var(--green);color:#fff;border:none;font-size:20px;font-weight:700;
            cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,0.2);z-index:500;
-           display:flex;align-items:center;justify-content:center;transition:transform .15s"
-    onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'"
-    title="Guía de uso">?</button>
+           display:flex;align-items:center;justify-content:center;transition:transform .15s" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'" title="Guía de uso">?</button>
 
   <!-- MODAL AYUDA -->
   <div class="modal-overlay" id="modal-ayuda" style="z-index:9998">
@@ -4747,23 +4951,23 @@ if (rEl) rEl.checked = true;
 <!-- BARRA NAVEGACIÓN MÓVIL -->
 <nav class="mobile-nav" id="mobile-nav">
   <button class="mob-tab active" data-page="dashboard" onclick="showPage('dashboard');setMobTab(this)">
-    <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+    <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect></svg>
     Inicio
   </button>
   <button class="mob-tab" data-page="instalaciones" onclick="showPage('instalaciones');setMobTab(this)">
-    <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+    <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
     Instalaciones
   </button>
   <button class="mob-tab" data-page="clientes" onclick="showPage('clientes');setMobTab(this)">
-    <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+    <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
     Clientes
   </button>
   <button class="mob-tab" data-page="bajas" onclick="showPage('bajas');setMobTab(this)">
-    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>
     Retiradas
   </button>
   <button class="mob-tab" data-page="config" onclick="showPage('config');setMobTab(this)">
-    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
     Config
   </button>
 </nav>
@@ -4777,5 +4981,6 @@ function setMobTab(el){document.querySelectorAll('.mob-tab').forEach(t=>t.classL
   };
 })();
 </script>
-</body>
-</html>
+
+
+<div id="proctor-extension-installed"></div><div id="claude-agent-glow-border" style="position: fixed; inset: 0px; pointer-events: none; z-index: 2147483646; opacity: 0; transition: opacity 0.3s ease-in-out; animation: 2s ease-in-out 0s infinite normal none running claude-pulse; box-shadow: rgba(217, 119, 87, 0.5) 0px 0px 10px inset, rgba(217, 119, 87, 0.3) 0px 0px 20px inset, rgba(217, 119, 87, 0.1) 0px 0px 30px inset;"></div></body></html>
