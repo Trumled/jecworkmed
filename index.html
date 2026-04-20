@@ -359,109 +359,43 @@
           <div class="search-box"><span>🔍</span><input type="text" id="search-cli" placeholder="Buscar cliente…" oninput="renderClientes()"></div>
         </div>
         <table><thead><tr><th>Nombre</th><th>NIF</th><th>Nº IRX</th><th>Localidad</th><th>Provincia</th><th>Teléfono</th><th>Contacto</th><th>Acciones</th></tr></thead>
-        <tbody id="table-clientes"><tr class="cli-hist-row" style="cursor:pointer" onclick="toggleCliHist('1774655077264')">
-<td><strong>Hospital La Paloma</strong> <span id="cli-arrow-1774655077264" style="color:var(--text3);font-size:11px">▸</span>
-<span style="margin-left:6px;font-size:11px;color:var(--text3)">3 registros</span>
-</td>
-<td><span style="font-family:'DM Mono',monospace;font-size:12px">A35005842</span></td>
-<td><span style="font-family:'DM Mono',monospace;font-size:12px;color:var(--green)">IRX/GC-2112</span></td>
-<td>Las Palmas de Gran Canaria</td>
-<td>Las Palmas</td>
-<td>+34 629690034</td>
-<td>fernandojimenezdelcampo@hospitallapaloma.com</td>
-<td onclick="event.stopPropagation()"><div class="actions-cell">
-<button class="btn btn-sm btn-outline" onclick="verCliente('1774655077264')" title="Ver cliente">Ver</button>
-        <button class="btn btn-sm" style="background:var(--green-dark,#1f6b5e);color:#fff;border:none" onclick="editCliente('1774655077264')" title="Editar cliente"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg> Editar</button>
-<button class="btn btn-sm btn-danger" onclick="deleteCliente('1774655077264')" title="Eliminar cliente"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path><path d="M10 11v6"></path><path d="M14 11v6"></path><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"></path></svg></button>
-</div></td>
-</tr>
-<tr><td colspan="8" style="padding:0;border-top:none"><div class="cli-hist-panel" id="cli-hist-1774655077264">
-<div class="cli-hist-item">
-<span style="font-weight:500">Mamografo</span>
-<span style="color:var(--text3)">HOLOGIC, INC. 010-1547</span>
-<span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text3)">14150</span>
-<span style="margin-left:auto;color:var(--text3)">2026-04-01</span>
-<span class="cli-hist-badge baja">Baja</span>
-<button class="btn btn-sm btn-outline" style="font-size:11px;padding:2px 8px" onclick="verInstalacion('1775074220246')">Ver</button>
-</div>
-<div class="cli-hist-item">
-<span style="font-weight:500">Equipo de RX</span>
-<span style="color:var(--text3)">Siemens fdhbnx</span>
-<span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text3)">zxb x</span>
-<span style="margin-left:auto;color:var(--text3)">2026-03-28</span>
-<span class="cli-hist-badge baja">Retirada</span>
-</div>
-<div class="cli-hist-item">
-<span style="font-weight:500">Mamografo</span>
-<span style="color:var(--text3)">HOLOGIC, INC. 010-1547</span>
-<span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text3)">14150</span>
-<span style="margin-left:auto;color:var(--text3)">2026-04-05</span>
-<span class="cli-hist-badge baja">Retirada</span>
-</div></div></td></tr><tr class="cli-hist-row" style="cursor:pointer" onclick="toggleCliHist('1774656044411')">
-<td><strong>Clínica Can S.L</strong> <span id="cli-arrow-1774656044411" style="color:var(--text3);font-size:11px">▸</span>
-<span style="margin-left:6px;font-size:11px;color:var(--text3)">1 registro</span>
-</td>
-<td><span style="font-family:'DM Mono',monospace;font-size:12px">B76335173</span></td>
-<td><span style="font-family:'DM Mono',monospace;font-size:12px;color:var(--green)">—</span></td>
-<td>Las Palmas de Gran Canaria</td>
-<td>Las Palmas</td>
-<td>+34 928240773</td>
-<td>clinicacan@gmail.com</td>
-<td onclick="event.stopPropagation()"><div class="actions-cell">
-<button class="btn btn-sm btn-outline" onclick="verCliente('1774656044411')" title="Ver cliente">Ver</button>
-        <button class="btn btn-sm" style="background:var(--green-dark,#1f6b5e);color:#fff;border:none" onclick="editCliente('1774656044411')" title="Editar cliente"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg> Editar</button>
-<button class="btn btn-sm btn-danger" onclick="deleteCliente('1774656044411')" title="Eliminar cliente"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path><path d="M10 11v6"></path><path d="M14 11v6"></path><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"></path></svg></button>
-</div></td>
-</tr>
-<tr><td colspan="8" style="padding:0;border-top:none"><div class="cli-hist-panel" id="cli-hist-1774656044411">
-<div class="cli-hist-item">
-<span style="font-weight:500">CT</span>
-<span style="color:var(--text3)">General Electric 5324907-1</span>
-<span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text3)">340938HM0</span>
-<span style="margin-left:auto;color:var(--text3)">2026-03-28</span>
-<span class="cli-hist-badge inst">Activa</span>
-<button class="btn btn-sm btn-outline" style="font-size:11px;padding:2px 8px" onclick="verInstalacion('1774657506280')">Ver</button>
-</div></div></td></tr><tr class="cli-hist-row" style="cursor:pointer" onclick="toggleCliHist('1774969704270')">
-<td><strong>Clinica Dr. Mager</strong> <span id="cli-arrow-1774969704270" style="color:var(--text3);font-size:11px">▸</span>
-<span style="margin-left:6px;font-size:11px;color:var(--text3)">1 registro</span>
-</td>
-<td><span style="font-family:'DM Mono',monospace;font-size:12px">B35488378</span></td>
-<td><span style="font-family:'DM Mono',monospace;font-size:12px;color:var(--green)">—</span></td>
-<td>Playa Blanca</td>
-<td>Las Palmas</td>
-<td>+34 928517938</td>
-<td>blanca@lanzamedic.com</td>
-<td onclick="event.stopPropagation()"><div class="actions-cell">
-<button class="btn btn-sm btn-outline" onclick="verCliente('1774969704270')" title="Ver cliente">Ver</button>
-        <button class="btn btn-sm" style="background:var(--green-dark,#1f6b5e);color:#fff;border:none" onclick="editCliente('1774969704270')" title="Editar cliente"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg> Editar</button>
-<button class="btn btn-sm btn-danger" onclick="deleteCliente('1774969704270')" title="Eliminar cliente"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path><path d="M10 11v6"></path><path d="M14 11v6"></path><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"></path></svg></button>
-</div></td>
-</tr>
-<tr><td colspan="8" style="padding:0;border-top:none"><div class="cli-hist-panel" id="cli-hist-1774969704270">
-<div class="cli-hist-item">
-<span style="font-weight:500">Equipo de RX</span>
-<span style="color:var(--text3)">Sangsun XGEO GU60A</span>
-<span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text3)">S018M3BDA00001T</span>
-<span style="margin-left:auto;color:var(--text3)">2026-03-31</span>
-<span class="cli-hist-badge inst">Activa</span>
-<button class="btn btn-sm btn-outline" style="font-size:11px;padding:2px 8px" onclick="verInstalacion('1774970355564')">Ver</button>
-</div></div></td></tr><tr class="cli-hist-row" style="cursor:pointer" onclick="toggleCliHist('1776679056105')">
-<td><strong>Tes</strong> <span id="cli-arrow-1776679056105" style="color:var(--text3);font-size:11px">▸</span>
-<span style="margin-left:6px;font-size:11px;color:var(--text3)">0 registros</span>
-</td>
-<td><span style="font-family:'DM Mono',monospace;font-size:12px">—</span></td>
-<td><span style="font-family:'DM Mono',monospace;font-size:12px;color:var(--green)">—</span></td>
-<td>—</td>
-<td>—</td>
-<td>—</td>
-<td>—</td>
-<td onclick="event.stopPropagation()"><div class="actions-cell">
-<button class="btn btn-sm btn-outline" onclick="verCliente('1776679056105')" title="Ver cliente">Ver</button>
-        <button class="btn btn-sm" style="background:var(--green-dark,#1f6b5e);color:#fff;border:none" onclick="editCliente('1776679056105')" title="Editar cliente"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg> Editar</button>
-<button class="btn btn-sm btn-danger" onclick="deleteCliente('1776679056105')" title="Eliminar cliente"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path><path d="M10 11v6"></path><path d="M14 11v6"></path><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"></path></svg></button>
-</div></td>
-</tr>
-<tr><td colspan="8" style="padding:0;border-top:none"><div class="cli-hist-panel" id="cli-hist-1776679056105"><div class="cli-hist-empty">Sin instalaciones registradas</div></div></td></tr></tbody></table><div class="mob-cards" id="mob-cards-clientes" style="display: none;"><div class="mob-card"><div class="mob-card-top"><div class="mob-card-nombre">Hospital La Paloma</div><span class="mob-card-tag">1 inst.</span></div><div style="font-size:13px;color:var(--text2);margin:2px 0 10px">📍 Las Palmas de Gran Canaria</div><div class="mob-card-actions"><button class="btn btn-sm btn-outline" style="flex:1" data-id="1774655077264" onclick="verCliente(this.dataset.id)">Ver</button><button class="btn btn-sm" style="background:var(--green);color:#fff;border:none;padding:5px 12px" data-id="1774655077264" onclick="editCliente(this.dataset.id)">✏️</button></div></div><div class="mob-card"><div class="mob-card-top"><div class="mob-card-nombre">Clínica Can S.L</div><span class="mob-card-tag">1 inst.</span></div><div style="font-size:13px;color:var(--text2);margin:2px 0 10px">📍 Las Palmas de Gran Canaria</div><div class="mob-card-actions"><button class="btn btn-sm btn-outline" style="flex:1" data-id="1774656044411" onclick="verCliente(this.dataset.id)">Ver</button><button class="btn btn-sm" style="background:var(--green);color:#fff;border:none;padding:5px 12px" data-id="1774656044411" onclick="editCliente(this.dataset.id)">✏️</button></div></div><div class="mob-card"><div class="mob-card-top"><div class="mob-card-nombre">Clinica Dr. Mager</div><span class="mob-card-tag">1 inst.</span></div><div style="font-size:13px;color:var(--text2);margin:2px 0 10px">📍 Playa Blanca</div><div class="mob-card-actions"><button class="btn btn-sm btn-outline" style="flex:1" data-id="1774969704270" onclick="verCliente(this.dataset.id)">Ver</button><button class="btn btn-sm" style="background:var(--green);color:#fff;border:none;padding:5px 12px" data-id="1774969704270" onclick="editCliente(this.dataset.id)">✏️</button></div></div><div class="mob-card"><div class="mob-card-top"><div class="mob-card-nombre">Tes</div><span class="mob-card-tag">0 inst.</span></div><div style="font-size:13px;color:var(--text2);margin:2px 0 10px">📍 —</div><div class="mob-card-actions"><button class="btn btn-sm btn-outline" style="flex:1" data-id="1776679056105" onclick="verCliente(this.dataset.id)">Ver</button><button class="btn btn-sm" style="background:var(--green);color:#fff;border:none;padding:5px 12px" data-id="1776679056105" onclick="editCliente(this.dataset.id)">✏️</button></div></div></div>
+        <tbody id="table-clientes"><tr onclick="toggleCliHist('1774655077264')" style="cursor:pointer">
+        <td><strong>Hospital La Paloma</strong> <span style="color:var(--text3);font-size:11px">3 registros</span></td>
+        <td>A35005842</td><td>IRX/GC-2112</td><td>Las Palmas de Gran Canaria</td>
+        <td>Las Palmas</td><td>+34 629690034</td><td>fernandojimenezdelcampo@hospitallapaloma.com</td>
+        <td onclick="event.stopPropagation()"><div class="actions-cell">
+          <button class="btn btn-sm btn-outline" data-id="1774655077264" onclick="verCliente(this.dataset.id)">Ver</button>
+          <button class="btn btn-sm" style="background:var(--green-dark,#1f6b5e);color:#fff;border:none" data-id="1774655077264" onclick="editCliente(this.dataset.id)">✏️</button>
+          <button class="btn btn-sm btn-danger" data-id="1774655077264" onclick="deleteCliente(this.dataset.id)">🗑️</button>
+        </div></td>
+      </tr><tr onclick="toggleCliHist('1774656044411')" style="cursor:pointer">
+        <td><strong>Clínica Can S.L</strong> <span style="color:var(--text3);font-size:11px">1 registros</span></td>
+        <td>B76335173</td><td>—</td><td>Las Palmas de Gran Canaria</td>
+        <td>Las Palmas</td><td>+34 928240773</td><td>clinicacan@gmail.com</td>
+        <td onclick="event.stopPropagation()"><div class="actions-cell">
+          <button class="btn btn-sm btn-outline" data-id="1774656044411" onclick="verCliente(this.dataset.id)">Ver</button>
+          <button class="btn btn-sm" style="background:var(--green-dark,#1f6b5e);color:#fff;border:none" data-id="1774656044411" onclick="editCliente(this.dataset.id)">✏️</button>
+          <button class="btn btn-sm btn-danger" data-id="1774656044411" onclick="deleteCliente(this.dataset.id)">🗑️</button>
+        </div></td>
+      </tr><tr onclick="toggleCliHist('1774969704270')" style="cursor:pointer">
+        <td><strong>Clinica Dr. Mager</strong> <span style="color:var(--text3);font-size:11px">1 registros</span></td>
+        <td>B35488378</td><td>—</td><td>Playa Blanca</td>
+        <td>Las Palmas</td><td>+34 928517938</td><td>blanca@lanzamedic.com</td>
+        <td onclick="event.stopPropagation()"><div class="actions-cell">
+          <button class="btn btn-sm btn-outline" data-id="1774969704270" onclick="verCliente(this.dataset.id)">Ver</button>
+          <button class="btn btn-sm" style="background:var(--green-dark,#1f6b5e);color:#fff;border:none" data-id="1774969704270" onclick="editCliente(this.dataset.id)">✏️</button>
+          <button class="btn btn-sm btn-danger" data-id="1774969704270" onclick="deleteCliente(this.dataset.id)">🗑️</button>
+        </div></td>
+      </tr><tr onclick="toggleCliHist('1776679056105')" style="cursor:pointer">
+        <td><strong>Tes</strong> <span style="color:var(--text3);font-size:11px">0 registros</span></td>
+        <td>—</td><td>—</td><td>—</td>
+        <td>—</td><td>—</td><td>—</td>
+        <td onclick="event.stopPropagation()"><div class="actions-cell">
+          <button class="btn btn-sm btn-outline" data-id="1776679056105" onclick="verCliente(this.dataset.id)">Ver</button>
+          <button class="btn btn-sm" style="background:var(--green-dark,#1f6b5e);color:#fff;border:none" data-id="1776679056105" onclick="editCliente(this.dataset.id)">✏️</button>
+          <button class="btn btn-sm btn-danger" data-id="1776679056105" onclick="deleteCliente(this.dataset.id)">🗑️</button>
+        </div></td>
+      </tr></tbody></table><div class="mob-cards" id="mob-cards-clientes" style="display: none;"><div class="mob-card"><div class="mob-card-top"><div class="mob-card-nombre">Hospital La Paloma</div><span class="mob-card-tag">1 inst.</span></div><div style="font-size:13px;color:var(--text2);margin:2px 0 10px">📍 Las Palmas de Gran Canaria</div><div class="mob-card-actions"><button class="btn btn-sm btn-outline" style="flex:1" data-id="1774655077264" onclick="verCliente(this.dataset.id)">Ver</button><button class="btn btn-sm" style="background:var(--green);color:#fff;border:none;padding:5px 12px" data-id="1774655077264" onclick="editCliente(this.dataset.id)">✏️</button></div></div><div class="mob-card"><div class="mob-card-top"><div class="mob-card-nombre">Clínica Can S.L</div><span class="mob-card-tag">1 inst.</span></div><div style="font-size:13px;color:var(--text2);margin:2px 0 10px">📍 Las Palmas de Gran Canaria</div><div class="mob-card-actions"><button class="btn btn-sm btn-outline" style="flex:1" data-id="1774656044411" onclick="verCliente(this.dataset.id)">Ver</button><button class="btn btn-sm" style="background:var(--green);color:#fff;border:none;padding:5px 12px" data-id="1774656044411" onclick="editCliente(this.dataset.id)">✏️</button></div></div><div class="mob-card"><div class="mob-card-top"><div class="mob-card-nombre">Clinica Dr. Mager</div><span class="mob-card-tag">1 inst.</span></div><div style="font-size:13px;color:var(--text2);margin:2px 0 10px">📍 Playa Blanca</div><div class="mob-card-actions"><button class="btn btn-sm btn-outline" style="flex:1" data-id="1774969704270" onclick="verCliente(this.dataset.id)">Ver</button><button class="btn btn-sm" style="background:var(--green);color:#fff;border:none;padding:5px 12px" data-id="1774969704270" onclick="editCliente(this.dataset.id)">✏️</button></div></div><div class="mob-card"><div class="mob-card-top"><div class="mob-card-nombre">Tes</div><span class="mob-card-tag">0 inst.</span></div><div style="font-size:13px;color:var(--text2);margin:2px 0 10px">📍 —</div><div class="mob-card-actions"><button class="btn btn-sm btn-outline" style="flex:1" data-id="1776679056105" onclick="verCliente(this.dataset.id)">Ver</button><button class="btn btn-sm" style="background:var(--green);color:#fff;border:none;padding:5px 12px" data-id="1776679056105" onclick="editCliente(this.dataset.id)">✏️</button></div></div></div>
       </div>
     </div>
 
