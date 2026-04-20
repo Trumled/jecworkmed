@@ -206,12 +206,12 @@
       <div class="sidebar-label">Menú</div>
       <div class="nav-item" onclick="showPage('dashboard')" data-page="dashboard"><span class="icon">◈</span> Inicio</div>
       <div class="nav-item" onclick="showPage('instalaciones')" data-page="instalaciones"><span class="icon">⊞</span> Instalaciones</div>
-      <div class="nav-item active" onclick="showPage('clientes')" data-page="clientes"><span class="icon">◎</span> Clientes</div>
+      <div class="nav-item" onclick="showPage('clientes')" data-page="clientes"><span class="icon">◎</span> Clientes</div>
       <div class="nav-item" onclick="showPage('bajas')" data-page="bajas"><span class="icon">⊗</span> Retiradas y Bajas</div>
     </div>
     <div class="sidebar-section">
       <div class="sidebar-label">Configuración</div>
-      <div class="nav-item" onclick="showPage('config')" data-page="config"><span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg></span> Parámetros</div>
+      <div class="nav-item active" onclick="showPage('config')" data-page="config"><span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg></span> Parámetros</div>
     </div>
   </nav>
 
@@ -426,7 +426,7 @@
     </div>
 
     <!-- CLIENTES -->
-    <div class="page active" id="page-clientes">
+    <div class="page" id="page-clientes">
       <div class="page-header">
         <div><div class="page-title">Clientes</div><div class="page-subtitle">Centros registrados</div></div>
         <button class="btn btn-primary" onclick="openModalCliente()">＋ Nuevo cliente</button>
@@ -629,7 +629,7 @@
       </div>
     </div>
 
-    <div class="page" id="page-config">
+    <div class="page active" id="page-config">
       <div class="page-header"><div><div class="page-title">Parámetros</div><div class="page-subtitle">Empresas, técnicos, directores y países</div></div></div>
       <div class="config-grid">
         <div class="config-card">
@@ -773,7 +773,20 @@
           </div>
         </div>
       </div>
-    </div>
+    <div id="card-install-pwa" class="config-card" style="margin-top: 20px;">
+  <div class="config-card-header">
+    <span class="config-card-title">📲 Instalar aplicación</span>
+  </div>
+  <div style="padding:18px">
+    <p style="font-size:13px;color:var(--text2);margin-bottom:14px">
+      Instala JECWORKMED en tu dispositivo para acceder directamente sin abrir el navegador.
+    </p>
+    <button id="btn-install-pwa" class="btn btn-primary" style="width:100%;justify-content:center;padding:12px;font-size:14px" onclick="installPWA()">
+      📲 Instalar la app en este dispositivo
+    </button>
+    <p id="pwa-install-msg" style="font-size:12px;color:var(--text3);margin-top:10px;text-align:center;display:none"></p>
+  </div>
+</div></div>
 
   </main>
 </div>
@@ -5115,7 +5128,7 @@ if (rEl) rEl.checked = true;
     <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
     Instalaciones
   </button>
-  <button class="mob-tab active" data-page="clientes" onclick="showPage('clientes');setMobTab(this)">
+  <button class="mob-tab" data-page="clientes" onclick="showPage('clientes');setMobTab(this)">
     <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
     Clientes
   </button>
@@ -5123,7 +5136,7 @@ if (rEl) rEl.checked = true;
     <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>
     Retiradas
   </button>
-  <button class="mob-tab" data-page="config" onclick="showPage('config');setMobTab(this)">
+  <button class="mob-tab active" data-page="config" onclick="showPage('config');setMobTab(this)">
     <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
     Config
   </button>
