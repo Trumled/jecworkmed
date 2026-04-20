@@ -774,19 +774,46 @@
         </div>
       </div>
     <div id="card-install-pwa" class="config-card" style="margin-top: 20px;">
-  <div class="config-card-header">
-    <span class="config-card-title">📲 Instalar aplicación</span>
-  </div>
-  <div style="padding:18px">
-    <p style="font-size:13px;color:var(--text2);margin-bottom:14px">
-      Instala JECWORKMED en tu dispositivo para acceder directamente sin abrir el navegador.
-    </p>
-    <button id="btn-install-pwa" class="btn btn-primary" style="width:100%;justify-content:center;padding:12px;font-size:14px" onclick="installPWA()">
-      📲 Instalar la app en este dispositivo
-    </button>
-    <p id="pwa-install-msg" style="font-size:12px;color:var(--text3);margin-top:10px;text-align:center;display:none"></p>
-  </div>
-</div></div>
+    <div class="config-card-header">
+      <span class="config-card-title">📲 Instalar aplicación</span>
+    </div>
+    <div style="padding:18px">
+      <p style="font-size:13px;color:var(--text2);margin-bottom:16px">
+        Sigue los pasos según tu dispositivo para instalar JECWORKMED y acceder directamente sin el navegador.
+      </p>
+
+      <div style="margin-bottom:14px;padding:14px;background:var(--bg2);border-radius:8px">
+        <div style="font-weight:600;font-size:13px;margin-bottom:8px">🤖 Android (Chrome)</div>
+        <ol style="font-size:12px;color:var(--text2);padding-left:18px;line-height:1.8">
+          <li>Abre la app en Chrome</li>
+          <li>Toca el menú <strong>⋮</strong> (arriba a la derecha)</li>
+          <li>Selecciona <strong>"Añadir a pantalla de inicio"</strong></li>
+          <li>Toca <strong>"Añadir"</strong></li>
+        </ol>
+      </div>
+
+      <div style="margin-bottom:14px;padding:14px;background:var(--bg2);border-radius:8px">
+        <div style="font-weight:600;font-size:13px;margin-bottom:8px">🍎 iPhone / iPad (Safari)</div>
+        <ol style="font-size:12px;color:var(--text2);padding-left:18px;line-height:1.8">
+          <li>Abre la app en <strong>Safari</strong></li>
+          <li>Toca el botón <strong>⬆ Compartir</strong> (abajo en la pantalla)</li>
+          <li>Selecciona <strong>"Añadir a pantalla de inicio"</strong></li>
+          <li>Toca <strong>"Añadir"</strong></li>
+        </ol>
+      </div>
+
+      <div style="padding:14px;background:var(--bg2);border-radius:8px">
+        <div style="font-weight:600;font-size:13px;margin-bottom:8px">💻 PC / Windows (Chrome)</div>
+        <ol style="font-size:12px;color:var(--text2);padding-left:18px;line-height:1.8">
+          <li>Abre la app en Chrome</li>
+          <li>Haz clic en el icono <strong>⊕</strong> que aparece en la barra de direcciones</li>
+          <li>Haz clic en <strong>"Instalar"</strong></li>
+        </ol>
+      </div>
+
+      <div id="pwa-install-msg" style="font-size:12px;color:var(--text3);margin-top:12px;text-align:center;display:none"></div>
+    </div>
+  </div></div>
 
   </main>
 </div>
