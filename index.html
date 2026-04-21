@@ -4730,6 +4730,7 @@ localStorage.removeItem('jwm_remember_user');
 localStorage.removeItem('jwm_remember_pass');
 }
 updateAdminVisibility();
+showPage('dashboard');
 } else {
 const err = document.getElementById('login-error');
 err.textContent = 'Usuario o contraseña incorrectos';
@@ -4940,15 +4941,13 @@ Si un dato no es visible, deja el campo vacío "".`;
 init();
 (function() {
 const savedUser = localStorage.getItem('jwm_remember_user');
-const savedPass = localStorage.getItem('jwm_remember_pass');
-if (savedUser && savedPass) {
-const uEl = document.getElementById('login-user');
-const pEl = document.getElementById('login-pass');
-const rEl = document.getElementById('remember-me');
-if (uEl) uEl.value = savedUser;
-if (pEl) pEl.value = savedPass;
-if (rEl) rEl.checked = true;
+if (savedUser) {
+  const uEl = document.getElementById('login-user');
+  const rEl = document.getElementById('remember-me');
+  if (uEl) uEl.value = savedUser;
+  if (rEl) rEl.checked = true;
 }
+document.getElementById('login-screen').style.display = 'flex';
 })();
 </script>
   <!-- MODAL CREDENCIALES (solo admin Trumled) -->
