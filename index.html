@@ -5144,6 +5144,27 @@ function setMobTab(el){document.querySelectorAll('.mob-tab').forEach(t=>t.classL
     document.querySelectorAll('.mob-tab').forEach(t=>t.classList.toggle('active',t.dataset.page===page));
   };
 })();
+
+// === SUPABASE HEARTBEAT - Evita pausa por inactividad ===
+(function() {
+  const HB_KEY = 'jwm_supabase_hb';
+  const INTERVAL = 4 * 24 * 60 * 60 * 1000; // 4 días
+  function ping() {
+    const last = parseInt(localStorage.getItem(HB_KEY) || '0');
+    if (Date.now() - last < INTERVAL) return;
+    const scripts = Array.from(document.querySelectorAll('script'));
+    let key = '';
+    for (const s of scripts) {
+      const m = s.textContent.match(/eyJ[A-Za-z0-9_\-]+\.[A-Za-z0-9_\-]+\.[A-Za-z0-9_\-]+/);
+      if (m) { key = m[0]; break; }
+    }
+    if (!key) return;
+    fetch('https://hvjvtokrfigawnenrmsb.supabase.co/rest/v1/instalaciones?select=id&limit=1', {
+      headers: { 'apikey': key, 'Authorization': 'Bearer ' + key }
+    }).then(r => { if(r.ok) localStorage.setItem(HB_KEY, Date.now().toString()); }).catch(()=>{});
+  }
+  setTimeout(ping, 3000); // Esperar 3s a que la app cargue
+})();
 </script>
 
 
