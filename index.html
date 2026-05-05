@@ -812,9 +812,9 @@
           <div class="form-section-title" style="display:none">Datos generales</div>
           <div class="form-grid">
             <div class="form-group"><label>Fecha</label><input type="date" id="f-fecha"></div>
-            <div class="form-group"><label>Empresa</label><select id="f-empresa" onchange="syncFromFicha()"></select></div>
+            <div class="form-group"><label>Empresa</label><input id="f-empresa" list="dl-f-empresa" placeholder="Seleccionar o escribir empresa..." oninput="syncFromFicha()" style="width:100%;padding:8px 11px;border:1.5px solid var(--border);border-radius:var(--radius);font-family:'DM Sans',sans-serif;font-size:13px;background:var(--bg);color:var(--text)"><datalist id="dl-f-empresa"></datalist></div>
             <div class="form-group"><label>Técnico</label><select id="f-tecnico" onchange="syncFromFicha()"></select></div>
-            <div class="form-group"><label>Director</label><select id="f-director"></select></div>
+            <div class="form-group"><label>Director</label><input id="f-director" list="dl-f-director" placeholder="Seleccionar o escribir director..." style="width:100%;padding:8px 11px;border:1.5px solid var(--border);border-radius:var(--radius);font-family:'DM Sans',sans-serif;font-size:13px;background:var(--bg);color:var(--text)"><datalist id="dl-f-director"></datalist></div>
             <div class="form-group"><label>Cliente</label><select id="f-cliente" onchange="autoFillCliente();setTimeout(syncFromFicha,100)"></select></div>
             <div class="form-group"><label>Localidad</label><input type="text" id="f-localidad" oninput="syncFromFicha()"></div>
             <div class="form-group"><label>Provincia</label><input type="text" id="f-provincia"></div>
@@ -2612,9 +2612,9 @@ function saveInstalacion() {
 const GV = (id, fallback) => getVal(id) || (fallback||'');
 const fichaOk = !!(
 getVal('f-fecha') &&
-getVal('f-empresa') &&
+getVal('f-empresa') || '___________________________' &&
 getVal('f-tecnico') &&
-getVal('f-director') &&
+getVal('f-director') || '___________________________' &&
 getVal('f-cliente') &&
 getVal('f-localidad') &&
 getVal('f-provincia') &&
@@ -2647,7 +2647,7 @@ getVal('a-e2s')
 );
 const pruNombre  = getVal('pru-nombre')     || getVal('f-cliente');
 const pruDir     = getVal('pru-dir')        || '';
-const pruInst    = getVal('pru-instalador') || getVal('f-empresa');
+const pruInst    = getVal('pru-instalador') || getVal('f-empresa') || '___________________________';
 const pruTec     = getVal('pru-tecnico')    || getVal('f-tecnico');
 const pruTipo    = getVal('pru-tipo')       || getVal('f-tipo');
 const pruNserie  = getVal('pru-nserie')     || getVal('f-nserie');
@@ -2655,8 +2655,8 @@ const pruebasOk = !!(pruNombre && pruInst && pruTec && pruTipo && pruNserie);
 const estado=(fichaOk&&anexoOk&&pruebasOk)?'completado':'proceso';
 const inst={
 id:editingId||String(Date.now()), estado,
-fecha:getVal('f-fecha'), empresa:getVal('f-empresa'), tecnico:getVal('f-tecnico'),
-director:getVal('f-director'), cliente:getVal('f-cliente'), localidad:getVal('f-localidad'),
+fecha:getVal('f-fecha'), empresa:getVal('f-empresa') || '___________________________', tecnico:getVal('f-tecnico'),
+director:getVal('f-director') || '___________________________', cliente:getVal('f-cliente'), localidad:getVal('f-localidad'),
 provincia:getVal('f-provincia'), telefono:getVal('f-telefono'), neq:getVal('f-neq'),
 fijomovil:document.querySelector('[name=fijomovil]:checked')?.value||'Fijo',
 tipo:getVal('f-tipo'), fabricante:getVal('f-fabricante'), pais:getVal('f-pais'),
@@ -2980,7 +2980,7 @@ const tmod = getVal('f-tmod');
 const tcod = getVal('f-tcod');
 const tser = getVal('f-tnserie');
 setVal('f-codfab', getVal('f-codorg'));
-const empD = getEmpresaData(getVal('f-empresa'));
+const empD = getEmpresaData(getVal('f-empresa') || '___________________________');
 const tecD = getTecnicoData(getVal('f-tecnico'));
 setVal('a-titular', getVal('f-cliente'));
 setVal('a-nif',     cli.nif||'');
@@ -2999,7 +2999,7 @@ setVal('pru-nombre',      getVal('f-cliente'));
 setVal('pru-dir',         cli.direccion||'');
 setVal('pru-cp',          cli.cp||'');
 setVal('pru-loc',         getVal('f-localidad'));
-setVal('pru-instalador',  getVal('f-empresa'));
+setVal('pru-instalador',  getVal('f-empresa') || '___________________________');
 setVal('pru-cif',         empD.cif||'');
 setVal('pru-codauth',     empD.codAuth||'');
 setVal('pru-tecnico',     getVal('f-tecnico'));
@@ -4662,7 +4662,7 @@ const el = document.getElementById(id);
 if (!el) return false;
 const val = (el.value || '').trim();
 if (id === 'pru-nombre')     return !val && !getVal('f-cliente');
-if (id === 'pru-instalador') return !val && !getVal('f-empresa');
+if (id === 'pru-instalador') return !val && !getVal('f-empresa') || '___________________________';
 if (id === 'pru-tecnico')    return !val && !getVal('f-tecnico');
 if (id === 'pru-tipo')       return !val && !getVal('f-tipo');
 if (id === 'pru-nserie')     return !val && !getVal('f-nserie');
@@ -5164,6 +5164,29 @@ function setMobTab(el){document.querySelectorAll('.mob-tab').forEach(t=>t.classL
     }).then(r => { if(r.ok) localStorage.setItem(HB_KEY, Date.now().toString()); }).catch(()=>{});
   }
   setTimeout(ping, 3000); // Esperar 3s a que la app cargue
+})();
+
+(function(){
+  const _origFill = window.fillSelect;
+  window.fillSelect = function(id, opts) {
+    const el = document.getElementById(id);
+    if(el && el.tagName === 'INPUT') {
+      const dl = document.getElementById('dl-' + id);
+      if(dl) dl.innerHTML = (opts||[]).map(o=>'<option value="'+o+'">').join('');
+    } else {
+      if(_origFill) _origFill(id, opts);
+      const dl = document.getElementById('dl-' + id);
+      if(dl) dl.innerHTML = (opts||[]).map(o=>'<option value="'+o+'">').join('');
+    }
+  };
+  const _origGetVal = window.getVal;
+  if(_origGetVal) {
+    window.getVal = function(id) {
+      const el = document.getElementById(id);
+      if(el) return el.value || '';
+      return _origGetVal(id);
+    };
+  }
 })();
 </script>
 
