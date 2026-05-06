@@ -3363,7 +3363,7 @@ const dctw=doc.getTextWidth('DATOS DE CONFORMIDAD'); ln(mg+3,cy+1,mg+3+dctw,cy+1
 cy+=9;
 norm(10); doc.text('D. ',mg+5,cy);
 const prefW=doc.getTextWidth('D. ');
-bold(10); const dirName=V(i.director)||'___________________________';
+bold(10); const dirName=V(i.director)||'          ';
 doc.text(dirName,mg+5+prefW,cy);
 const dw=doc.getTextWidth(dirName);
 ln(mg+5+prefW,cy+1,mg+5+prefW+dw,cy+1);
@@ -3371,7 +3371,7 @@ norm(10);
 const afterDir=', en calidad de representante de la EVAT. ';
 doc.text(afterDir,mg+5+prefW+dw,cy);
 const adw=doc.getTextWidth(afterDir);
-const empName=V(i.empresa)||'___________________________';
+const empName=V(i.empresa)||'          ';
 const empW=doc.getTextWidth(empName);
 const afterX=mg+5+prefW+dw+adw;
 if (afterX+empW <= mg+cw-3) {
@@ -3452,7 +3452,7 @@ return p[2]+' de '+mes+' de '+p[0];
 doc.text('En Las Palmas de Gran Canaria, a '+fechaStr,mg+5,s3Top+11);
 const sigX=mg+cw-76, sigLineY=s3Top+34;
 ln(sigX,sigLineY,mg+cw-5,sigLineY);
-bold(10); const sigName=V(i.director)||'___________________________';
+bold(10); const sigName=V(i.director)||'          ';
 const sigW=doc.getTextWidth(sigName);
 doc.text(sigName,sigX+(71-sigW)/2,sigLineY-5);
 norm(7.5); doc.text('[Nombre del representante de la EVAT]',sigX,sigLineY+4);
