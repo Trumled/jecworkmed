@@ -5014,92 +5014,65 @@ document.getElementById('login-screen').style.display = 'flex';
           <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
             <div style="width:28px;height:28px;border-radius:50%;background:var(--green);color:#fff;
                         display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;flex-shrink:0">1</div>
-            <div style="font-size:14px;font-weight:700;color:var(--text)">Crear un cliente</div>
-          </div>
-          <div style="margin-left:38px;font-size:13px;color:var(--text2);line-height:1.6">
-            Ve a <strong>Clientes</strong> en el menú lateral y pulsa <strong>＋ Nuevo Cliente</strong>.<br>
-            Rellena nombre, NIF, Nº IRX, dirección y datos de contacto.<br>
-            El Nº IRX es el número de registro sanitario de la instalación del cliente.
-          </div>
-        </div>
-
-        <!-- PASO 2 -->
-        <div style="margin-bottom:20px">
-          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
-            <div style="width:28px;height:28px;border-radius:50%;background:var(--green);color:#fff;
-                        display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;flex-shrink:0">2</div>
-            <div style="font-size:14px;font-weight:700;color:var(--text)">Crear una instalación</div>
-          </div>
-          <div style="margin-left:38px;font-size:13px;color:var(--text2);line-height:1.6">
-            Ve a <strong>Instalaciones</strong> y pulsa <strong>＋ Nueva Instalación</strong>.<br>
-            El formulario tiene tres pestañas:
-            <ul style="margin:6px 0 6px 16px;padding:0">
-              <li><strong>Ficha técnica</strong> — datos del equipo, tubo y empresa. Al seleccionar el cliente se autocompletan los datos del Anexo II y Pruebas.</li>
-              <li><strong>Anexo II</strong> — datos del titular y equipos para la notificación oficial.</li>
-              <li><strong>Pruebas de Aceptación</strong> — resultados de las pruebas con las tablas del Anexo I.</li>
-            </ul>
-            Pulsa <strong>💾 Guardar instalación</strong> en cualquier momento (arriba a la derecha del modal).
-          </div>
-        </div>
-
-        <!-- PASO 3 -->
-        <div style="margin-bottom:20px">
-          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
-            <div style="width:28px;height:28px;border-radius:50%;background:var(--green);color:#fff;
-                        display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;flex-shrink:0">3</div>
-            <div style="font-size:14px;font-weight:700;color:var(--text)">Rellenar las pruebas</div>
-          </div>
-          <div style="margin-left:38px;font-size:13px;color:var(--text2);line-height:1.6">
-            En la pestaña <strong>Pruebas de Aceptación</strong> encontrarás las tablas del Anexo I.<br>
-            Cada tabla tiene un botón <strong>🎲 Generar resultados aleatorios</strong> para rellenar los valores automáticamente si no tienes los datos reales.<br>
-            Marca el checkbox <strong>"Incluir en PDF"</strong> para elegir qué tablas aparecen en el documento generado.
-          </div>
-        </div>
-
-        <!-- PASO 4 -->
-        <div style="margin-bottom:20px">
-          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
-            <div style="width:28px;height:28px;border-radius:50%;background:var(--green);color:#fff;
-                        display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;flex-shrink:0">4</div>
-            <div style="font-size:14px;font-weight:700;color:var(--text)">Generar los documentos PDF</div>
-          </div>
-          <div style="margin-left:38px;font-size:13px;color:var(--text2);line-height:1.6">
-            Desde la vista de la instalación (botón <strong>Ver</strong>) puedes generar:<br>
-            <ul style="margin:6px 0 6px 16px;padding:0">
-              <li><strong>🖨 Ficha Técnica</strong> — documento de la instalación.</li>
-              <li><strong>🖨 Anexo II</strong> — notificación al registro sanitario.</li>
-              <li><strong>🖨 Pruebas</strong> — informe de pruebas de aceptación con el Anexo I.</li>
-              <li><strong>📄 Todo</strong> — los tres documentos de una vez.</li>
-            </ul>
-            Todos los PDFs muestran una <strong>previsualización</strong> antes de descargar.
-          </div>
-        </div>
-
-        <!-- PASO 5 -->
-        <div style="margin-bottom:20px">
-          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
-            <div style="width:28px;height:28px;border-radius:50%;background:var(--green);color:#fff;
-                        display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;flex-shrink:0">5</div>
-            <div style="font-size:14px;font-weight:700;color:var(--text)">Configurar parámetros</div>
-          </div>
-          <div style="margin-left:38px;font-size:13px;color:var(--text2);line-height:1.6">
-            En <strong>Parámetros</strong> (menú lateral ⚙) puedes gestionar:<br>
-            <ul style="margin:6px 0 6px 16px;padding:0">
-              <li><strong>Empresas</strong> — tu empresa instaladora con CIF y código de autorización.</li>
-              <li><strong>Técnicos y Directores</strong> — personal que firma los documentos.</li>
-              <li><strong>Tipos de equipo y Marcas</strong> — valores disponibles en los desplegables.</li>
-              <li><strong>Equipos de medida</strong> — instrumentos usados en las pruebas.</li>
-              <li><strong>Base de datos</strong> — hacer backup y restaurar tus datos.</li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- PASO 6 -->
-        <div style="margin-bottom:8px">
-          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
-            <div style="width:28px;height:28px;border-radius:50%;background:#e07b39;color:#fff;
-                        display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;flex-shrink:0">⊗</div>
-            <div style="font-size:14px;font-weight:700;color:var(--text)">Dar de baja o retirar un equipo</div>
+            <div class="help-steps">
+  <div class="help-step">
+    <div class="help-step-num">1</div>
+    <div class="help-step-body">
+      <div class="help-step-title">Crear un cliente</div>
+      <div class="help-step-desc">Ve a <b>Clientes</b> en el menú lateral (o en la barra inferior en móvil) y pulsa <b>＋ Nuevo Cliente</b>. Rellena nombre, NIF, Nº IRX, dirección y datos de contacto. El Nº IRX es el número de registro sanitario del cliente.</div>
+    </div>
+  </div>
+  <div class="help-step">
+    <div class="help-step-num">2</div>
+    <div class="help-step-body">
+      <div class="help-step-title">Crear una instalación</div>
+      <div class="help-step-desc">Ve a <b>Instalaciones</b> y pulsa <b>＋ Nueva Instalación</b>. El formulario tiene tres pestañas:<br><br>
+      • <b>Ficha técnica</b> — datos del equipo, tubo y empresa. Al seleccionar el cliente se autocompletan los datos del Anexo II.<br>
+      • <b>Anexo II</b> — datos del titular y equipos para la notificación oficial. Los campos de director y empresa permiten escribir directamente o seleccionar de la lista.<br>
+      • <b>Pruebas de Aceptación</b> — resultados de las pruebas con las tablas del Anexo I.<br><br>
+      Pulsa 💾 <b>Guardar instalación</b> en cualquier momento.</div>
+    </div>
+  </div>
+  <div class="help-step">
+    <div class="help-step-num">3</div>
+    <div class="help-step-body">
+      <div class="help-step-title">Rellenar las pruebas</div>
+      <div class="help-step-desc">En la pestaña <b>Pruebas de Aceptación</b> encontrarás las tablas del Anexo I. Cada tabla tiene un botón 🎲 <b>Generar resultados aleatorios</b> para rellenar los valores automáticamente. Marca el checkbox <b>"Incluir en PDF"</b> para elegir qué tablas aparecen en el documento generado.</div>
+    </div>
+  </div>
+  <div class="help-step">
+    <div class="help-step-num">4</div>
+    <div class="help-step-body">
+      <div class="help-step-title">Generar los documentos PDF</div>
+      <div class="help-step-desc">Desde la vista de la instalación (botón <b>Ver</b>) puedes generar:<br><br>
+      • 🖨 <b>Ficha Técnica</b> — documento de la instalación.<br>
+      • 🖨 <b>Anexo II</b> — notificación al registro sanitario. Si director o empresa están vacíos, el PDF dejará espacio en blanco para rellenar a mano.<br>
+      • 🖨 <b>Pruebas</b> — informe de pruebas de aceptación con el Anexo I.<br>
+      • 📄 <b>Todo</b> — los tres documentos de una vez.<br><br>
+      Todos los PDFs muestran una previsualización antes de descargar.</div>
+    </div>
+  </div>
+  <div class="help-step">
+    <div class="help-step-num">5</div>
+    <div class="help-step-body">
+      <div class="help-step-title">Configurar parámetros</div>
+      <div class="help-step-desc">En <b>Parámetros</b> (menú lateral ⚙ o pestaña Config en móvil) puedes gestionar:<br><br>
+      • <b>Empresas</b> — tu empresa instaladora con CIF y código de autorización.<br>
+      • <b>Técnicos y Directores</b> — personal que firma los documentos.<br>
+      • <b>Tipos de equipo y Marcas</b> — valores disponibles en los desplegables.<br>
+      • <b>Equipos de medida</b> — instrumentos usados en las pruebas.<br>
+      • <b>Base de datos</b> — hacer backup y restaurar tus datos.<br>
+      • 📲 <b>Instalar la app</b> — instrucciones para instalar JECWORKMED en móvil (Android/iPhone) y PC sin pasar por ninguna tienda.</div>
+    </div>
+  </div>
+  <div class="help-step">
+    <div class="help-step-num">⊗</div>
+    <div class="help-step-body">
+      <div class="help-step-title">Dar de baja o retirar un equipo</div>
+      <div class="help-step-desc">Pulsa el botón 📦 naranja en la instalación para darla de baja. Se creará automáticamente un registro en <b>Retiradas y Bajas</b> con todos los datos del equipo, desde donde podrás generar el <b>Certificado de Retirada</b>.</div>
+    </div>
+  </div>
+</div>
           </div>
           <div style="margin-left:38px;font-size:13px;color:var(--text2);line-height:1.6">
             Pulsa el botón <strong>📦</strong> naranja en la instalación para darla de baja.<br>
