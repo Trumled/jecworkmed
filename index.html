@@ -3049,6 +3049,12 @@ if (!getVal('a-dir'))     setVal('a-dir',     getVal('pru-dir'));
 if (!getVal('a-cp'))      setVal('a-cp',      getVal('pru-cp'));
 if (!getVal('a-loc'))     setVal('a-loc',     getVal('pru-loc'));
 actualizarPrevPruebas();
+// Restaurar checkboxes pdf-dl desde los datos guardados
+const _inst = db.instalaciones.find(x=>x.id===currentInstId) || {};
+['dl001','dl002','dl003','dl004','dl006','dl007','dl008'].forEach(key => {
+  const el = document.getElementById('pdf-'+key);
+  if(el) el.checked = _inst['pdf-'+key] !== false;
+});
 }
 function autoFillCliente(){
 const nombre=getVal('f-cliente');
