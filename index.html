@@ -5031,89 +5031,145 @@ document.getElementById('login-screen').style.display = 'flex';
            display:flex;align-items:center;justify-content:center;transition:transform .15s" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'" title="Guía de uso">?</button>
 
   <!-- MODAL AYUDA -->
-  <div class="modal-overlay" id="modal-ayuda" style="z-index:9998">
-    <div class="modal" style="max-width:640px">
-      <div class="modal-header">
-        <div class="modal-title">📖 Guía de uso — JECWORKMED</div>
-        <button class="modal-close" onclick="closeModal('modal-ayuda')">✕</button>
-      </div>
-      <div class="modal-body" style="max-height:75vh;overflow-y:auto">
+<div class="modal-overlay" id="modal-ayuda">
+  <div class="modal" style="max-width:700px">
+    <div class="modal-header">
+      <h2>&#128218; Gu&iacute;a de uso &mdash; JECWORKMED</h2>
+      <button class="modal-close" onclick="closeModal('modal-ayuda')">&#x2715;</button>
+    </div>
+    <div class="modal-body" style="max-height:70vh;overflow-y:auto;padding:20px;font-size:14px;line-height:1.6;color:var(--text)">
 
-        <!-- PASO 1 -->
-        <div style="margin-bottom:20px">
-          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
-            <div style="width:28px;height:28px;border-radius:50%;background:var(--green);color:#fff;
-                        display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;flex-shrink:0">1</div>
-            <div class="help-steps">
-  <div class="help-step">
-    <div class="help-step-num">1</div>
-    <div class="help-step-body">
-      <div class="help-step-title">Crear un cliente</div>
-      <div class="help-step-desc">Ve a <b>Clientes</b> en el menú lateral (o en la barra inferior en móvil) y pulsa <b>＋ Nuevo Cliente</b>. Rellena nombre, NIF, Nº IRX, dirección y datos de contacto. El Nº IRX es el número de registro sanitario del cliente.</div>
-    </div>
-  </div>
-  <div class="help-step">
-    <div class="help-step-num">2</div>
-    <div class="help-step-body">
-      <div class="help-step-title">Crear una instalación</div>
-      <div class="help-step-desc">Ve a <b>Instalaciones</b> y pulsa <b>＋ Nueva Instalación</b>. El formulario tiene tres pestañas:<br><br>
-      • <b>Ficha técnica</b> — datos del equipo, tubo y empresa. Al seleccionar el cliente se autocompletan los datos del Anexo II.<br>
-      • <b>Anexo II</b> — datos del titular y equipos para la notificación oficial. Los campos de director y empresa permiten escribir directamente o seleccionar de la lista.<br>
-      • <b>Pruebas de Aceptación</b> — resultados de las pruebas con las tablas del Anexo I.<br><br>
-      Pulsa 💾 <b>Guardar instalación</b> en cualquier momento.</div>
-    </div>
-  </div>
-  <div class="help-step">
-    <div class="help-step-num">3</div>
-    <div class="help-step-body">
-      <div class="help-step-title">Rellenar las pruebas</div>
-      <div class="help-step-desc">En la pestaña <b>Pruebas de Aceptación</b> encontrarás las tablas del Anexo I. Cada tabla tiene un botón 🎲 <b>Generar resultados aleatorios</b> para rellenar los valores automáticamente. Marca el checkbox <b>"Incluir en PDF"</b> para elegir qué tablas aparecen en el documento generado.</div>
-    </div>
-  </div>
-  <div class="help-step">
-    <div class="help-step-num">4</div>
-    <div class="help-step-body">
-      <div class="help-step-title">Generar los documentos PDF</div>
-      <div class="help-step-desc">Desde la vista de la instalación (botón <b>Ver</b>) puedes generar:<br><br>
-      • 🖨 <b>Ficha Técnica</b> — documento de la instalación.<br>
-      • 🖨 <b>Anexo II</b> — notificación al registro sanitario. Si director o empresa están vacíos, el PDF dejará espacio en blanco para rellenar a mano.<br>
-      • 🖨 <b>Pruebas</b> — informe de pruebas de aceptación con el Anexo I.<br>
-      • 📄 <b>Todo</b> — los tres documentos de una vez.<br><br>
-      Todos los PDFs muestran una previsualización antes de descargar.</div>
-    </div>
-  </div>
-  <div class="help-step">
-    <div class="help-step-num">5</div>
-    <div class="help-step-body">
-      <div class="help-step-title">Configurar parámetros</div>
-      <div class="help-step-desc">En <b>Parámetros</b> (menú lateral ⚙ o pestaña Config en móvil) puedes gestionar:<br><br>
-      • <b>Empresas</b> — tu empresa instaladora con CIF y código de autorización.<br>
-      • <b>Técnicos y Directores</b> — personal que firma los documentos.<br>
-      • <b>Tipos de equipo y Marcas</b> — valores disponibles en los desplegables.<br>
-      • <b>Equipos de medida</b> — instrumentos usados en las pruebas.<br>
-      • <b>Base de datos</b> — hacer backup y restaurar tus datos.<br>
-      • 📲 <b>Instalar la app</b> — instrucciones para instalar JECWORKMED en móvil (Android/iPhone) y PC sin pasar por ninguna tienda.</div>
-    </div>
-  </div>
-  <div class="help-step">
-    <div class="help-step-num">⊗</div>
-    <div class="help-step-body">
-      <div class="help-step-title">Dar de baja o retirar un equipo</div>
-      <div class="help-step-desc">Pulsa el botón 📦 naranja en la instalación para darla de baja. Se creará automáticamente un registro en <b>Retiradas y Bajas</b> con todos los datos del equipo, desde donde podrás generar el <b>Certificado de Retirada</b>.</div>
+      <div style="background:var(--primary-soft,#e8f5f0);border-radius:8px;padding:12px 16px;margin-bottom:20px;font-size:13px;color:var(--primary)">
+        JECWORKMED es una aplicaci&oacute;n para gestionar instalaciones de equipos de radiodiagn&oacute;stico. Genera autom&aacute;ticamente la Ficha T&eacute;cnica, el Anexo II de notificaci&oacute;n al registro sanitario y el informe de Pruebas de Aceptaci&oacute;n.
+      </div>
+
+      <!-- 1. LOGIN -->
+      <div style="margin-bottom:20px">
+        <div style="font-weight:700;font-size:15px;margin-bottom:6px;color:var(--primary)">&#9312; Acceder a la aplicaci&oacute;n</div>
+        <p>Introduce tu <strong>usuario</strong> y <strong>contrase&ntilde;a</strong> en la pantalla de inicio. Marca <em>Recordar usuario</em> para que el campo se rellene autom&aacute;ticamente en el pr&oacute;ximo acceso. Los datos se sincronizan autom&aacute;ticamente con la nube (&ldquo;&#9889; Sincronizado&rdquo; en la esquina superior derecha).</p>
+      </div>
+
+      <!-- 2. PARÁMETROS -->
+      <div style="margin-bottom:20px">
+        <div style="font-weight:700;font-size:15px;margin-bottom:6px;color:var(--primary)">&#9313; Configurar par&aacute;metros (primer uso)</div>
+        <p>Ve a <strong>Par&aacute;metros</strong> en el men&uacute; lateral antes de crear tu primera instalaci&oacute;n. Desde aqu&iacute; gestionas cuatro listas que se usan en los formularios:</p>
+        <ul style="margin:6px 0 6px 18px">
+          <li><strong>Empresas</strong> &mdash; tu empresa instaladora (nombre, CIF, n&uacute;mero ERX). La marcada como <em>Principal</em> se selecciona por defecto.</li>
+          <li><strong>T&eacute;cnicos</strong> &mdash; t&eacute;cnicos con DNI y fecha de nacimiento.</li>
+          <li><strong>Directores</strong> &mdash; directores de la instalaci&oacute;n.</li>
+          <li><strong>Pa&iacute;ses</strong> &mdash; pa&iacute;ses fabricantes de equipos.</li>
+        </ul>
+        <p>Pulsa <strong>+ A&ntilde;adir</strong> en cada secci&oacute;n para crear nuevas entradas. La X roja elimina una entrada.</p>
+      </div>
+
+      <!-- 3. CLIENTES -->
+      <div style="margin-bottom:20px">
+        <div style="font-weight:700;font-size:15px;margin-bottom:6px;color:var(--primary)">&#9314; Crear un cliente</div>
+        <p>Ve a <strong>Clientes</strong> y pulsa <strong>+ Nuevo Cliente</strong>. Rellena:</p>
+        <ul style="margin:6px 0 6px 18px">
+          <li><strong>Nombre</strong> &mdash; nombre de la cl&iacute;nica o centro.</li>
+          <li><strong>NIF</strong> &mdash; n&uacute;mero de identificaci&oacute;n fiscal.</li>
+          <li><strong>N&ordm; IRX</strong> &mdash; n&uacute;mero de registro sanitario del cliente.</li>
+          <li>Direcci&oacute;n, localidad, provincia, tel&eacute;fono y persona de contacto.</li>
+        </ul>
+        <p>Al seleccionar el cliente en una instalaci&oacute;n sus datos se autocompletan en el Anexo II.</p>
+      </div>
+
+      <!-- 4. NUEVA INSTALACIÓN -->
+      <div style="margin-bottom:20px">
+        <div style="font-weight:700;font-size:15px;margin-bottom:6px;color:var(--primary)">&#9315; Crear una instalaci&oacute;n</div>
+        <p>Ve a <strong>Instalaciones</strong> y pulsa <strong>+ Nueva Instalaci&oacute;n</strong>. El formulario tiene tres pesta&ntilde;as:</p>
+
+        <div style="margin:10px 0 6px 0;font-weight:600">&#9888; Ficha t&eacute;cnica</div>
+        <ul style="margin:0 0 10px 18px">
+          <li><strong>Datos generales</strong> &mdash; fecha, empresa, t&eacute;cnico, director, cliente, localidad, provincia, tel&eacute;fono, n&ordm; de equipos y tipo (Fijo / M&oacute;vil).</li>
+          <li><strong>Equipo de Rayos X</strong> &mdash; tipo de equipo, fabricante, pa&iacute;s, marcado CE, denominaci&oacute;n, modelo, n&ordm; de serie, a&ntilde;o, kV y mA m&aacute;ximos. El bot&oacute;n <em>Equipo</em> a&ntilde;ade un segundo equipo si la instalaci&oacute;n tiene m&aacute;s de uno.</li>
+          <li><strong>Tubo de Rayos X</strong> &mdash; fabricante, c&oacute;digo, n&ordm; de serie, kV/mA y a&ntilde;o del tubo. El bot&oacute;n <em>Tubo</em> a&ntilde;ade un segundo tubo.</li>
+          <li><strong>Procedencia</strong> &mdash; si el equipo es nuevo, de segunda mano o traslado, con fecha y observaciones.</li>
+        </ul>
+
+        <div style="margin:0 0 6px 0;font-weight:600">&#9888; Anexo II</div>
+        <ul style="margin:0 0 10px 18px">
+          <li><strong>Datos del titular</strong> &mdash; se autocompletan al seleccionar el cliente. Incluye NIF, direcci&oacute;n, localidad, provincia, tel&eacute;fono, instalador y n&uacute;mero de expediente.</li>
+          <li><strong>Equipos 1, 2 y 3</strong> &mdash; marca, modelo y n&ordm; de serie del sistema y del tubo para la notificaci&oacute;n oficial al registro sanitario.</li>
+        </ul>
+
+        <div style="margin:0 0 6px 0;font-weight:600">&#9888; Pruebas de Aceptaci&oacute;n</div>
+        <p style="margin:0 0 6px 0">Contiene las tablas del Anexo I. Cada tabla tiene un bot&oacute;n <strong>&#127922; Generar resultados aleatorios</strong> para rellenar los valores autom&aacute;ticamente. Marca el checkbox <strong>Incluir en PDF</strong> para elegir qu&eacute; tablas aparecer&aacute;n en el documento final.</p>
+        <p>Las tablas disponibles son:</p>
+        <ul style="margin:0 0 10px 18px">
+          <li>Control de calidad de contraste (CT Air)</li>
+          <li>Control de calidad de ruido</li>
+          <li>Control de centraje y colimaci&oacute;n</li>
+          <li>Resultado de Aire CTDI</li>
+          <li>Exactitud de la tensi&oacute;n</li>
+          <li>Reproductividad de la tensi&oacute;n</li>
+          <li>Filtraci&oacute;n</li>
+          <li>Rendimiento del equipo</li>
+          <li>Tiempo de exposici&oacute;n</li>
+        </ul>
+        <p>Pulsa <strong>&#128190; Guardar instalaci&oacute;n</strong> en cualquier momento para guardar todos los cambios.</p>
+      </div>
+
+      <!-- 5. VER Y EDITAR -->
+      <div style="margin-bottom:20px">
+        <div style="font-weight:700;font-size:15px;margin-bottom:6px;color:var(--primary)">&#9316; Ver y editar una instalaci&oacute;n</div>
+        <p>En la lista de instalaciones cada fila tiene cuatro botones:</p>
+        <ul style="margin:6px 0 6px 18px">
+          <li><strong>Ver</strong> &mdash; abre la vista de detalle con todos los datos y los botones de PDF.</li>
+          <li><strong>&#9998; Editar</strong> (l&aacute;piz verde) &mdash; abre el formulario para modificar la instalaci&oacute;n.</li>
+          <li><strong>Retirar</strong> (icono naranja) &mdash; registra la baja del equipo y lo mueve a Retiradas.</li>
+          <li><strong>&#128465; Eliminar</strong> (papelera roja) &mdash; borra la instalaci&oacute;n permanentemente.</li>
+        </ul>
+        <p>La columna <strong>Estado</strong> muestra el nombre del t&eacute;cnico y un indicador del porcentaje de secciones completadas (ej. <em>1/3 secciones</em>).</p>
+        <p>Puedes buscar instalaciones por cliente, tipo de equipo o fabricante usando la barra de b&uacute;squeda, y filtrar por estado con el desplegable de la derecha.</p>
+      </div>
+
+      <!-- 6. GENERAR PDFs -->
+      <div style="margin-bottom:20px">
+        <div style="font-weight:700;font-size:15px;margin-bottom:6px;color:var(--primary)">&#9317; Generar documentos PDF</div>
+        <p>Desde la vista de detalle (bot&oacute;n <strong>Ver</strong>) puedes generar:</p>
+        <ul style="margin:6px 0 6px 18px">
+          <li><strong>&#128424; Ficha T&eacute;cnica</strong> &mdash; documento completo de la instalaci&oacute;n.</li>
+          <li><strong>&#128424; Anexo II</strong> &mdash; notificaci&oacute;n al registro sanitario. Si director o empresa est&aacute;n vac&iacute;os el PDF deja espacio en blanco para rellenar a mano.</li>
+          <li><strong>&#128424; Pruebas</strong> &mdash; informe de pruebas de aceptaci&oacute;n con las tablas del Anexo I seleccionadas.</li>
+          <li><strong>&#128196; Todo</strong> &mdash; los tres documentos en un &uacute;nico PDF.</li>
+        </ul>
+        <p>Todos los PDFs muestran una previsualizaci&oacute;n antes de descargarse. El nombre del archivo incluye el tipo de documento, el nombre del cliente y el tipo de equipo (ej. <em>Ficha_Tecnica_Clinica_Dr_Mager_Equipo_de_RX.pdf</em>).</p>
+      </div>
+
+      <!-- 7. DOCUMENTOS FIRMADOS -->
+      <div style="margin-bottom:20px">
+        <div style="font-weight:700;font-size:15px;margin-bottom:6px;color:var(--primary)">&#9318; Documentos firmados</div>
+        <p>Al final de la vista de detalle encontrar&aacute;s la secci&oacute;n <strong>&#128206; Documentos Firmados</strong> con tres espacios:</p>
+        <ul style="margin:6px 0 6px 18px">
+          <li><strong>Ficha T&eacute;cnica</strong></li>
+          <li><strong>Anexo II</strong></li>
+          <li><strong>Pruebas Aceptaci&oacute;n</strong></li>
+        </ul>
+        <p>Pulsa <strong>&#8593; Subir PDF</strong> en cada espacio para subir el documento firmado desde tu ordenador. Una vez subido aparecer&aacute;n los botones <strong>&#8595; Descargar</strong> y <strong>&#10005;</strong> (eliminar). Los archivos se guardan en la nube asociados a la instalaci&oacute;n.</p>
+      </div>
+
+      <!-- 8. RETIRADAS -->
+      <div style="margin-bottom:20px">
+        <div style="font-weight:700;font-size:15px;margin-bottom:6px;color:var(--primary)">&#9319; Retiradas y Bajas</div>
+        <p>Cuando un equipo se retira de servicio usa el bot&oacute;n de retirada (icono naranja) en la lista de instalaciones. Rellena la fecha, categor&iacute;a (baja definitiva, traslado, sustituci&oacute;n...), motivo y destino. La instalaci&oacute;n se mueve a la secci&oacute;n <strong>Retiradas y Bajas</strong>, desde donde puedes generar el <strong>Certificado de Retirada</strong>.</p>
+      </div>
+
+      <!-- 9. SINCRONIZACIÓN -->
+      <div style="margin-bottom:8px">
+        <div style="font-weight:700;font-size:15px;margin-bottom:6px;color:var(--primary)">&#9320; Sincronizaci&oacute;n y datos</div>
+        <p>La aplicaci&oacute;n guarda los datos localmente en el navegador y los sincroniza autom&aacute;ticamente con la nube cada vez que guardas. El indicador en la esquina superior derecha muestra el estado:</p>
+        <ul style="margin:6px 0 0 18px">
+          <li><strong>&#9889; Sincronizado</strong> &mdash; datos guardados en la nube.</li>
+          <li><strong>&#8987; Guardando&hellip;</strong> &mdash; sincronizaci&oacute;n en curso.</li>
+          <li><strong>&#9889; Sin conexi&oacute;n</strong> &mdash; trabajando en modo local, se sincronizar&aacute; al recuperar la conexi&oacute;n.</li>
+        </ul>
+      </div>
+
     </div>
   </div>
 </div>
-          </div>
-          <div style="margin-left:38px;font-size:13px;color:var(--text2);line-height:1.6">
-            Pulsa el botón <strong>📦</strong> naranja en la instalación para darla de baja.<br>
-            Se creará automáticamente un registro en <strong>Retiradas y Bajas</strong> con todos los datos del equipo, desde donde podrás generar el <strong>Certificado de Retirada</strong>.
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-
 
 <!-- BARRA NAVEGACIÓN MÓVIL -->
 <nav class="mobile-nav" id="mobile-nav">
