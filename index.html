@@ -3982,7 +3982,7 @@ titulo('ANEXO I',y,13); y+=13;
 const aw=cw;
 const PAGE_LIMIT=272;
 const checkPage=(needed)=>{ if(y+needed>PAGE_LIMIT){ doc.addPage(); y=18; } };
-if(inst['chk-cont']!==false){ checkPage(50);
+if((inst['chk-cont']!==false&&(document.getElementById('chk-cont')?document.getElementById('chk-cont').checked:true))){ checkPage(50);
 secHeader(mg,y,aw,8,'CONTROL DE CALIDAD DE CONTRASTE'); y+=8;
 fillGR(); doc.rect(mg,y,aw,7,'FD');
 It(8.5); doc.text(V(inst['a1-cont-params'])||'120KV, 280mA, 1 x 10,00mm, foco grueso, 0,5seg',W/2,y+4.8,{align:'center'}); y+=7;
@@ -3996,7 +3996,7 @@ cell(mg,y,cLw,8,l,true,true,8.5); cell(mg+cLw,y,cHUw,8,hu,gray,false,9,'center')
 });
 y+=8;
 } 
-if(inst['chk-ruido']!==false){ checkPage(70);
+if((inst['chk-ruido']!==false&&(document.getElementById('chk-ruido')?document.getElementById('chk-ruido').checked:true))){ checkPage(70);
 secHeader(mg,y,aw,8,'CONTROL DE CALIDAD DE RUIDO'); y+=8;
 fillGR(); doc.rect(mg,y,aw,7,'FD');
 It(8.5); doc.text(V(inst['a1-ruido-params'])||'120 KV, foco fino, 160mA, 1sec, 6x0,6mm',W/2,y+4.8,{align:'center'}); y+=7;
@@ -4026,7 +4026,7 @@ y+=8;
 });
 y+=8;
 } 
-if(inst['chk-centr']!==false){ checkPage(42);
+if((inst['chk-centr']!==false&&(document.getElementById('chk-centr')?document.getElementById('chk-centr').checked:true))){ checkPage(42);
 secHeader(mg,y,aw,8,'CONTROL DE CENTRAJE DE COLIMACION'); y+=8;
 fillGR(); doc.rect(mg,y,aw,7,'FD');
 It(8.5); doc.text(V(inst['a1-centr-params'])||'120KV, 180mA, 1 x 2,00mm, foco fino, 0,5seg',W/2,y+4.8,{align:'center'}); y+=7;
@@ -4035,7 +4035,7 @@ const cenLw=55,cenVw=aw-cenLw;
 cell(mg,y,cenLw,8,l,true,true,8.5); cell(mg+cenLw,y,cenVw,8,v,gray,false,9,'center'); y+=8;
 });
 } 
-if(inst['chk-pch1']!==false){ checkPage(58);
+if((inst['chk-pch1']!==false&&(document.getElementById('chk-pch1')?document.getElementById('chk-pch1').checked:true))){ checkPage(58);
 y+=8;
 const pch1W=aw;
 secHeader(mg,y,pch1W,8,'EXACTITUD DE LA TENSION'); y+=8;
@@ -4052,7 +4052,7 @@ cell(mg+pch1Lw+pch1Mw,y,pch1Ow,8,ok,false,false,9,'center');
 y+=8;
 });
 }
-if(inst['chk-repr']!==false){ checkPage(66);
+if((inst['chk-repr']!==false&&(document.getElementById('chk-repr')?document.getElementById('chk-repr').checked:true))){ checkPage(66);
 y+=8;
 const reprW=aw;
 secHeader(mg,y,reprW,8,'REPRODUCTIVIDAD DE LA TENSION'); y+=8;
@@ -4071,7 +4071,7 @@ cell(mg+reprKw+(t-1)*reprCw,y,reprCw,8,val,false,false,9,'center');
 y+=8;
 });
 }
-if(inst['chk-filtr']!==false){
+if((inst['chk-filtr']!==false&&(document.getElementById('chk-filtr')?document.getElementById('chk-filtr').checked:true))){
 checkPage(66);
 y+=8;
 const fLw2=Math.floor(aw/2), fVw2=aw-fLw2;
@@ -4087,7 +4087,7 @@ cell(mg+fLw2,y,fVw2,8,hvlVal,false,false,10,'center');
 y+=8;
 });
 }
-if(inst['chk-rend']!==false){
+if((inst['chk-rend']!==false&&(document.getElementById('chk-rend')?document.getElementById('chk-rend').checked:true))){
 checkPage(40);
 y+=8;
 secHeader(mg,y,aw,8,'VALOR DEL RENDIMIENTO'); y+=8;
@@ -4097,7 +4097,7 @@ const rendVal='5,' + V(inst['rend-dec']) + ' UGY /MA';
 cell(mg+rLw,y,rVw,9,rendVal,false,false,10,'center');
 y+=9;
 }
-if(inst['chk-texp']!==false){
+if((inst['chk-texp']!==false&&(document.getElementById('chk-texp')?document.getElementById('chk-texp').checked:true))){
 checkPage(80);
 y+=8;
 secHeader(mg,y,aw,8,'EXACTITUD DEL TIEMPO DE EXPOSICION'); y+=8;
@@ -4121,7 +4121,7 @@ y+=8;
 });
 }
 }
-if(inst['chk-ctdi']!==false){
+if((inst['chk-ctdi']!==false&&(document.getElementById('chk-ctdi')?document.getElementById('chk-ctdi').checked:true))){
 doc.addPage();
 {
 let y=18;
