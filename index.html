@@ -3309,7 +3309,7 @@ y+=12;
 T('En Las Palmas de Gran Canaria a '+formatDate(i.fecha),mg,y,10,false);y+=6;
 T(v(i.empresa),mg,y,10,false);y+=14;
 T(v(i.director)+'.',mg,y,10,true);
-const _fn='Ficha_Tecnica_'+v(i.cliente).replace(/\s+/g,'_')+'.pdf';
+const _fn='Ficha_Tecnica_'+v(i.cliente).replace(/\s+/g,'_')+'_'+v(i.tipo).replace(/\s+/g,'_')+'.pdf';
 showPreview(doc,'Ficha Técnica — '+v(i.cliente),()=>{doc.save(_fn);notify('Ficha Técnica descargada ✓','success');});
 notify('Ficha Técnica generada ✓','success');
 }
@@ -3467,7 +3467,7 @@ bold(10); const sigName=V(i.director)||'                              ';
 const sigW=doc.getTextWidth(sigName);
 doc.text(sigName,sigX+(71-sigW)/2,sigLineY-5);
 norm(7.5); doc.text('[Nombre del representante de la EVAT]',sigX,sigLineY+4);
-const _an='Anexo_II_'+V(i.cliente).replace(/\s+/g,'_')+'.pdf';
+const _an='Anexo_II_'+V(i.cliente).replace(/\s+/g,'_')+'_'+V(i.tipo).replace(/\s+/g,'_')+'.pdf';
 showPreview(doc,'Anexo II — '+V(i.cliente),()=>{doc.save(_an);notify('Anexo II descargado ✓','success');});
 notify('Anexo II generado \u2713','success');
 }
@@ -4161,7 +4161,7 @@ B(10); doc.text(V(inst.director),W/2,fy-6,{align:'center'});
 doc.setLineWidth(0.5); doc.line(W/2-45,fy,W/2+45,fy); doc.setLineWidth(0.2);
 N(9); doc.text('Firma del Director',W/2,fy+6,{align:'center'});
 }
-const _pname = 'Pruebas_Aceptacion_'+V(inst.cliente).replace(/\s+/g,'_')+'.pdf';
+const _pname = 'Pruebas_Aceptacion_'+V(inst.cliente).replace(/\s+/g,'_')+'_'+V(inst.tipo).replace(/\s+/g,'_')+'.pdf';
 showPreview(doc, 'Pruebas de Aceptación — '+V(inst.cliente), ()=>{ doc.save(_pname); notify('Pruebas descargadas ✓','success'); });
 }
 function imprimirTodo(id){
