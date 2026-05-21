@@ -5174,26 +5174,27 @@ const DOCS_BUCKET = 'documentos-firmados';
 const DOCS_LABELS = {ficha:'Ficha T\u00e9cnica', anexo:'Anexo II', pruebas:'Pruebas Aceptaci\u00f3n'};
 
 window.loadDocsFirmados = async function(instId) {
-  const tipos = ['ficha','anexo','pruebas'];
-  for(const tipo of tipos) {
-    const slot = document.getElementById('dfs-'+tipo+'-'+instId);
+  var tipos = ['ficha','anexo','pruebas'];
+  for(var t=0; t<tipos.length; t++) {
+    var tipo = tipos[t];
+    var slot = document.getElementById('dfs-'+tipo+'-'+instId);
     if(!slot) continue;
-    renderDocSlot(slot, tipo, instId, null, true);
+    window.renderDocSlot(slot, tipo, instId, null, true);
     try {
-      const r = await fetch(SUPA_URL+'/storage/v1/object/list/'+DOCS_BUCKET, {
+      var r = await fetch(SUPA_URL+'/storage/v1/object/list/'+DOCS_BUCKET, {
         method:'POST',
-        headers:{...SUPA_HEADERS,'Content-Type':'application/json'},
-        body:JSON.stringify({prefix:instId+'/'+tipo, limit:1})
+        headers:Object.assign({}, SUPA_HEADERS, {'Content-Type':'application/json'}),
+        body:JSON.stringify({prefix:instId+'/'+tipo, limit:10})
       });
-      const files = await r.json();
-      const file = Array.isArray(files) && files.length > 0 ? files[0] : null;
-      renderDocSlot(slot, tipo, instId, file, false);
-    } catch(e) { renderDocSlot(slot, tipo, instId, null, false); }
+      var files = await r.json();
+      var file = Array.isArray(files) && files.length > 0 ? files[0] : null;
+      window.renderDocSlot(slot, tipo, instId, file, false);
+    } catch(e) { window.renderDocSlot(slot, tipo, instId, null, false); }
   }
-}
+};
 
 window.renderDocSlot = function(slot, tipo, instId, file, loading) {
-  const label = DOCS_LABELS[tipo];
+  var label = DOCS_LABELS[tipo];
   if(loading) {
     slot.innerHTML = '<div class="slot-label">'+label+'</div><div class="slot-estado">Cargando...</div>';
     slot.classList.remove('tiene-doc');
@@ -5201,78 +5202,67 @@ window.renderDocSlot = function(slot, tipo, instId, file, loading) {
   }
   if(file) {
     slot.classList.add('tiene-doc');
-    const fname = file.name;
-    const dateStr = file.updated_at ? new Date(file.updated_at).toLocaleDateString('es-ES') : '';
-    slot.innerHTML = '<div class="slot-label">'+label+'</div>'+
-      '<div class="slot-estado">\u2705 '+fname.substring(0,25)+(fname.length>25?'...':'')+'<br><small>'+dateStr+'</small></div>'+
-      '<div class="slot-btns">'+
-        '<button class="btn-ver-doc" onclick="descargarDocFirmado(''+instId+'',''+tipo+'',''+fname+'')">\u2935 Descargar</button>'+
-        '<button class="btn-borrar-doc" onclick="borrarDocFirmado(''+instId+'',''+tipo+'',''+fname+'')">\u2715</button>'+
-      '</div>';
+    var fname = file.name;
+    var dateStr = file.updated_at ? new Date(file.updated_at).toLocaleDateString('es-ES') : '';
+    slot.innerHTML = '<div class="slot-label">'+label+'</div>'
+      +'<div class="slot-estado">&#x2705; '+fname.substring(0,25)+(fname.length>25?'...':'')+'<br><small>'+dateStr+'</small></div>'
+      +'<div class="slot-btns">'
+        +'<button class="btn-ver-doc" onclick="window.descargarDocFirmado(''+instId+'',''+tipo+'',''+fname+'')">&#x2935; Descargar</button>'
+        +'<button class="btn-borrar-doc" onclick="window.borrarDocFirmado(''+instId+'',''+tipo+'',''+fname+'')">&#x2715;</button>'
+      +'</div>';
   } else {
     slot.classList.remove('tiene-doc');
-    slot.innerHTML = '<div class="slot-label">'+label+'</div>'+
-      '<div class="slot-estado" style="color:var(--text3)">Sin documento</div>'+
-      '<div class="slot-btns"><button class="btn-subir-doc" onclick="subirDocFirmado(''+instId+'',''+tipo+'')">\u2191 Subir PDF</button></div>';
+    slot.innerHTML = '<div class="slot-label">'+label+'</div>'
+      +'<div class="slot-estado" style="color:var(--text3)">Sin documento</div>'
+      +'<div class="slot-btns"><button class="btn-subir-doc" onclick="window.subirDocFirmado(''+instId+'',''+tipo+'')">&#x2191; Subir PDF</button></div>';
   }
-}
+};
 
 window.subirDocFirmado = function(instId, tipo) {
-  const input = document.createElement('input');
+  var input = document.createElement('input');
   input.type = 'file'; input.accept = '.pdf,application/pdf';
-  input.onchange = async (e) => {
-    const file = e.target.files[0];
+  input.onchange = async function(e) {
+    var file = e.target.files[0];
     if(!file) return;
-    const path = instId+'/'+tipo+'/'+file.name;
+    var path = instId+'/'+tipo+'/'+file.name;
     notify('Subiendo documento...','info');
     try {
-      // Eliminar anterior si existe
-      await fetch(SUPA_URL+'/storage/v1/object/'+DOCS_BUCKET+'/'+instId+'/'+tipo, {
-        method:'DELETE', headers:SUPA_HEADERS
-      });
-      const r = await fetch(SUPA_URL+'/storage/v1/object/'+DOCS_BUCKET+'/'+path, {
+      var r = await fetch(SUPA_URL+'/storage/v1/object/'+DOCS_BUCKET+'/'+path, {
         method:'POST',
-        headers:{...SUPA_HEADERS,'Content-Type':'application/pdf','x-upsert':'true'},
+        headers:Object.assign({}, SUPA_HEADERS, {'Content-Type':'application/pdf','x-upsert':'true'}),
         body:file
       });
       if(r.ok || r.status===200 || r.status===201) {
         notify('Documento subido \u2705','success');
-        loadDocsFirmados(instId);
+        window.loadDocsFirmados(instId);
       } else {
-        const err = await r.json();
-        notify('Error: '+(err.message||r.status),'error');
+        notify('Error al subir: '+r.status,'error');
       }
-    } catch(ex) { notify('Error al subir: '+ex.message,'error'); }
+    } catch(ex) { notify('Error: '+ex.message,'error'); }
   };
   input.click();
-}
+};
 
 window.descargarDocFirmado = async function(instId, tipo, fname) {
   try {
-    const path = instId+'/'+tipo+'/'+fname;
-    const r = await fetch(SUPA_URL+'/storage/v1/object/'+DOCS_BUCKET+'/'+path, {
-      headers:SUPA_HEADERS
-    });
+    var r = await fetch(SUPA_URL+'/storage/v1/object/'+DOCS_BUCKET+'/'+instId+'/'+tipo+'/'+fname, {headers:SUPA_HEADERS});
     if(!r.ok) { notify('Error al descargar','error'); return; }
-    const blob = await r.blob();
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url; a.download = fname; a.click();
+    var blob = await r.blob();
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a'); a.href=url; a.download=fname; a.click();
     URL.revokeObjectURL(url);
   } catch(ex) { notify('Error: '+ex.message,'error'); }
-}
+};
 
 window.borrarDocFirmado = async function(instId, tipo, fname) {
-  if(!confirm('\u00bfEliminar el documento firmado de '+DOCS_LABELS[tipo]+'?')) return;
-  const path = instId+'/'+tipo+'/'+fname;
+  if(!confirm('\u00bfEliminar documento firmado?')) return;
   try {
-    const r = await fetch(SUPA_URL+'/storage/v1/object/'+DOCS_BUCKET+'/'+path, {
-      method:'DELETE', headers:SUPA_HEADERS
-    });
+    await fetch(SUPA_URL+'/storage/v1/object/'+DOCS_BUCKET+'/'+instId+'/'+tipo+'/'+fname, {method:'DELETE',headers:SUPA_HEADERS});
     notify('Documento eliminado','success');
-    loadDocsFirmados(instId);
+    window.loadDocsFirmados(instId);
   } catch(ex) { notify('Error: '+ex.message,'error'); }
-}
+};
+
 </script>
 
 
