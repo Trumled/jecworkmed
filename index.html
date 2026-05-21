@@ -3055,6 +3055,10 @@ const _inst = db.instalaciones.find(x=>x.id===currentInstId) || {};
   const el = document.getElementById('pdf-'+key);
   if(el) el.checked = _inst['pdf-'+key] !== false;
 });
+['chk-cont','chk-ruido','chk-centr','chk-ctdi','chk-pch1','chk-repr','chk-filtr','chk-rend','chk-texp'].forEach(key => {
+  const el = document.getElementById(key);
+  if(el) el.checked = _inst[key] !== false;
+});
 }
 function autoFillCliente(){
 const nombre=getVal('f-cliente');
