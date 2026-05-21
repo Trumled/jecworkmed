@@ -5195,26 +5195,24 @@ window.loadDocsFirmados = async function(instId) {
 
 window.renderDocSlot = function(slot, tipo, instId, file, loading) {
   var label = DOCS_LABELS[tipo];
-  if(loading) {
-    slot.innerHTML = '<div class="slot-label">'+label+'</div><div class="slot-estado">Cargando...</div>';
-    slot.classList.remove('tiene-doc');
-    return;
-  }
+  if(loading) { slot.innerHTML = '<div class="slot-label">'+label+'</div><div class="slot-estado">Cargando...</div>'; slot.classList.remove('tiene-doc'); return; }
   if(file) {
     slot.classList.add('tiene-doc');
     var fname = file.name;
     var dateStr = file.updated_at ? new Date(file.updated_at).toLocaleDateString('es-ES') : '';
-    slot.innerHTML = '<div class="slot-label">'+label+'</div>'
-      +'<div class="slot-estado">&#x2705; '+fname.substring(0,25)+(fname.length>25?'...':'')+'<br><small>'+dateStr+'</small></div>'
-      +'<div class="slot-btns">'
-        +'<button class="btn-ver-doc" onclick="window.descargarDocFirmado(''+instId+'',''+tipo+'',''+fname+'')">&#x2935; Descargar</button>'
-        +'<button class="btn-borrar-doc" onclick="window.borrarDocFirmado(''+instId+'',''+tipo+'',''+fname+'')">&#x2715;</button>'
-      +'</div>';
+    var h = '<div class="slot-label">'+label+'</div>';
+    h += '<div class="slot-estado">&#x2705; '+fname.substring(0,25)+(fname.length>25?'...':'')+'<br><small>'+dateStr+'</small></div>';
+    h += '<div class="slot-btns">';
+    h += '<button class="btn-ver-doc" onclick="window.descargarDocFirmado(''+instId+'',''+tipo+'',''+fname+'')">&#x2935; Descargar</button>';
+    h += '<button class="btn-borrar-doc" onclick="window.borrarDocFirmado(''+instId+'',''+tipo+'',''+fname+'')">&#x2715;</button>';
+    h += '</div>';
+    slot.innerHTML = h;
   } else {
     slot.classList.remove('tiene-doc');
-    slot.innerHTML = '<div class="slot-label">'+label+'</div>'
-      +'<div class="slot-estado" style="color:var(--text3)">Sin documento</div>'
-      +'<div class="slot-btns"><button class="btn-subir-doc" onclick="window.subirDocFirmado(''+instId+'',''+tipo+'')">&#x2191; Subir PDF</button></div>';
+    var h = '<div class="slot-label">'+label+'</div>';
+    h += '<div class="slot-estado" style="color:var(--text3)">Sin documento</div>';
+    h += '<div class="slot-btns"><button class="btn-subir-doc" onclick="window.subirDocFirmado(''+instId+'',''+tipo+'')">&#x2191; Subir PDF</button></div>';
+    slot.innerHTML = h;
   }
 };
 
