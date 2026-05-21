@@ -5176,35 +5176,46 @@ function setMobTab(el){document.querySelectorAll('.mob-tab').forEach(t=>t.classL
   var DOCS_LABELS = {ficha:'Ficha T\u00e9cnica', anexo:'Anexo II', pruebas:'Pruebas Aceptaci\u00f3n'};
   var SURL = 'https://hvjvtokrfigawnenrmsb.supabase.co';
   var SKEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh2anZ0b2tyZmlnYXduZW5ybXNiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDUwOTU1ODQsImV4cCI6MjA2MDY3MTU4NH0.oStXQDRuJPZy3e3sUqxKTNkjRoSqcXXDLSBmHOuVASU';
-  var SH = {'apikey': SKEY, 'Authorization': 'Bearer ' + SKEY};
+  var SH = {'apikey':SKEY,'Authorization':'Bearer '+SKEY};
+
+  // Event delegation - sin comillas anidadas en onclick
+  document.addEventListener('click', function(e) {
+    var btn = e.target.closest('button[data-doc-action]');
+    if (!btn) return;
+    var action = btn.getAttribute('data-doc-action');
+    var instId = btn.getAttribute('data-inst');
+    var tipo = btn.getAttribute('data-tipo');
+    var fname = btn.getAttribute('data-fname');
+    if (action === 'subir') window._sube(instId, tipo);
+    if (action === 'descargar') window._descarga(instId, tipo, fname);
+    if (action === 'borrar') window._borra(instId, tipo, fname);
+  });
 
   window.loadDocsFirmados = async function(instId) {
-    var tipos = ['ficha', 'anexo', 'pruebas'];
+    var tipos = ['ficha','anexo','pruebas'];
     for (var i = 0; i < tipos.length; i++) {
       var tipo = tipos[i];
-      var slot = document.getElementById('dfs-' + tipo + '-' + instId);
+      var slot = document.getElementById('dfs-'+tipo+'-'+instId);
       if (!slot) continue;
       renderSlot(slot, tipo, instId, null, true);
       try {
-        var r = await fetch(SURL + '/storage/v1/object/list/' + DOCS_BUCKET, {
-          method: 'POST',
-          headers: Object.assign({}, SH, {'Content-Type': 'application/json'}),
-          body: JSON.stringify({prefix: instId + '/' + tipo, limit: 10})
+        var r = await fetch(SURL+'/storage/v1/object/list/'+DOCS_BUCKET, {
+          method:'POST',
+          headers:Object.assign({},SH,{'Content-Type':'application/json'}),
+          body:JSON.stringify({prefix:instId+'/'+tipo, limit:10})
         });
         var files = await r.json();
         var file = (Array.isArray(files) && files.length > 0) ? files[0] : null;
         renderSlot(slot, tipo, instId, file, false);
-      } catch(e) {
-        renderSlot(slot, tipo, instId, null, false);
-      }
+      } catch(e) { renderSlot(slot, tipo, instId, null, false); }
     }
   };
 
   function renderSlot(slot, tipo, instId, file, loading) {
     var label = DOCS_LABELS[tipo] || tipo;
-    var h = '<div class="slot-label">' + label + '</div>';
+    var h = '<div class="slot-label">'+label+'</div>';
     if (loading) {
-      slot.innerHTML = h + '<div class="slot-estado">Cargando...</div>';
+      slot.innerHTML = h+'<div class="slot-estado">Cargando...</div>';
       slot.classList.remove('tiene-doc');
       return;
     }
@@ -5212,15 +5223,15 @@ function setMobTab(el){document.querySelectorAll('.mob-tab').forEach(t=>t.classL
       slot.classList.add('tiene-doc');
       var fname = file.name || '';
       var dateStr = file.updated_at ? new Date(file.updated_at).toLocaleDateString('es-ES') : '';
-      h += '<div class="slot-estado">&#x2705; ' + fname.substring(0, 25) + (fname.length > 25 ? '...' : '') + '<br><small>' + dateStr + '</small></div>';
+      h += '<div class="slot-estado">&#x2705; '+fname.substring(0,25)+(fname.length>25?'...':'')+'<br><small>'+dateStr+'</small></div>';
       h += '<div class="slot-btns">';
-      h += '<button class="btn-ver-doc" onclick="window._descarga('' + instId + '','' + tipo + '','' + fname + '')">&#x2935; Descargar</button>';
-      h += '<button class="btn-borrar-doc" onclick="window._borra('' + instId + '','' + tipo + '','' + fname + '')">&#x2715;</button>';
+      h += '<button class="btn-ver-doc" data-doc-action="descargar" data-inst="'+instId+'" data-tipo="'+tipo+'" data-fname="'+fname+'">&#x2935; Descargar</button>';
+      h += '<button class="btn-borrar-doc" data-doc-action="borrar" data-inst="'+instId+'" data-tipo="'+tipo+'" data-fname="'+fname+'">&#x2715;</button>';
       h += '</div>';
     } else {
       slot.classList.remove('tiene-doc');
       h += '<div class="slot-estado" style="color:var(--text3)">Sin documento</div>';
-      h += '<div class="slot-btns"><button class="btn-subir-doc" onclick="window._sube('' + instId + '','' + tipo + '')">&#x2191; Subir PDF</button></div>';
+      h += '<div class="slot-btns"><button class="btn-subir-doc" data-doc-action="subir" data-inst="'+instId+'" data-tipo="'+tipo+'">&#x2191; Subir PDF</button></div>';
     }
     slot.innerHTML = h;
   }
@@ -5231,38 +5242,45 @@ function setMobTab(el){document.querySelectorAll('.mob-tab').forEach(t=>t.classL
     inp.onchange = async function(e) {
       var file = e.target.files[0];
       if (!file) return;
-      var path = instId + '/' + tipo + '/' + file.name;
-      if (window.notify) notify('Subiendo...', 'info');
-      var r = await fetch(SURL + '/storage/v1/object/' + DOCS_BUCKET + '/' + path, {
-        method: 'POST',
-        headers: Object.assign({}, SH, {'Content-Type': 'application/pdf', 'x-upsert': 'true'}),
-        body: file
-      });
-      if (r.ok || r.status === 200 || r.status === 201) {
-        if (window.notify) notify('Subido &#x2705;', 'success');
-        window.loadDocsFirmados(instId);
-      } else {
-        if (window.notify) notify('Error al subir', 'error');
-      }
+      var path = instId+'/'+tipo+'/'+file.name;
+      if (window.notify) notify('Subiendo...','info');
+      try {
+        var r = await fetch(SURL+'/storage/v1/object/'+DOCS_BUCKET+'/'+path, {
+          method:'POST',
+          headers:Object.assign({},SH,{'Content-Type':'application/pdf','x-upsert':'true'}),
+          body:file
+        });
+        if (r.ok || r.status===200 || r.status===201) {
+          if (window.notify) notify('Documento subido &#x2705;','success');
+          window.loadDocsFirmados(instId);
+        } else {
+          if (window.notify) notify('Error al subir','error');
+        }
+      } catch(ex) { if (window.notify) notify('Error: '+ex.message,'error'); }
     };
     inp.click();
   };
 
   window._descarga = async function(instId, tipo, fname) {
-    var r = await fetch(SURL + '/storage/v1/object/' + DOCS_BUCKET + '/' + instId + '/' + tipo + '/' + fname, {headers: SH});
-    if (!r.ok) { if (window.notify) notify('Error al descargar', 'error'); return; }
-    var blob = await r.blob();
-    var url = URL.createObjectURL(blob);
-    var a = document.createElement('a'); a.href = url; a.download = fname; a.click();
-    URL.revokeObjectURL(url);
+    try {
+      var r = await fetch(SURL+'/storage/v1/object/'+DOCS_BUCKET+'/'+instId+'/'+tipo+'/'+fname, {headers:SH});
+      if (!r.ok) { if (window.notify) notify('Error al descargar','error'); return; }
+      var blob = await r.blob();
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a'); a.href=url; a.download=fname; a.click();
+      URL.revokeObjectURL(url);
+    } catch(ex) { if (window.notify) notify('Error: '+ex.message,'error'); }
   };
 
   window._borra = async function(instId, tipo, fname) {
     if (!confirm('\u00bfEliminar documento firmado?')) return;
-    await fetch(SURL + '/storage/v1/object/' + DOCS_BUCKET + '/' + instId + '/' + tipo + '/' + fname, {method: 'DELETE', headers: SH});
-    if (window.notify) notify('Eliminado', 'success');
-    window.loadDocsFirmados(instId);
+    try {
+      await fetch(SURL+'/storage/v1/object/'+DOCS_BUCKET+'/'+instId+'/'+tipo+'/'+fname, {method:'DELETE',headers:SH});
+      if (window.notify) notify('Eliminado','success');
+      window.loadDocsFirmados(instId);
+    } catch(ex) { if (window.notify) notify('Error: '+ex.message,'error'); }
   };
+
 })();
 </script>
 
