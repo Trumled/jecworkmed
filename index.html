@@ -5173,7 +5173,7 @@ function setMobTab(el){document.querySelectorAll('.mob-tab').forEach(t=>t.classL
 const DOCS_BUCKET = 'documentos-firmados';
 const DOCS_LABELS = {ficha:'Ficha T\u00e9cnica', anexo:'Anexo II', pruebas:'Pruebas Aceptaci\u00f3n'};
 
-async function loadDocsFirmados(instId) {
+window.loadDocsFirmados = async function(instId) {
   const tipos = ['ficha','anexo','pruebas'];
   for(const tipo of tipos) {
     const slot = document.getElementById('dfs-'+tipo+'-'+instId);
@@ -5192,7 +5192,7 @@ async function loadDocsFirmados(instId) {
   }
 }
 
-function renderDocSlot(slot, tipo, instId, file, loading) {
+window.renderDocSlot = function(slot, tipo, instId, file, loading) {
   const label = DOCS_LABELS[tipo];
   if(loading) {
     slot.innerHTML = '<div class="slot-label">'+label+'</div><div class="slot-estado">Cargando...</div>';
@@ -5217,7 +5217,7 @@ function renderDocSlot(slot, tipo, instId, file, loading) {
   }
 }
 
-function subirDocFirmado(instId, tipo) {
+window.subirDocFirmado = function(instId, tipo) {
   const input = document.createElement('input');
   input.type = 'file'; input.accept = '.pdf,application/pdf';
   input.onchange = async (e) => {
@@ -5247,7 +5247,7 @@ function subirDocFirmado(instId, tipo) {
   input.click();
 }
 
-async function descargarDocFirmado(instId, tipo, fname) {
+window.descargarDocFirmado = async function(instId, tipo, fname) {
   try {
     const path = instId+'/'+tipo+'/'+fname;
     const r = await fetch(SUPA_URL+'/storage/v1/object/'+DOCS_BUCKET+'/'+path, {
@@ -5262,7 +5262,7 @@ async function descargarDocFirmado(instId, tipo, fname) {
   } catch(ex) { notify('Error: '+ex.message,'error'); }
 }
 
-async function borrarDocFirmado(instId, tipo, fname) {
+window.borrarDocFirmado = async function(instId, tipo, fname) {
   if(!confirm('\u00bfEliminar el documento firmado de '+DOCS_LABELS[tipo]+'?')) return;
   const path = instId+'/'+tipo+'/'+fname;
   try {
