@@ -2706,6 +2706,12 @@ document.getElementById('view-actions').innerHTML = `
 <span class="check-item ${calcularAnexoOk(i)?'done':'warn'}">${calcularAnexoOk(i)?'✓':'⚠'} Anexo II</span>
 <span class="check-item ${calcularPruebasOk(i)?'done':'warn'}">${calcularPruebasOk(i)?'✓':'⚠'} Pruebas</span>
 </div>
+<div style="display:flex;align-items:center;gap:6px;margin-bottom:8px">
+<span style="font-size:12px;color:var(--text2);font-weight:600">🌐 PDF:</span>
+<button class="btn btn-sm" style="padding:3px 10px;font-size:11px" onclick="window.LANG='es';this.parentNode.querySelectorAll('button').forEach(b=>b.style.fontWeight='normal');this.style.fontWeight='700'" title="Español">🇪🇸 ES</button>
+<button class="btn btn-sm" style="padding:3px 10px;font-size:11px" onclick="window.LANG='en';this.parentNode.querySelectorAll('button').forEach(b=>b.style.fontWeight='normal');this.style.fontWeight='700'" title="English">🇬🇧 EN</button>
+<button class="btn btn-sm" style="padding:3px 10px;font-size:11px" onclick="window.LANG='de';this.parentNode.querySelectorAll('button').forEach(b=>b.style.fontWeight='normal');this.style.fontWeight='700'" title="Deutsch">🇩🇪 DE</button>
+</div>
 <button class="btn btn-sm btn-dark" onclick="imprimirFicha('${i.id}')">🖨 Ficha Técnica</button>
 <button class="btn btn-sm btn-dark" onclick="imprimirAnexo('${i.id}')">🖨 Anexo II</button>
 <button class="btn btn-sm btn-dark" onclick="imprimirPruebas('${i.id}')">🖨 Pruebas</button>
@@ -3283,22 +3289,22 @@ let y=18;
 const R=(x,yy,w,h)=>doc.rect(x,yy,w,h);
 const L=(x1,y1,x2,y2)=>doc.line(x1,y1,x2,y2);
 const T=(t,x,yy,sz,bold,opts)=>{doc.setFontSize(sz||10);doc.setFont('helvetica',bold?'bold':'normal');doc.text(String(t||''),x,yy,opts||{});};
-T('FICHA DE DATOS TÉCNICOS',W/2,y,14,true,{align:'center'});
-const tw=doc.getTextWidth('FICHA DE DATOS TÉCNICOS'); L(W/2-tw/2,y+1,W/2+tw/2,y+1); y+=10;
+T(t('FICHA DE DATOS TÉCNICOS'),W/2,y,14,true,{align:'center'});
+const tw=doc.getTextWidth(t('FICHA DE DATOS TÉCNICOS')); L(W/2-tw/2,y+1,W/2+tw/2,y+1); y+=10;
 const rH=8, lW=48;
-[['DATO DE LA INSTALACIÓN',v(i.cliente)],['POBLACIÓN',v(i.localidad)],['PROVINCIA',v(i.provincia)],['TELÉFONO',v(i.telefono)]].forEach(([lb,vl])=>{
+[[t('DATO DE LA INSTALACIÓN'),v(i.cliente)],[t('POBLACIÓN'),v(i.localidad)],[t('PROVINCIA'),v(i.provincia)],[t('TELÉFONO'),v(i.telefono)]].forEach(([lb,vl])=>{
 R(mg,y,lW,rH); R(mg+lW,y,cw-lW,rH);
 T(lb,mg+2,y+5.5,8,true); T(vl,mg+lW+3,y+5.5,10,false); y+=rH;
 });
 y+=4;
-[['INSTALADOR',v(emp.nombre||i.empresa)],['CIF/NIF',v(emp.cif)+'     CÓDIGO DE AUTORIZACIÓN: '+v(emp.codAuth)],['TÉCNICO',v(i.tecnico)],['DNI',v(tec.dni)+'     FECHA DE NACIMIENTO: '+v(tec.fechaNac)]].forEach(([lb,vl])=>{
+[[t('INSTALADOR'),v(emp.nombre||i.empresa)],['CIF/NIF',v(emp.cif)+'     CÓDIGO DE AUTORIZACIÓN: '+v(emp.codAuth)],[t('TÉCNICO'),v(i.tecnico)],['DNI',v(tec.dni)+'     FECHA DE NACIMIENTO: '+v(tec.fechaNac)]].forEach(([lb,vl])=>{
 R(mg,y,lW,rH); R(mg+lW,y,cw-lW,rH);
 T(lb,mg+2,y+5.5,8,true); T(vl,mg+lW+3,y+5.5,9,false); y+=rH;
 });
 y+=6;
-R(mg,y,cw,rH); T('EQUIPO',W/2,y+6,12,true,{align:'center'}); y+=rH;
+R(mg,y,cw,rH); T(t('EQUIPO'),W/2,y+6,12,true,{align:'center'}); y+=rH;
 const c1=lW,c2=48,c3=cw-lW-48;
-[['N DE EQUIPO',v(i.neq),'',''],['FIJO / MÓVIL',v(i.fijomovil),'',''],['TIPO',v(i.tipo),'',''],['FABRICANTE',v(i.fabricante),'',''],['PAÍS',v(i.pais),'CÓDIGO ORGANISMOS\nNOTIFICADOR',v(i.codorg)],['DENOMINACIÓN',v(i.denom),'','']].forEach(([l,val,l2,v2])=>{
+[[t('N DE EQUIPO'),v(i.neq),'',''],[t('FIJO / MÓVIL'),v(i.fijomovil),'',''],[t('TIPO'),v(i.tipo),'',''],[t('FABRICANTE'),v(i.fabricante),'',''],[t('PAÍS'),v(i.pais),'CÓDIGO ORGANISMOS\nNOTIFICADOR',v(i.codorg)],[t('DENOMINACIÓN'),v(i.denom),'','']].forEach(([l,val,l2,v2])=>{
 R(mg,y,c1,rH); R(mg+c1,y,c2,rH);
 T(l,mg+2,y+5.5,8,true); T(val,mg+c1+2,y+5.5,9,false);
 if(l2){R(mg+c1+c2,y,c3/2,rH);R(mg+c1+c2+c3/2,y,c3/2,rH);l2.split('\n').forEach((ln,ix)=>{T(ln,mg+c1+c2+2,y+3+ix*3.5,7,true);});T(v2,mg+c1+c2+c3/2+2,y+5.5,9,false);}
@@ -3306,24 +3312,24 @@ else R(mg+c1+c2,y,c3,rH);
 y+=rH;
 });
 y+=5;
-T('SISTEMA',W/2,y+5,12,true,{align:'center'}); const sw=doc.getTextWidth('SISTEMA'); L(W/2-sw/2,y+6,W/2+sw/2,y+6); y+=9;
+T(t('SISTEMA'),W/2,y+5,12,true,{align:'center'}); const sw=doc.getTextWidth(t('SISTEMA')); L(W/2-sw/2,y+6,W/2+sw/2,y+6); y+=9;
 R(mg,y,c1,rH*1.5);R(mg+c1,y,c2,rH*1.5);R(mg+c1+c2,y,c3/2,rH*1.5);R(mg+c1+c2+c3/2,y,c3/2,rH*1.5);
-T('MODELO',mg+2,y+7,8,true);T(v(i.modelo),mg+c1+2,y+7,9,false);
-T('CÓDIGO ORGANISMO',mg+c1+c2+2,y+4,7,true);T('NOTIFICADOR DEL FAB.',mg+c1+c2+2,y+8,7,true);T(v(i.codfab),mg+c1+c2+c3/2+2,y+7,9,false);y+=rH*1.5;
+T(t('MODELO'),mg+2,y+7,8,true);T(v(i.modelo),mg+c1+2,y+7,9,false);
+T(t('CÓDIGO ORGANISMO'),mg+c1+c2+2,y+4,7,true);T(t('NOTIFICADOR DEL FAB.'),mg+c1+c2+2,y+8,7,true);T(v(i.codfab),mg+c1+c2+c3/2+2,y+7,9,false);y+=rH*1.5;
 R(mg,y,c1,rH);R(mg+c1,y,c2,rH);R(mg+c1+c2,y,c3/4,rH);R(mg+c1+c2+c3/4,y,c3/4,rH);R(mg+c1+c2+c3/2,y,c3/4,rH);R(mg+c1+c2+c3*3/4,y,c3/4,rH);
-T('N SERIE',mg+2,y+5.5,8,true);T(v(i.nserie),mg+c1+2,y+5.5,9,false);
+T(t('N SERIE'),mg+2,y+5.5,8,true);T(v(i.nserie),mg+c1+2,y+5.5,9,false);
 T('KV max',mg+c1+c2+2,y+5.5,8,true);T(v(i.kv),mg+c1+c2+c3/4+2,y+5.5,9,false);
 T('Ma max',mg+c1+c2+c3/2+2,y+5.5,8,true);T(v(i.ma),mg+c1+c2+c3*3/4+2,y+5.5,9,false);y+=rH;
-R(mg,y,c1,rH);R(mg+c1,y,cw-c1,rH);T('AÑO DE FABRICACIÓN',mg+2,y+5.5,8,true);T(v(i.anio),mg+c1+2,y+5.5,9,false);y+=rH+5;
-T('TUBO',W/2,y+5,12,true,{align:'center'}); const tbw=doc.getTextWidth('TUBO'); L(W/2-tbw/2,y+6,W/2+tbw/2,y+6); y+=9;
+R(mg,y,c1,rH);R(mg+c1,y,cw-c1,rH);T(t('AÑO DE FABRICACIÓN'),mg+2,y+5.5,8,true);T(v(i.anio),mg+c1+2,y+5.5,9,false);y+=rH+5;
+T(t('TUBO'),W/2,y+5,12,true,{align:'center'}); const tbw=doc.getTextWidth(t('TUBO')); L(W/2-tbw/2,y+6,W/2+tbw/2,y+6); y+=9;
 R(mg,y,c1,rH*1.5);R(mg+c1,y,c2,rH*1.5);R(mg+c1+c2,y,c3/2,rH*1.5);R(mg+c1+c2+c3/2,y,c3/2,rH*1.5);
-T('MARCA/MODELO',mg+2,y+7,8,true);T(v(i.tmod)+' / '+v(i.tcod),mg+c1+2,y+7,9,false);
-T('CÓDIGO ORGANISMO',mg+c1+c2+2,y+4,7,true);T('NOTIFICADOR',mg+c1+c2+2,y+8,7,true);y+=rH*1.5;
+T(t('MARCA/MODELO'),mg+2,y+7,8,true);T(v(i.tmod)+' / '+v(i.tcod),mg+c1+2,y+7,9,false);
+T(t('CÓDIGO ORGANISMO'),mg+c1+c2+2,y+4,7,true);T(t('NOTIFICADOR'),mg+c1+c2+2,y+8,7,true);y+=rH*1.5;
 R(mg,y,c1,rH);R(mg+c1,y,c2,rH);R(mg+c1+c2,y,c3/4,rH);R(mg+c1+c2+c3/4,y,c3/4,rH);R(mg+c1+c2+c3/2,y,c3/4,rH);R(mg+c1+c2+c3*3/4,y,c3/4,rH);
-T('N DE SERIE',mg+2,y+5.5,8,true);T(v(i.tnserie),mg+c1+2,y+5.5,9,false);
+T(t('N DE SERIE'),mg+2,y+5.5,8,true);T(v(i.tnserie),mg+c1+2,y+5.5,9,false);
 T('KV max',mg+c1+c2+2,y+5.5,8,true);T(v(i.tkv),mg+c1+c2+c3/4+2,y+5.5,9,false);
 T('MA max',mg+c1+c2+c3/2+2,y+5.5,8,true);T(v(i.tma),mg+c1+c2+c3*3/4+2,y+5.5,9,false);y+=rH;
-R(mg,y,c1,rH);R(mg+c1,y,cw-c1,rH);T('Año de fabricación',mg+2,y+5.5,8,true);T(v(i.tanio),mg+c1+2,y+5.5,9,false);y+=rH;
+R(mg,y,c1,rH);R(mg+c1,y,cw-c1,rH);T(t('Año de fabricación'),mg+2,y+5.5,8,true);T(v(i.tanio),mg+c1+2,y+5.5,9,false);y+=rH;
 y+=12;
 T('En Las Palmas de Gran Canaria a '+formatDate(i.fecha),mg,y,10,false);y+=6;
 T(v(i.empresa),mg,y,10,false);y+=14;
@@ -3345,40 +3351,40 @@ const ln   = (x1,y1,x2,y2)=>doc.line(x1,y1,x2,y2);
 const bold = (sz)=>{ doc.setFont('helvetica','bold');   doc.setFontSize(sz||9); };
 const norm = (sz)=>{ doc.setFont('helvetica','normal'); doc.setFontSize(sz||10); };
 const ital = (sz)=>{ doc.setFont('helvetica','italic'); doc.setFontSize(sz||8); };
-bold(15); doc.text('ANEXO II',W/2,y,{align:'center'}); y+=7;
+bold(15); doc.text(t('ANEXO II'),W/2,y,{align:'center'}); y+=7;
 bold(12); doc.text('Certificado de conformidad de los equipos para su registro (EVAT)',W/2,y,{align:'center'}); y+=12;
 const s1Top = y;
 let iy = s1Top + 8;
-bold(9); doc.text('DATOS DE LA INSTALACIÓN',mg+3,iy);
-const dtw=doc.getTextWidth('DATOS DE LA INSTALACIÓN'); ln(mg+3,iy+1,mg+3+dtw,iy+1);
+bold(9); doc.text(t('DATOS DE LA INSTALACIÓN'),mg+3,iy);
+const dtw=doc.getTextWidth(t('DATOS DE LA INSTALACIÓN')); ln(mg+3,iy+1,mg+3+dtw,iy+1);
 iy+=8;
-norm(8); bold(8); doc.text('NOMBRE DEL TITULAR:',mg+3,iy);
-const lbT=doc.getTextWidth('NOMBRE DEL TITULAR:')+2;
+norm(8); bold(8); doc.text(t('NOMBRE DEL TITULAR:'),mg+3,iy);
+const lbT=doc.getTextWidth(t('NOMBRE DEL TITULAR:'))+2;
 norm(10); doc.text(V(i.a2_titular),mg+3+lbT,iy);
 ln(mg+3+lbT,iy+1,mg+cw-3,iy+1); iy+=8;
 bold(8); doc.text('NIF:',mg+3,iy);
 norm(10); doc.text(V(i.a2_nif),mg+12,iy);
 ln(mg+12,iy+1,mg+60,iy+1);
-bold(8); doc.text('TLFNO/E-MAIL:',mg+63,iy);
-const lbTlf=doc.getTextWidth('TLFNO/E-MAIL:')+2;
+bold(8); doc.text(t('TLFNO/E-MAIL:'),mg+63,iy);
+const lbTlf=doc.getTextWidth(t('TLFNO/E-MAIL:'))+2;
 norm(10); doc.text(V(i.a2_tlfmail),mg+63+lbTlf,iy);
 ln(mg+63+lbTlf,iy+1,mg+cw-3,iy+1); iy+=8;
-bold(8); doc.text('DIRECCIÓN',mg+3,iy);
-const lbD=doc.getTextWidth('DIRECCIÓN')+3;
+bold(8); doc.text(t('DIRECCIÓN'),mg+3,iy);
+const lbD=doc.getTextWidth(t('DIRECCIÓN'))+3;
 norm(10); doc.text(V(i.a2_dir),mg+3+lbD,iy);
 ln(mg+3+lbD,iy+1,mg+cw-3,iy+1); iy+=8;
 bold(8); doc.text('C.P.',mg+3,iy);
 norm(10); doc.text(V(i.a2_cp),mg+12,iy);
 ln(mg+12,iy+1,mg+36,iy+1);
-bold(8); doc.text('LOCALIDAD',mg+39,iy);
-const lbL=doc.getTextWidth('LOCALIDAD')+2;
+bold(8); doc.text(t('LOCALIDAD'),mg+39,iy);
+const lbL=doc.getTextWidth(t('LOCALIDAD'))+2;
 norm(10); doc.text(V(i.a2_loc),mg+39+lbL,iy);
 ln(mg+39+lbL,iy+1,mg+118,iy+1);
-bold(8); doc.text('PROVINCIA',mg+121,iy);
-const lbPr=doc.getTextWidth('PROVINCIA')+2;
+bold(8); doc.text(t('PROVINCIA'),mg+121,iy);
+const lbPr=doc.getTextWidth(t('PROVINCIA'))+2;
 norm(10); doc.text(V(i.a2_prov),mg+121+lbPr,iy);
 ln(mg+121+lbPr,iy+1,mg+cw-3,iy+1); iy+=8;
-bold(8); doc.text('NOMBRE DE LA INSTALACION',mg+3,iy);
+bold(8); doc.text(t('NOMBRE DE LA INSTALACION'),mg+3,iy);
 ital(7); doc.text('(si es diferente al titular)',mg+3,iy+4);
 const nominsX = mg+3+doc.getTextWidth('NOMBRE DE LA INSTALACION    ');
 norm(10); doc.text(V(i.a2_nomins||''),nominsX,iy);
@@ -3388,8 +3394,8 @@ box(mg, s1Top, cw, s1h);
 y = s1Top + s1h + 6;
 const s2Top = y;
 let cy = s2Top + 8;
-bold(9); doc.text('DATOS DE CONFORMIDAD',mg+3,cy);
-const dctw=doc.getTextWidth('DATOS DE CONFORMIDAD'); ln(mg+3,cy+1,mg+3+dctw,cy+1);
+bold(9); doc.text(t('DATOS DE CONFORMIDAD'),mg+3,cy);
+const dctw=doc.getTextWidth(t('DATOS DE CONFORMIDAD')); ln(mg+3,cy+1,mg+3+dctw,cy+1);
 cy+=9;
 norm(10); doc.text('D. ',mg+5,cy);
 const prefW=doc.getTextWidth('D. ');
@@ -3412,7 +3418,7 @@ cy+=5; bold(10); doc.text(empName,mg+5,cy);
 cy+=6;
 norm(9.5); doc.text('con fines de registro de la instalación, ',mg+5,cy);
 const cfW=doc.getTextWidth('con fines de registro de la instalación, ');
-bold(9.5); doc.text('CERTIFICO:',mg+5+cfW,cy);
+bold(9.5); doc.text(t('CERTIFICO:'),mg+5+cfW,cy);
 cy+=7;
 norm(9); doc.text('- Que los equipos adquiridos por el titular para la instalación arriba citada son los siguientes:',mg+7,cy);
 cy+=4;
@@ -3422,7 +3428,7 @@ const notaL=doc.splitTextToSize(nota,cw-14);
 doc.text(notaL,mg+7,cy); cy+=notaL.length*3.5+3;
 const colW=[16,32,70,46]; 
 const tX=mg+9, rH=7;
-const headers=['EQUIPO N\u00BA','MARCA','MODELO','N\u00BAMERO DE SERIE'];
+const headers=['EQUIPO N\u00BA',t('MARCA'),t('MODELO'),'N\u00BAMERO DE SERIE'];
 let tx=tX;
 bold(8);
 headers.forEach((h,idx)=>{ box(tx,cy,colW[idx],rH); doc.text(h,tx+colW[idx]/2,cy+5,{align:'center'}); tx+=colW[idx]; });
@@ -3449,7 +3455,7 @@ norm(9); doc.text('- Que estos equipos provienen de:',mg+7,cy); cy+=6;
 const esNueva=(i.procedencia==='nueva'||!i.procedencia);
 box(mg+14,cy-4.5,4.5,4.5);
 if(esNueva){bold(9);doc.text('X',mg+15.3,cy-0.8);norm(9);}
-doc.text('Nueva adquisición',mg+21,cy-0.5); cy+=6;
+doc.text(t('Nueva adquisición'),mg+21,cy-0.5); cy+=6;
 box(mg+14,cy-4.5,4.5,4.5);
 if(!esNueva){bold(9);doc.text('X',mg+15.3,cy-0.8);norm(9);}
 const irxTxt = (!esNueva && V(i.pr_irx)) ? ' '+V(i.pr_irx) : '';
@@ -3785,13 +3791,13 @@ renderPruebasResultados([
 {tipo:'seccion', desc:'PARÁMETROS GEOMÉTRICOS'},
 {tipo:'prueba', codigo:'DL001', desc:'Mínima distancia foco-piel', resultado:'OK', tolerancia:'20cm para Tp>60kV\n10cm para Tp≤60kV'},
 {tipo:'prueba', codigo:'DL002', desc:'Tamaño del campo en el extremo del localizador', resultado:'OK', tolerancia:'≤ 6cm'},
-{tipo:'seccion', desc:'CALIDAD DEL HAZ'},
-{tipo:'prueba', codigo:'*DL003', desc:'Exactitud y reproducibilidad de la tensión', resultado:'Ver ANEXO I', tolerancia:'Exactitud ≤±10%'},
+{tipo:'seccion', desc:t('CALIDAD DEL HAZ')},
+{tipo:'prueba', codigo:'*DL003', desc:'Exactitud y reproducibilidad de la tensión', resultado:t('Ver ANEXO I'), tolerancia:'Exactitud ≤±10%'},
 {tipo:'prueba', codigo:'DL004', desc:'Filtración. Capa Hemirreductora', resultado:'2,8mm Al', tolerancia:'≥1,5mmAl (Tp≤70Kv)\n≥2,5mmAl (Tp>70Kv)'},
 {tipo:'seccion', desc:'TIEMPO DE EXPOSICIÓN'},
-{tipo:'prueba', codigo:'*DL006', desc:'Exactitud y reproducibilidad del tiempo de exposición', resultado:'Ver ANEXO I', tolerancia:'Exactitud ≤±20%\nReproducibilidad ≤10%'},
-{tipo:'seccion', desc:'RENDIMIENTO'},
-{tipo:'prueba', codigo:'*DL007', desc:'Reproducibilidad', resultado:'Ver ANEXO I', tolerancia:'<10%'},
+{tipo:'prueba', codigo:'*DL006', desc:'Exactitud y reproducibilidad del tiempo de exposición', resultado:t('Ver ANEXO I'), tolerancia:'Exactitud ≤±20%\nReproducibilidad ≤10%'},
+{tipo:'seccion', desc:t('RENDIMIENTO')},
+{tipo:'prueba', codigo:'*DL007', desc:t(t('Reproducibilidad')), resultado:t('Ver ANEXO I'), tolerancia:'<10%'},
 ]);
 notify('Plantilla CT cargada ✓','success');
 }
@@ -3870,7 +3876,7 @@ B(11); doc.text(en.slice(0,mid).join(' '),mg+4,y+9);
 N(9);  doc.text(en.slice(mid).join(' '),mg+4,y+16);
 doc.rect(mg+85,y,cw-85,22,'S');
 y+=55;
-titulo('PRUEBAS DE ACEPTACION',y,44); y+=26;
+titulo(t('PRUEBAS DE ACEPTACION'),y,44); y+=26;
 titulo('',y-2,0); 
 N(13); doc.text('(Conforme R.D. 1085/2009)',W/2,y+10,{align:'center'});
 y+=90;
@@ -3888,33 +3894,33 @@ const rowSplit=(l1,v1,w1,l2,v2,y2)=>{
 cell(mg,y2,lw,rH,l1,true,true,8); cell(mg+lw,y2,w1,rH,v1,false,false,9);
 cell(mg+lw+w1,y2,(fw-lw-w1)/2,rH,l2,true,true,7); cell(mg+lw+w1+(fw-lw-w1)/2,y2,(fw-lw-w1)/2,rH,v2,false,false,9);
 };
-secHeader(mg,y,fw,8,'INSTALADOR'); y+=8;
-rowGray('INSTALADOR',pInst,y); y+=rH;
-rowSplit('CIF/NIF',pCif,(fw-lw)/2,'COD. AUTORIZACION',pAuth,y); y+=rH;
+secHeader(mg,y,fw,8,t('INSTALADOR')); y+=8;
+rowGray(t('INSTALADOR'),pInst,y); y+=rH;
+rowSplit('CIF/NIF',pCif,(fw-lw)/2,t('COD. AUTORIZACION'),pAuth,y); y+=rH;
 rowGray('TECNICO',pTec,y); y+=rH;
-rowSplit('DNI',pDni,(fw-lw)/2,'FECHA NAC.',pFnac,y); y+=rH+5;
-secHeader(mg,y,fw,8,'EQUIPO'); y+=8;
-[['N EQUIPO',pNeq],['FIJO/MOVIL',pFM],['TIPO',pTipo],
-['FABRICANTE',pFab],['PAIS',pPais],['DENOMINACION',pDenom]].forEach(([l,v])=>{
+rowSplit('DNI',pDni,(fw-lw)/2,t('FECHA NAC.'),pFnac,y); y+=rH+5;
+secHeader(mg,y,fw,8,t('EQUIPO')); y+=8;
+[['N EQUIPO',pNeq],[t('FIJO/MOVIL'),pFM],[t('TIPO'),pTipo],
+[t('FABRICANTE'),pFab],[t('PAIS'),pPais],[t('DENOMINACION'),pDenom]].forEach(([l,v])=>{
 rowGray(l,v,y); y+=rH;
 });
 y+=3;
 const mw=42, sw=(fw-mw)/3*2, vw=(fw-mw)/3;
-secHeader(mg,y,fw,7,'SISTEMA'); y+=7;
-cell(mg,y,mw,rH*1.6,'MARCA/MODELO',true,true,8);
+secHeader(mg,y,fw,7,t('SISTEMA')); y+=7;
+cell(mg,y,mw,rH*1.6,t('MARCA/MODELO'),true,true,8);
 cell(mg+mw,y,sw/2,rH*1.6,pSisMod,false,false,9);
 cell(mg+mw+sw/2,y,sw/2,rH*1.6,'COD.ORG.NOTIF. CE FAB.',true,true,7);
 cell(mg+mw+sw,y,vw,rH*1.6,pSisCod,false,false,9); y+=rH*1.6;
-cell(mg,y,mw,rH,'N SERIE',true,true,8); cell(mg+mw,y,sw/3,rH,pNserie,false,false,9);
+cell(mg,y,mw,rH,t('N SERIE'),true,true,8); cell(mg+mw,y,sw/3,rH,pNserie,false,false,9);
 cell(mg+mw+sw/3,y,sw/6,rH,'KV max',true,true,7); cell(mg+mw+sw/3+sw/6,y,sw/6,rH,pKv,false,false,9);
 cell(mg+mw+sw*2/3,y,sw/6,rH,'mA max',true,true,7); cell(mg+mw+sw*2/3+sw/6,y,vw,rH,pMa,false,false,9); y+=rH;
 cell(mg,y,mw,rH,'ANO FAB.',true,true,8); cell(mg+mw,y,fw-mw,rH,pAnio,false,false,9); y+=rH+3;
-secHeader(mg,y,fw,7,'TUBO'); y+=7;
-cell(mg,y,mw,rH*1.6,'MARCA/MODELO',true,true,8);
+secHeader(mg,y,fw,7,t('TUBO')); y+=7;
+cell(mg,y,mw,rH*1.6,t('MARCA/MODELO'),true,true,8);
 cell(mg+mw,y,sw/2,rH*1.6,pTubMod,false,false,9);
 cell(mg+mw+sw/2,y,sw/2,rH*1.6,'COD.ORG.NOTIF. CE FAB.',true,true,7);
 cell(mg+mw+sw,y,vw,rH*1.6,pTubCod,false,false,9); y+=rH*1.6;
-cell(mg,y,mw,rH,'N SERIE',true,true,8); cell(mg+mw,y,sw/3,rH,pTnserie,false,false,9);
+cell(mg,y,mw,rH,t('N SERIE'),true,true,8); cell(mg+mw,y,sw/3,rH,pTnserie,false,false,9);
 cell(mg+mw+sw/3,y,sw/6,rH,'KV max',true,true,7); cell(mg+mw+sw/3+sw/6,y,sw/6,rH,pTkv,false,false,9);
 cell(mg+mw+sw*2/3,y,sw/6,rH,'mA max',true,true,7); cell(mg+mw+sw*2/3+sw/6,y,vw,rH,pTma,false,false,9); y+=rH;
 cell(mg,y,mw,rH,'ANO FAB.',true,true,8); cell(mg+mw,y,fw-mw,rH,pTanio,false,false,9);
@@ -3922,7 +3928,7 @@ cell(mg,y,mw,rH,'ANO FAB.',true,true,8); cell(mg+mw,y,fw-mw,rH,pTanio,false,fals
 doc.addPage();
 {
 let y=35;
-titulo('PRUEBAS DE ACEPTACION',y,12); y+=18;
+titulo(t('PRUEBAS DE ACEPTACION'),y,12); y+=18;
 N(10.5);
 const ps=[
 'Este Documento y las Pruebas de Aceptacion que en el se describen tienen la finalidad de documentar ante el cliente que el sistema radiografico se ha instalado correctamente y que cumple con todas las especificaciones de venta.',
@@ -3944,9 +3950,9 @@ flush(line,true); y+=7;
 doc.addPage();
 {
 let y=15;
-titulo('EQUIPOS DE MEDIDA UTILIZADOS',y,10); y+=9;
+titulo(t('EQUIPOS DE MEDIDA UTILIZADOS'),y,10); y+=9;
 const eC=[46,20,20,40,22,22]; const eTot=eC.reduce((a,b)=>a+b);
-const eH=['DESCRIPCION','MARCA','MODELO','N SERIE','FECHA CAL.','ORGANISMO'];
+const eH=[t('DESCRIPCION'),t('MARCA'),t('MODELO'),t('N SERIE'),t('FECHA CAL.'),t('ORGANISMO')];
 let tx=mg; eH.forEach((h,ix)=>{ cell(tx,y,eC[ix],9,h,true,true,7.5,'center'); tx+=eC[ix]; }); y+=9;
 const eqArr=inst['eq-medida']||[];
 if(eqArr.length){
@@ -3967,7 +3973,7 @@ doc.setLineWidth(0.4); doc.line(mg,y+1,mg+iw,y+1); doc.setLineWidth(0.2);
 It(8); doc.text('(segun Protocolo Espanol de Control de Calidad en Radiodiagnostico - SEFM-SEPR 2002 rev 1)',mg,y+5);
 y+=12;
 const pC=[22,74,30,36]; const pTot=pC.reduce((a,b)=>a+b);
-tx=mg; ['CODIGO','DESCRIPCION','RESULTADO','TOLERANCIA'].forEach((h,ix)=>{
+tx=mg; [t('CODIGO'),t('DESCRIPCION'),t('RESULTADO'),t('TOLERANCIA')].forEach((h,ix)=>{
 cell(tx,y,pC[ix],10,h,true,true,8,'center'); tx+=pC[ix];
 }); y+=10;
 const SEC=(t)=>{ cell(mg,y,pTot,7,t,true,true,9,'center'); y+=7; };
@@ -3982,33 +3988,33 @@ noFill(); doc.rect(tx,y,pC[3],h,'FD'); N(8); tL.forEach((l,li)=>doc.text(l,tx+2,
 y+=h;
 };
 const inclPDF = (key) => inst['pdf-'+key] !== false;
-SEC('PARAMETROS GEOMETRICOS');
-if(inclPDF('dl001')) PR('DL001','Minima distancia foco-piel', V(inst['pr-dl001'])||'OK','20cm Tp>60kV / 10cm Tp<60kV');
-if(inclPDF('dl002')) PR('DL002','Tamano del campo en el extremo del localizador', V(inst['pr-dl002'])||'OK','< 6cm');
-SEC('CALIDAD DEL HAZ');
-if(inclPDF('dl003')) PR('*DL003','Exactitud y reproducibilidad de la tension', V(inst['pr-dl003'])||'Ver ANEXO I','Exactitud < +/-10%');
-if(inclPDF('dl004')) PR('DL004','Filtracion. Capa Hemirreductora', V(inst['pr-dl004'])||'','>1,5mmAl (TP<70Kv) / >2,5mmAl (TP>70Kv)');
-SEC('TIEMPO DE EXPOSICION');
-if(inclPDF('dl006')) PR('*DL006','Exactitud y reproducibilidad del tiempo de exposicion', V(inst['pr-dl006'])||'Ver ANEXO I','Exactitud <+/-20% / Reprod.<10%');
-SEC('RENDIMIENTO');
-if(inclPDF('dl007')) PR('*DL007','Reproducibilidad', V(inst['pr-dl007'])||'Ver ANEXO I','<10%');
-if(inclPDF('dl008')) PR('DL008','Linealidad dosis con tiempo', V(inst['pr-dl008'])||'Ver ANEXO I','10%');
+SEC(t('PARAMETROS GEOMETRICOS'));
+if(inclPDF('dl001')) PR('DL001',t('Minima distancia foco-piel'), V(inst['pr-dl001'])||'OK','20cm Tp>60kV / 10cm Tp<60kV');
+if(inclPDF('dl002')) PR('DL002',t('Tamano del campo en el extremo del localizador'), V(inst['pr-dl002'])||'OK','< 6cm');
+SEC(t('CALIDAD DEL HAZ'));
+if(inclPDF('dl003')) PR('*DL003',t('Exactitud y reproducibilidad de la tension'), V(inst['pr-dl003'])||t('Ver ANEXO I'),'Exactitud < +/-10%');
+if(inclPDF('dl004')) PR('DL004',t('Filtracion. Capa Hemirreductora'), V(inst['pr-dl004'])||'','>1,5mmAl (TP<70Kv) / >2,5mmAl (TP>70Kv)');
+SEC(t('TIEMPO DE EXPOSICION'));
+if(inclPDF('dl006')) PR('*DL006',t('Exactitud y reproducibilidad del tiempo de exposicion'), V(inst['pr-dl006'])||t('Ver ANEXO I'),'Exactitud <+/-20% / Reprod.<10%');
+SEC(t('RENDIMIENTO'));
+if(inclPDF('dl007')) PR('*DL007',t('Reproducibilidad'), V(inst['pr-dl007'])||t('Ver ANEXO I'),'<10%');
+if(inclPDF('dl008')) PR('DL008',t('Linealidad dosis con tiempo'), V(inst['pr-dl008'])||t('Ver ANEXO I'),'10%');
 }
 doc.addPage();
 {
 let y=18;
-titulo('ANEXO I',y,13); y+=13;
+titulo(t('ANEXO I'),y,13); y+=13;
 const aw=cw;
 const PAGE_LIMIT=272;
 const checkPage=(needed)=>{ if(y+needed>PAGE_LIMIT){ doc.addPage(); y=18; } };
 if((inst['chk-cont']!==false&&(document.getElementById('chk-cont')?document.getElementById('chk-cont').checked:true))){ checkPage(50);
-secHeader(mg,y,aw,8,'CONTROL DE CALIDAD DE CONTRASTE'); y+=8;
+secHeader(mg,y,aw,8,t('CONTROL DE CALIDAD DE CONTRASTE')); y+=8;
 fillGR(); doc.rect(mg,y,aw,7,'FD');
 It(8.5); doc.text(V(inst['a1-cont-params'])||'120KV, 280mA, 1 x 10,00mm, foco grueso, 0,5seg',W/2,y+4.8,{align:'center'}); y+=7;
 const cLw=50,cHUw=72,cECw=58;
 cell(mg,y,cLw,8,'',true,false); cell(mg+cLw,y,cHUw,8,'CT Air (HV)',true,true,8.5,'center'); cell(mg+cLw+cHUw,y,cECw,8,'Escala de contrastes',true,true,8,'center'); y+=8;
 [['Referencia','- 1.000,00','1,92e - 004',true],
-['Tolerancia','+/- 10,00','+/- 3,00e-006',true],
+[t('Tolerancia'),'+/- 10,00','+/- 3,00e-006',true],
 ['Resultados',V(inst['a1-cont-res-hu']),V(inst['a1-cont-res-ec']),false]
 ].forEach(([l,hu,ec,gray])=>{
 cell(mg,y,cLw,8,l,true,true,8.5); cell(mg+cLw,y,cHUw,8,hu,gray,false,9,'center'); cell(mg+cLw+cHUw,y,cECw,8,ec,gray,false,9,'center'); y+=8;
@@ -4016,14 +4022,14 @@ cell(mg,y,cLw,8,l,true,true,8.5); cell(mg+cLw,y,cHUw,8,hu,gray,false,9,'center')
 y+=8;
 } 
 if((inst['chk-ruido']!==false&&(document.getElementById('chk-ruido')?document.getElementById('chk-ruido').checked:true))){ checkPage(70);
-secHeader(mg,y,aw,8,'CONTROL DE CALIDAD DE RUIDO'); y+=8;
+secHeader(mg,y,aw,8,t('CONTROL DE CALIDAD DE RUIDO')); y+=8;
 fillGR(); doc.rect(mg,y,aw,7,'FD');
 It(8.5); doc.text(V(inst['a1-ruido-params'])||'120 KV, foco fino, 160mA, 1sec, 6x0,6mm',W/2,y+4.8,{align:'center'}); y+=7;
 const rKw=20,rCw=Math.floor((aw-rKw)/6);
 cell(mg,y,rKw,6,'',true,false);
 cell(mg+rKw,y,rCw*2,6,'Referencia',true,true,8,'center');
-cell(mg+rKw+rCw*2,y,rCw*2,6,'Tolerancia',true,true,8,'center');
-cell(mg+rKw+rCw*4,y,rCw*2,6,'Resultado',true,true,8,'center'); y+=6;
+cell(mg+rKw+rCw*2,y,rCw*2,6,t('Tolerancia'),true,true,8,'center');
+cell(mg+rKw+rCw*4,y,rCw*2,6,t('Resultado'),true,true,8,'center'); y+=6;
 cell(mg,y,rKw,6,'',true,false);
 ['HU','KV','HU','KV','HU','KV'].forEach((h,ix)=>cell(mg+rKw+ix*rCw,y,rCw,6,h,true,true,7.5,'center')); y+=6;
 const rFijo=[
@@ -4046,7 +4052,7 @@ y+=8;
 y+=8;
 } 
 if((inst['chk-centr']!==false&&(document.getElementById('chk-centr')?document.getElementById('chk-centr').checked:true))){ checkPage(42);
-secHeader(mg,y,aw,8,'CONTROL DE CENTRAJE DE COLIMACION'); y+=8;
+secHeader(mg,y,aw,8,t('CONTROL DE CENTRAJE DE COLIMACION')); y+=8;
 fillGR(); doc.rect(mg,y,aw,7,'FD');
 It(8.5); doc.text(V(inst['a1-centr-params'])||'120KV, 180mA, 1 x 2,00mm, foco fino, 0,5seg',W/2,y+4.8,{align:'center'}); y+=7;
 const cenLw=55,cenVw=aw-cenLw;
@@ -4057,13 +4063,13 @@ cell(mg,y,cenLw,8,l,true,true,8.5); cell(mg+cenLw,y,cenVw,8,v,gray,false,9,'cent
 if((inst['chk-pch1']!==false&&(document.getElementById('chk-pch1')?document.getElementById('chk-pch1').checked:true))){ checkPage(58);
 y+=8;
 const pch1W=aw;
-secHeader(mg,y,pch1W,8,'EXACTITUD DE LA TENSION'); y+=8;
+secHeader(mg,y,pch1W,8,t('EXACTITUD DE LA TENSION')); y+=8;
 const pch1Lw=55, pch1Mw=80, pch1Ow=pch1W-pch1Lw-pch1Mw;
-cell(mg,y,pch1Lw,7,'KV FIJADOS',true,true,8.5); cell(mg+pch1Lw,y,pch1Mw,7,'KV MEDIDOS',true,true,8.5,'center'); cell(mg+pch1Lw+pch1Mw,y,pch1Ow,7,'',true,false); y+=7;
+cell(mg,y,pch1Lw,7,t('KV FIJADOS'),true,true,8.5); cell(mg+pch1Lw,y,pch1Mw,7,t('KV MEDIDOS'),true,true,8.5,'center'); cell(mg+pch1Lw+pch1Mw,y,pch1Ow,7,'',true,false); y+=7;
 const pch1KVs=['70 KV','80 KV','90 KV','100 KV',''];
 pch1KVs.forEach((kv,n)=>{
 const medido=V(inst[`pch1-${n+1}-medido`]);
-const ok=inst[`pch1-${n+1}-ok`]!==undefined?(inst[`pch1-${n+1}-ok`]?'OK':'NO OK'):(n<4?'OK':'');
+const ok=inst[`pch1-${n+1}-ok`]!==undefined?(inst[`pch1-${n+1}-ok`]?'OK':t('NO OK')):(n<4?'OK':'');
 if(kv==='' && !medido) return;
 cell(mg,y,pch1Lw,8,kv,true,true,8.5);
 cell(mg+pch1Lw,y,pch1Mw,8,medido,false,false,9,'center');
@@ -4074,7 +4080,7 @@ y+=8;
 if((inst['chk-repr']!==false&&(document.getElementById('chk-repr')?document.getElementById('chk-repr').checked:true))){ checkPage(66);
 y+=8;
 const reprW=aw;
-secHeader(mg,y,reprW,8,'REPRODUCTIVIDAD DE LA TENSION'); y+=8;
+secHeader(mg,y,reprW,8,t('REPRODUCTIVIDAD DE LA TENSION')); y+=8;
 const reprKw=30, reprCw=Math.floor((reprW-reprKw)/4);
 cell(mg,y,reprKw,7,'KV',true,true,8.5,'center');
 ['TEST 1','TEST 2','TEST 3','TEST 4'].forEach((t,ti)=>cell(mg+reprKw+ti*reprCw,y,reprCw,7,t,true,true,8.5,'center'));
@@ -4094,8 +4100,8 @@ if((inst['chk-filtr']!==false&&(document.getElementById('chk-filtr')?document.ge
 checkPage(66);
 y+=8;
 const fLw2=Math.floor(aw/2), fVw2=aw-fLw2;
-secHeader(mg,y,aw,8,'FILTRACION CAPA HEMIRREDUCTORA'); y+=8;
-cell(mg,y,fLw2,8,'TENSION',true,true,9,'center');
+secHeader(mg,y,aw,8,t('FILTRACION CAPA HEMIRREDUCTORA')); y+=8;
+cell(mg,y,fLw2,8,t('TENSION'),true,true,9,'center');
 cell(mg+fLw2,y,fVw2,8,'HVL (MMA)',true,true,9,'center'); y+=8;
 const filtrFijos={75:'2,',100:'3,',125:'4,',150:'5,'};
 [75,100,125,150].forEach(tension=>{
@@ -4123,7 +4129,7 @@ secHeader(mg,y,aw,8,'EXACTITUD DEL TIEMPO DE EXPOSICION'); y+=8;
 fillGR(); doc.rect(mg,y,aw,7,'FD');
 It(8.5); doc.text('Técnica: '+(V(inst['texp-tecnica'])||'80 kv 200 ma'),W/2,y+4.8,{align:'center'}); y+=7;
 const tCols=[30,42,42,56];
-['Ms','kv','ms','Resultado'].forEach((h,ci)=>cell(mg+tCols.slice(0,ci).reduce((a,b)=>a+b,0),y,tCols[ci],7,h,true,true,8,'center'));
+['Ms','kv','ms',t('Resultado')].forEach((h,ci)=>cell(mg+tCols.slice(0,ci).reduce((a,b)=>a+b,0),y,tCols[ci],7,h,true,true,8,'center'));
 y+=7;
 const tMsFijos=[1000,400,40,10,''];
 tMsFijos.forEach((ms,ri)=>{
@@ -4144,7 +4150,7 @@ if((inst['chk-ctdi']!==false&&(document.getElementById('chk-ctdi')?document.getE
 doc.addPage();
 {
 let y=18;
-titulo('RESULTADO DE AIRE CTDI',y,11); y+=10;
+titulo(t('RESULTADO DE AIRE CTDI'),y,11); y+=10;
 const kvW=14, coW=32, colW=Math.floor((cw-kvW-coW)/5);
 const tot=kvW+coW+colW*5;
 const offX=mg+(cw-tot)/2;
@@ -4178,7 +4184,7 @@ doc.addPage();
 const fy=210;
 B(10); doc.text(V(inst.director),W/2,fy-6,{align:'center'});
 doc.setLineWidth(0.5); doc.line(W/2-45,fy,W/2+45,fy); doc.setLineWidth(0.2);
-N(9); doc.text('Firma del Director',W/2,fy+6,{align:'center'});
+N(9); doc.text(t('Firma del Director'),W/2,fy+6,{align:'center'});
 }
 const _pname = 'Pruebas_Aceptacion_'+V(inst.cliente).replace(/\s+/g,'_')+'_'+V(inst.tipo).replace(/\s+/g,'_')+'.pdf';
 showPreview(doc, 'Pruebas de Aceptación — '+V(inst.cliente), ()=>{ doc.save(_pname); notify('Pruebas descargadas ✓','success'); });
@@ -4378,7 +4384,7 @@ if (e.target && e.target.id && e.target.id.startsWith('pch1-') && e.target.id.en
 const n = e.target.id.split('-')[1];
 const lbl = document.getElementById('pch1-'+n+'-ok-lbl');
 if (lbl) {
-lbl.textContent = e.target.checked ? 'OK' : 'NO OK';
+lbl.textContent = e.target.checked ? 'OK' : t('NO OK');
 lbl.style.color = e.target.checked ? 'var(--green)' : 'var(--accent2)';
 }
 }
@@ -5338,6 +5344,317 @@ function setMobTab(el){document.querySelectorAll('.mob-tab').forEach(t=>t.classL
   };
 
 })();
+
+// ===== SISTEMA DE IDIOMAS =====
+window.LANG = 'es'; // idioma activo: 'es', 'en', 'de'
+
+const TRANSLATIONS = {
+  es: {
+    // Ficha Técnica
+    'FICHA DE DATOS TÉCNICOS': 'FICHA DE DATOS TÉCNICOS',
+    'DATO DE LA INSTALACIÓN': 'DATO DE LA INSTALACIÓN',
+    'POBLACIÓN': 'POBLACIÓN',
+    'PROVINCIA': 'PROVINCIA',
+    'TELÉFONO': 'TELÉFONO',
+    'INSTALADOR': 'INSTALADOR',
+    'TÉCNICO': 'TÉCNICO',
+    'DNI': 'DNI',
+    'EQUIPO': 'EQUIPO',
+    'N DE EQUIPO': 'N DE EQUIPO',
+    'FIJO / MÓVIL': 'FIJO / MÓVIL',
+    'TIPO': 'TIPO',
+    'FABRICANTE': 'FABRICANTE',
+    'PAÍS': 'PAÍS',
+    'CÓDIGO ORGANISMOS\nNOTIFICADOR': 'CÓDIGO ORGANISMOS\nNOTIFICADOR',
+    'DENOMINACIÓN': 'DENOMINACIÓN',
+    'SISTEMA': 'SISTEMA',
+    'MODELO': 'MODELO',
+    'CÓDIGO ORGANISMO': 'CÓDIGO ORGANISMO',
+    'NOTIFICADOR DEL FAB.': 'NOTIFICADOR DEL FAB.',
+    'N SERIE': 'N SERIE',
+    'KV max': 'KV max',
+    'Ma max': 'Ma max',
+    'AÑO DE FABRICACIÓN': 'AÑO DE FABRICACIÓN',
+    'TUBO': 'TUBO',
+    'MARCA/MODELO': 'MARCA/MODELO',
+    'NOTIFICADOR': 'NOTIFICADOR',
+    'N DE SERIE': 'N DE SERIE',
+    'Año de fabricación': 'Año de fabricación',
+    'En Las Palmas de Gran Canaria a ': 'En Las Palmas de Gran Canaria a ',
+    'CIF/NIF': 'CIF/NIF',
+    'CÓDIGO DE AUTORIZACIÓN: ': 'CÓDIGO DE AUTORIZACIÓN: ',
+    'FECHA DE NACIMIENTO: ': 'FECHA DE NACIMIENTO: ',
+    // Anexo II
+    'ANEXO II': 'ANEXO II',
+    'NOMBRE DEL TITULAR:': 'NOMBRE DEL TITULAR:',
+    'NIF:': 'NIF:',
+    'DIRECCIÓN': 'DIRECCIÓN',
+    'C.P.': 'C.P.',
+    'LOCALIDAD': 'LOCALIDAD',
+    'TLFNO/E-MAIL:': 'TLFNO/E-MAIL:',
+    'NOMBRE DE LA INSTALACION': 'NOMBRE DE LA INSTALACION',
+    'DATOS DE LA INSTALACIÓN': 'DATOS DE LA INSTALACIÓN',
+    'DATOS DE CONFORMIDAD': 'DATOS DE CONFORMIDAD',
+    'MARCA': 'MARCA',
+    'NÚMERO DE SERIE': 'NÚMERO DE SERIE',
+    'Nueva adquisición': 'Nueva adquisición',
+    'Traslado desde otra instalación ya registrada como': 'Traslado desde otra instalación ya registrada como',
+    'CERTIFICO:': 'CERTIFICO:',
+    // Pruebas
+    'PRUEBAS DE ACEPTACION': 'PRUEBAS DE ACEPTACION',
+    'CONTROL DE CALIDAD DE CONTRASTE': 'CONTROL DE CALIDAD DE CONTRASTE',
+    'CONTROL DE CALIDAD DE RUIDO': 'CONTROL DE CALIDAD DE RUIDO',
+    'CONTROL DE CENTRAJE DE COLIMACION': 'CONTROL DE CENTRAJE DE COLIMACION',
+    'RESULTADO DE AIRE CTDI': 'RESULTADO DE AIRE CTDI',
+    'EXACTITUD DE LA TENSION': 'EXACTITUD DE LA TENSION',
+    'REPRODUCTIVIDAD DE LA TENSION': 'REPRODUCTIVIDAD DE LA TENSION',
+    'FILTRACION CAPA HEMIRREDUCTORA': 'FILTRACION CAPA HEMIRREDUCTORA',
+    'RENDIMIENTO': 'RENDIMIENTO',
+    'TIEMPO DE EXPOSICION': 'TIEMPO DE EXPOSICION',
+    'RESULTADO': 'RESULTADO',
+    'TOLERANCIA': 'TOLERANCIA',
+    'DESCRIPCION': 'DESCRIPCION',
+    'Resultado': 'Resultado',
+    'Tolerancia': 'Tolerancia',
+    'NO OK': 'NO OK',
+    'EQUIPOS DE MEDIDA UTILIZADOS': 'EQUIPOS DE MEDIDA UTILIZADOS',
+    'CALIDAD DEL HAZ': 'CALIDAD DEL HAZ',
+    'HVL (MMA)': 'HVL (MMA)',
+    'PARAMETROS GEOMETRICOS': 'PARAMETROS GEOMETRICOS',
+    'Firma del Director': 'Firma del Director',
+    'TENSION': 'TENSION',
+    'KV FIJADOS': 'KV FIJADOS',
+    'KV MEDIDOS': 'KV MEDIDOS',
+    'Reproducibilidad': 'Reproducibilidad',
+    'Linealidad dosis con tiempo': 'Linealidad dosis con tiempo',
+    'Filtracion. Capa Hemirreductora': 'Filtracion. Capa Hemirreductora',
+    'Exactitud y reproducibilidad de la tension': 'Exactitud y reproducibilidad de la tension',
+    'Exactitud y reproducibilidad del tiempo de exposicion': 'Exactitud y reproducibilidad del tiempo de exposicion',
+    'Minima distancia foco-piel': 'Minima distancia foco-piel',
+    'Tamano del campo en el extremo del localizador': 'Tamano del campo en el extremo del localizador',
+    'FECHA CAL.': 'FECHA CAL.',
+    'FECHA NAC.': 'FECHA NAC.',
+    'ORGANISMO': 'ORGANISMO',
+    'ANO FAB.': 'ANO FAB.',
+    'PAIS': 'PAIS',
+    'FIJO/MOVIL': 'FIJO/MOVIL',
+    'CODIGO': 'CODIGO',
+    'COD.ORG.NOTIF. CE FAB.': 'COD.ORG.NOTIF. CE FAB.',
+    'COD. AUTORIZACION': 'COD. AUTORIZACION',
+    'DENOMINACION': 'DENOMINACION',
+    'SISTEMA': 'SISTEMA',
+    'mA max': 'mA max',
+    'KV max': 'KV max',
+    'N EQUIPO': 'N EQUIPO',
+    'ANEXO I': 'ANEXO I',
+    'Ver ANEXO I': 'Ver ANEXO I',
+  },
+  en: {
+    // Ficha Técnica
+    'FICHA DE DATOS TÉCNICOS': 'TECHNICAL DATA SHEET',
+    'DATO DE LA INSTALACIÓN': 'INSTALLATION NAME',
+    'POBLACIÓN': 'CITY',
+    'PROVINCIA': 'PROVINCE',
+    'TELÉFONO': 'PHONE',
+    'INSTALADOR': 'INSTALLER',
+    'TÉCNICO': 'TECHNICIAN',
+    'DNI': 'ID',
+    'EQUIPO': 'EQUIPMENT',
+    'N DE EQUIPO': 'EQUIPMENT No.',
+    'FIJO / MÓVIL': 'FIXED / MOBILE',
+    'TIPO': 'TYPE',
+    'FABRICANTE': 'MANUFACTURER',
+    'PAÍS': 'COUNTRY',
+    'CÓDIGO ORGANISMOS\nNOTIFICADOR': 'NOTIFIED BODY\nCODE',
+    'DENOMINACIÓN': 'DENOMINATION',
+    'SISTEMA': 'SYSTEM',
+    'MODELO': 'MODEL',
+    'CÓDIGO ORGANISMO': 'NOTIFIED BODY',
+    'NOTIFICADOR DEL FAB.': 'MANUFACTURER BODY',
+    'N SERIE': 'SERIAL No.',
+    'KV max': 'KV max',
+    'Ma max': 'mA max',
+    'AÑO DE FABRICACIÓN': 'MANUFACTURING YEAR',
+    'TUBO': 'TUBE',
+    'MARCA/MODELO': 'BRAND/MODEL',
+    'NOTIFICADOR': 'NOTIFIER',
+    'N DE SERIE': 'SERIAL No.',
+    'Año de fabricación': 'Manufacturing year',
+    'En Las Palmas de Gran Canaria a ': 'In Las Palmas de Gran Canaria on ',
+    'CIF/NIF': 'VAT No.',
+    'CÓDIGO DE AUTORIZACIÓN: ': 'AUTHORIZATION CODE: ',
+    'FECHA DE NACIMIENTO: ': 'DATE OF BIRTH: ',
+    // Anexo II
+    'ANEXO II': 'ANNEX II',
+    'NOMBRE DEL TITULAR:': 'HOLDER NAME:',
+    'NIF:': 'VAT No.:',
+    'DIRECCIÓN': 'ADDRESS',
+    'C.P.': 'ZIP',
+    'LOCALIDAD': 'CITY',
+    'TLFNO/E-MAIL:': 'PHONE/E-MAIL:',
+    'NOMBRE DE LA INSTALACION': 'INSTALLATION NAME',
+    'DATOS DE LA INSTALACIÓN': 'INSTALLATION DATA',
+    'DATOS DE CONFORMIDAD': 'CONFORMITY DATA',
+    'MARCA': 'BRAND',
+    'NÚMERO DE SERIE': 'SERIAL NUMBER',
+    'Nueva adquisición': 'New acquisition',
+    'Traslado desde otra instalación ya registrada como': 'Transfer from another installation registered as',
+    'CERTIFICO:': 'I CERTIFY:',
+    // Pruebas
+    'PRUEBAS DE ACEPTACION': 'ACCEPTANCE TESTS',
+    'CONTROL DE CALIDAD DE CONTRASTE': 'CONTRAST QUALITY CONTROL',
+    'CONTROL DE CALIDAD DE RUIDO': 'NOISE QUALITY CONTROL',
+    'CONTROL DE CENTRAJE DE COLIMACION': 'COLLIMATION CENTRING CONTROL',
+    'RESULTADO DE AIRE CTDI': 'AIR CTDI RESULT',
+    'EXACTITUD DE LA TENSION': 'VOLTAGE ACCURACY',
+    'REPRODUCTIVIDAD DE LA TENSION': 'VOLTAGE REPRODUCIBILITY',
+    'FILTRACION CAPA HEMIRREDUCTORA': 'HALF-VALUE LAYER FILTRATION',
+    'RENDIMIENTO': 'OUTPUT',
+    'TIEMPO DE EXPOSICION': 'EXPOSURE TIME',
+    'RESULTADO': 'RESULT',
+    'TOLERANCIA': 'TOLERANCE',
+    'DESCRIPCION': 'DESCRIPTION',
+    'Resultado': 'Result',
+    'Tolerancia': 'Tolerance',
+    'NO OK': 'NOT OK',
+    'EQUIPOS DE MEDIDA UTILIZADOS': 'MEASUREMENT EQUIPMENT USED',
+    'CALIDAD DEL HAZ': 'BEAM QUALITY',
+    'HVL (MMA)': 'HVL (MMA)',
+    'PARAMETROS GEOMETRICOS': 'GEOMETRIC PARAMETERS',
+    'Firma del Director': 'Director Signature',
+    'TENSION': 'VOLTAGE',
+    'KV FIJADOS': 'SET KV',
+    'KV MEDIDOS': 'MEASURED KV',
+    'Reproducibilidad': 'Reproducibility',
+    'Linealidad dosis con tiempo': 'Dose linearity with time',
+    'Filtracion. Capa Hemirreductora': 'Filtration. Half-Value Layer',
+    'Exactitud y reproducibilidad de la tension': 'Voltage accuracy and reproducibility',
+    'Exactitud y reproducibilidad del tiempo de exposicion': 'Exposure time accuracy and reproducibility',
+    'Minima distancia foco-piel': 'Minimum focus-skin distance',
+    'Tamano del campo en el extremo del localizador': 'Field size at localizer end',
+    'FECHA CAL.': 'CAL. DATE',
+    'FECHA NAC.': 'BIRTH DATE',
+    'ORGANISMO': 'BODY',
+    'ANO FAB.': 'MFG. YEAR',
+    'PAIS': 'COUNTRY',
+    'FIJO/MOVIL': 'FIXED/MOBILE',
+    'CODIGO': 'CODE',
+    'COD.ORG.NOTIF. CE FAB.': 'MFG. CE BODY CODE',
+    'COD. AUTORIZACION': 'AUTH. CODE',
+    'DENOMINACION': 'DENOMINATION',
+    'mA max': 'mA max',
+    'KV max': 'KV max',
+    'N EQUIPO': 'EQUIP. No.',
+    'ANEXO I': 'ANNEX I',
+    'Ver ANEXO I': 'See ANNEX I',
+  },
+  de: {
+    // Ficha Técnica
+    'FICHA DE DATOS TÉCNICOS': 'TECHNISCHES DATENBLATT',
+    'DATO DE LA INSTALACIÓN': 'INSTALLATIONSNAME',
+    'POBLACIÓN': 'STADT',
+    'PROVINCIA': 'PROVINZ',
+    'TELÉFONO': 'TELEFON',
+    'INSTALADOR': 'INSTALLATEUR',
+    'TÉCNICO': 'TECHNIKER',
+    'DNI': 'AUSWEIS-NR.',
+    'EQUIPO': 'GERÄT',
+    'N DE EQUIPO': 'GERÄTE-NR.',
+    'FIJO / MÓVIL': 'FEST / MOBIL',
+    'TIPO': 'TYP',
+    'FABRICANTE': 'HERSTELLER',
+    'PAÍS': 'LAND',
+    'CÓDIGO ORGANISMOS\nNOTIFICADOR': 'BENANNTE\nSTELLE CODE',
+    'DENOMINACIÓN': 'BEZEICHNUNG',
+    'SISTEMA': 'SYSTEM',
+    'MODELO': 'MODELL',
+    'CÓDIGO ORGANISMO': 'BENANNTE STELLE',
+    'NOTIFICADOR DEL FAB.': 'HERSTELLER STELLE',
+    'N SERIE': 'SERIEN-NR.',
+    'KV max': 'KV max',
+    'Ma max': 'mA max',
+    'AÑO DE FABRICACIÓN': 'HERSTELLUNGSJAHR',
+    'TUBO': 'RÖHRE',
+    'MARCA/MODELO': 'MARKE/MODELL',
+    'NOTIFICADOR': 'BENANNTE STELLE',
+    'N DE SERIE': 'SERIEN-NR.',
+    'Año de fabricación': 'Herstellungsjahr',
+    'En Las Palmas de Gran Canaria a ': 'In Las Palmas de Gran Canaria am ',
+    'CIF/NIF': 'USt-IdNr.',
+    'CÓDIGO DE AUTORIZACIÓN: ': 'GENEHMIGUNGSCODE: ',
+    'FECHA DE NACIMIENTO: ': 'GEBURTSDATUM: ',
+    // Anexo II
+    'ANEXO II': 'ANHANG II',
+    'NOMBRE DEL TITULAR:': 'INHABERNAME:',
+    'NIF:': 'USt-IdNr.:',
+    'DIRECCIÓN': 'ADRESSE',
+    'C.P.': 'PLZ',
+    'LOCALIDAD': 'STADT',
+    'TLFNO/E-MAIL:': 'TEL./E-MAIL:',
+    'NOMBRE DE LA INSTALACION': 'INSTALLATIONSNAME',
+    'DATOS DE LA INSTALACIÓN': 'INSTALLATIONSDATEN',
+    'DATOS DE CONFORMIDAD': 'KONFORMITÄTSDATEN',
+    'MARCA': 'MARKE',
+    'NÚMERO DE SERIE': 'SERIENNUMMER',
+    'Nueva adquisición': 'Neuerwerb',
+    'Traslado desde otra instalación ya registrada como': 'Verlegung von einer anderen Installation registriert als',
+    'CERTIFICO:': 'ICH BESTÄTIGE:',
+    // Pruebas
+    'PRUEBAS DE ACEPTACION': 'ABNAHMEPRÜFUNGEN',
+    'CONTROL DE CALIDAD DE CONTRASTE': 'KONTRASTQUALITÄTSKONTROLLE',
+    'CONTROL DE CALIDAD DE RUIDO': 'RAUSCHQUALITÄTSKONTROLLE',
+    'CONTROL DE CENTRAJE DE COLIMACION': 'KOLLIMATIONSZENTRIER-KONTROLLE',
+    'RESULTADO DE AIRE CTDI': 'LUFT-CTDI-ERGEBNIS',
+    'EXACTITUD DE LA TENSION': 'SPANNUNGSGENAUIGKEIT',
+    'REPRODUCTIVIDAD DE LA TENSION': 'SPANNUNGSREPRODUKTION',
+    'FILTRACION CAPA HEMIRREDUCTORA': 'HALBWERTSCHICHTFILTERUNG',
+    'RENDIMIENTO': 'LEISTUNG',
+    'TIEMPO DE EXPOSICION': 'BELICHTUNGSZEIT',
+    'RESULTADO': 'ERGEBNIS',
+    'TOLERANCIA': 'TOLERANZ',
+    'DESCRIPCION': 'BESCHREIBUNG',
+    'Resultado': 'Ergebnis',
+    'Tolerancia': 'Toleranz',
+    'NO OK': 'NICHT OK',
+    'EQUIPOS DE MEDIDA UTILIZADOS': 'VERWENDETE MESSGERÄTE',
+    'CALIDAD DEL HAZ': 'STRAHLQUALITÄT',
+    'HVL (MMA)': 'HVL (MMA)',
+    'PARAMETROS GEOMETRICOS': 'GEOMETRISCHE PARAMETER',
+    'Firma del Director': 'Unterschrift des Direktors',
+    'TENSION': 'SPANNUNG',
+    'KV FIJADOS': 'EINGESTELLT KV',
+    'KV MEDIDOS': 'GEMESSEN KV',
+    'Reproducibilidad': 'Reproduzierbarkeit',
+    'Linealidad dosis con tiempo': 'Dosislinearität mit Zeit',
+    'Filtracion. Capa Hemirreductora': 'Filterung. Halbwertschicht',
+    'Exactitud y reproducibilidad de la tension': 'Spannungsgenauigkeit und Reproduzierbarkeit',
+    'Exactitud y reproducibilidad del tiempo de exposicion': 'Belichtungszeitgenauigkeit und Reproduzierbarkeit',
+    'Minima distancia foco-piel': 'Minimaler Fokus-Haut-Abstand',
+    'Tamano del campo en el extremo del localizador': 'Feldgröße am Lokalisatorende',
+    'FECHA CAL.': 'KAL.-DATUM',
+    'FECHA NAC.': 'GEBURTSDATUM',
+    'ORGANISMO': 'STELLE',
+    'ANO FAB.': 'HERST.-JAHR',
+    'PAIS': 'LAND',
+    'FIJO/MOVIL': 'FEST/MOBIL',
+    'CODIGO': 'CODE',
+    'COD.ORG.NOTIF. CE FAB.': 'HERSTELLER CE STELLE CODE',
+    'COD. AUTORIZACION': 'GENEHM.-CODE',
+    'DENOMINACION': 'BEZEICHNUNG',
+    'mA max': 'mA max',
+    'KV max': 'KV max',
+    'N EQUIPO': 'GERÄT-NR.',
+    'ANEXO I': 'ANHANG I',
+    'Ver ANEXO I': 'Siehe ANHANG I',
+  }
+};
+
+// Función de traducción — t() en PDFs
+function t(key) {
+  const lang = window.LANG || 'es';
+  return (TRANSLATIONS[lang] && TRANSLATIONS[lang][key]) ? TRANSLATIONS[lang][key] : key;
+}
+
 </script>
 
 
