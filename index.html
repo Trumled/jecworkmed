@@ -4262,6 +4262,9 @@ function downloadRTF(filename, bodyRtf) {
   setTimeout(()=>URL.revokeObjectURL(url), 4000);
   notify('Documento Word descargado ✓','success');
 }
+function sanitizeFilename(name){
+  return String(name||'documento').replace(/[\/\\:*?"<>|]/g,'-');
+}
 function rtfLabelRow(items) {
   // items: array of [label, value] pairs -> one two-column table row per item
   let out='';
@@ -4272,6 +4275,7 @@ function rtfLabelRow(items) {
 }
 
 function exportarFichaWord(id) {
+try {
 const i = db.instalaciones.find(x=>x.id===id); if(!i) return;
 const emp = getEmpresaData(i.empresa);
 const tec = getTecnicoData(i.tecnico);
@@ -4287,17 +4291,19 @@ b += rtfPar(t('EQUIPO'),{bold:true,size:22});
 b += rtfLabelRow([[t('N DE EQUIPO'),v(i.neq)],[t('FIJO / MÓVIL'),t(v(i.fijomovil))],[t('TIPO'),t(v(i.tipo))],[t('FABRICANTE'),v(i.fabricante)],[t('PAÍS'),v(i.pais)],[t('CÓDIGO ORGANISMOS\nNOTIFICADOR'),v(i.codorg)],[t('DENOMINACIÓN'),v(i.denom)]]);
 b += rtfSpace(200);
 b += rtfPar(t('SISTEMA'),{bold:true,size:22});
-b += rtfLabelRow([[t('MARCA/MODELO'),v(i.fabricante)+(i.modelo?' / '+v(i.modelo):'')],[t('CÓDIGO ORGANISMO'),v(i.codfab)],[t('N SERIE'),v(i.nserie)],['KV max',v(i.kv)],['Ma max',v(i.ma)],[t('AÑO DE FABRICACIÓN'),v(i.anio)]]);
+b += rtfLabelRow([[t('MODELO'),v(i.modelo)],[t('CÓDIGO ORGANISMO'),v(i.codfab)],[t('N SERIE'),v(i.nserie)],['KV max',v(i.kv)],['Ma max',v(i.ma)],[t('AÑO DE FABRICACIÓN'),v(i.anio)]]);
 b += rtfSpace(200);
 b += rtfPar(t('TUBO'),{bold:true,size:22});
 b += rtfLabelRow([[t('MARCA/MODELO'),v(i.tmod)+(i.tcod?' / '+v(i.tcod):'')],[t('N DE SERIE'),v(i.tnserie)],['KV max',v(i.tkv)],['Ma max',v(i.tma)],[t('AÑO DE FABRICACIÓN'),v(i.tanio)]]);
 b += rtfSpace(300);
 b += rtfPar(t('En Las Palmas de Gran Canaria a ')+formatDate(i.fecha),{});
-const _fn='Ficha_Tecnica_'+v(i.cliente).replace(/\s+/g,'_')+'_'+v(i.tipo).replace(/\s+/g,'_')+'.rtf';
+const _fn=sanitizeFilename('Ficha_Tecnica_'+v(i.cliente).replace(/\s+/g,'_')+'_'+v(i.tipo).replace(/\s+/g,'_')+'.rtf');
 downloadRTF(_fn, b);
+} catch(e) { console.error('exportarFichaWord error:', e); notify('Error al generar el Word: '+e.message,'error'); }
 }
 
 function exportarAnexoWord(id) {
+try {
 const i = db.instalaciones.find(x=>x.id===id); if(!i) return;
 const V = x=>x||'';
 let b='';
@@ -4355,11 +4361,13 @@ b += rtfSpace(400);
 b += rtfPar('____________________________',{align:'center'});
 b += rtfPar(dirName,{bold:true,align:'center'});
 b += rtfPar(t('[Nombre del representante de la EVAT]'),{italic:true,align:'center'});
-const _an='Anexo_II_'+V(i.cliente).replace(/\s+/g,'_')+'_'+V(i.tipo).replace(/\s+/g,'_')+'.rtf';
+const _an=sanitizeFilename('Anexo_II_'+V(i.cliente).replace(/\s+/g,'_')+'_'+V(i.tipo).replace(/\s+/g,'_')+'.rtf');
 downloadRTF(_an, b);
+} catch(e) { console.error('exportarAnexoWord error:', e); notify('Error al generar el Word: '+e.message,'error'); }
 }
 
 function exportarPruebasWord(id) {
+try {
 const inst = db.instalaciones.find(x=>x.id===id); if(!inst) return;
 const empD = getEmpresaData(inst.empresa);
 const tecD = getTecnicoData(inst.tecnico);
@@ -4532,8 +4540,9 @@ b += rtfSpace(300);
 b += rtfPar('____________________________',{align:'center'});
 b += rtfPar(V(inst.director),{bold:true,align:'center'});
 b += rtfPar(t('Firma del Director'),{align:'center'});
-const _pname='Pruebas_Aceptacion_'+V(inst.cliente).replace(/\s+/g,'_')+'_'+V(inst.tipo).replace(/\s+/g,'_')+'.rtf';
+const _pname=sanitizeFilename('Pruebas_Aceptacion_'+V(inst.cliente).replace(/\s+/g,'_')+'_'+V(inst.tipo).replace(/\s+/g,'_')+'.rtf');
 downloadRTF(_pname, b);
+} catch(e) { console.error('exportarPruebasWord error:', e); notify('Error al generar el Word: '+e.message,'error'); }
 }
 
 const TIPOS_FIJOS = ['Electrómetro','Kilovoltímetro','Medidor de tiempo'];
