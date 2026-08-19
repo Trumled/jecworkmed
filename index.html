@@ -3941,9 +3941,9 @@ let y=35;
 titulo(t('PRUEBAS DE ACEPTACION'),y,12); y+=18;
 N(10.5);
 const ps=[
-'Este Documento y las Pruebas de Aceptacion que en el se describen tienen la finalidad de documentar ante el cliente que el sistema radiografico se ha instalado correctamente y que cumple con todas las especificaciones de venta.',
-'Siguiendo las pautas de la normativa vigente, Real Decreto 1976/1999, las pruebas de aceptacion de los equipos seran realizadas por el suministrador del equipo en presencia de un representante del comprador tecnicamente cualificado, y los resultados se reflejaran en el presente documento. Este documento supone un Control de Calidad inicial y constituye una referencia para posteriores verificaciones. Las pruebas de aceptacion se ajustan a normas internacionales y nacionales, Protocolo Espanol de Control de Calidad en Radiodiagnostico.',
-'Todos los parametros medidos y los resultados obtenidos deberan estar de acuerdo con los especificados en el Contrato de Compra y dentro de las tolerancias indicadas en las Fichas de Producto, no pudiendo ser superiores a las indicadas en el Anexo III del Real Decreto 1976/1999.',
+t('Este Documento y las Pruebas de Aceptacion que en el se describen tienen la finalidad de documentar ante el cliente que el sistema radiografico se ha instalado correctamente y que cumple con todas las especificaciones de venta.'),
+t('Siguiendo las pautas de la normativa vigente, Real Decreto 1976/1999, las pruebas de aceptacion de los equipos seran realizadas por el suministrador del equipo en presencia de un representante del comprador tecnicamente cualificado, y los resultados se reflejaran en el presente documento. Este documento supone un Control de Calidad inicial y constituye una referencia para posteriores verificaciones. Las pruebas de aceptacion se ajustan a normas internacionales y nacionales, Protocolo Espanol de Control de Calidad en Radiodiagnostico.'),
+t('Todos los parametros medidos y los resultados obtenidos deberan estar de acuerdo con los especificados en el Contrato de Compra y dentro de las tolerancias indicadas en las Fichas de Producto, no pudiendo ser superiores a las indicadas en el Anexo III del Real Decreto 1976/1999.'),
 ];
 ps.forEach(p=>{
 const words=p.split(' '); let line=[],lineW=0; const spW=doc.getTextWidth(' ');
@@ -3969,7 +3969,7 @@ if(eqArr.length){
 eqArr.forEach(eq=>{
 if(!V(eq.tipo)&&!V(eq.desc)) return;
 tx=mg;
-[V(eq.tipo)||V(eq.desc),V(eq.marca),V(eq.modelo),V(eq.serie),V(eq.fcal),V(eq.org)].forEach((v,ix)=>{
+[t(V(eq.tipo))||V(eq.desc),V(eq.marca),V(eq.modelo),V(eq.serie),V(eq.fcal),V(eq.org)].forEach((v,ix)=>{
 cell(tx,y,eC[ix],8,v,false,false,8.5); tx+=eC[ix];
 }); y+=8;
 });
@@ -3980,7 +3980,7 @@ y+=8;
 B(10); doc.text(t('INFORME TECNICO DE RESULTADOS'),mg,y);
 const iw=doc.getTextWidth(t('INFORME TECNICO DE RESULTADOS'));
 doc.setLineWidth(0.4); doc.line(mg,y+1,mg+iw,y+1); doc.setLineWidth(0.2);
-It(8); doc.text('(segun Protocolo Espanol de Control de Calidad en Radiodiagnostico - SEFM-SEPR 2002 rev 1)',mg,y+5);
+It(8); doc.text(t('(segun Protocolo Espanol de Control de Calidad en Radiodiagnostico - SEFM-SEPR 2002 rev 1)'),mg,y+5);
 y+=12;
 const pC=[22,74,30,36]; const pTot=pC.reduce((a,b)=>a+b);
 tx=mg; [t('CODIGO'),t('DESCRIPCION'),t('RESULTADO'),t('TOLERANCIA')].forEach((h,ix)=>{
@@ -4020,7 +4020,7 @@ const checkPage=(needed)=>{ if(y+needed>PAGE_LIMIT){ doc.addPage(); y=18; } };
 if((inst['chk-cont']!==false&&(document.getElementById('chk-cont')?document.getElementById('chk-cont').checked:true))){ checkPage(50);
 secHeader(mg,y,aw,8,t('CONTROL DE CALIDAD DE CONTRASTE')); y+=8;
 fillGR(); doc.rect(mg,y,aw,7,'FD');
-It(8.5); doc.text(V(inst['a1-cont-params'])||'120KV, 280mA, 1 x 10,00mm, foco grueso, 0,5seg',W/2,y+4.8,{align:'center'}); y+=7;
+It(8.5); doc.text(t(V(inst['a1-cont-params'])||'120KV, 280mA, 1 x 10,00mm, foco grueso, 0,5seg'),W/2,y+4.8,{align:'center'}); y+=7;
 const cLw=50,cHUw=72,cECw=58;
 cell(mg,y,cLw,8,'',true,false); cell(mg+cLw,y,cHUw,8,'CT Air (HV)',true,true,8.5,'center'); cell(mg+cLw+cHUw,y,cECw,8,t('Escala de contrastes'),true,true,8,'center'); y+=8;
 [[t('Referencia'),'- 1.000,00','1,92e - 004',true],
@@ -4034,7 +4034,7 @@ y+=8;
 if((inst['chk-ruido']!==false&&(document.getElementById('chk-ruido')?document.getElementById('chk-ruido').checked:true))){ checkPage(70);
 secHeader(mg,y,aw,8,t('CONTROL DE CALIDAD DE RUIDO')); y+=8;
 fillGR(); doc.rect(mg,y,aw,7,'FD');
-It(8.5); doc.text(V(inst['a1-ruido-params'])||'120 KV, foco fino, 160mA, 1sec, 6x0,6mm',W/2,y+4.8,{align:'center'}); y+=7;
+It(8.5); doc.text(t(V(inst['a1-ruido-params'])||'120 KV, foco fino, 160mA, 1sec, 6x0,6mm'),W/2,y+4.8,{align:'center'}); y+=7;
 const rKw=20,rCw=Math.floor((aw-rKw)/6);
 cell(mg,y,rKw,6,'',true,false);
 cell(mg+rKw,y,rCw*2,6,t('Referencia'),true,true,8,'center');
@@ -4064,7 +4064,7 @@ y+=8;
 if((inst['chk-centr']!==false&&(document.getElementById('chk-centr')?document.getElementById('chk-centr').checked:true))){ checkPage(42);
 secHeader(mg,y,aw,8,t('CONTROL DE CENTRAJE DE COLIMACION')); y+=8;
 fillGR(); doc.rect(mg,y,aw,7,'FD');
-It(8.5); doc.text(V(inst['a1-centr-params'])||'120KV, 180mA, 1 x 2,00mm, foco fino, 0,5seg',W/2,y+4.8,{align:'center'}); y+=7;
+It(8.5); doc.text(t(V(inst['a1-centr-params'])||'120KV, 180mA, 1 x 2,00mm, foco fino, 0,5seg'),W/2,y+4.8,{align:'center'}); y+=7;
 const cenLw=55,cenVw=aw-cenLw;
 [[t('Referencia (mm)'),'0,0',true],[t('Tolerancia (mm)'),'+/- 2.0',true],[t('Resultado (mm)'),V(inst['a1-centr-res']),false]].forEach(([l,v,gray])=>{
 cell(mg,y,cenLw,8,l,true,true,8.5); cell(mg+cenLw,y,cenVw,8,v,gray,false,9,'center'); y+=8;
@@ -4137,7 +4137,7 @@ checkPage(80);
 y+=8;
 secHeader(mg,y,aw,8,t('EXACTITUD DEL TIEMPO DE EXPOSICION')); y+=8;
 fillGR(); doc.rect(mg,y,aw,7,'FD');
-It(8.5); doc.text('Técnica: '+(V(inst['texp-tecnica'])||'80 kv 200 ma'),W/2,y+4.8,{align:'center'}); y+=7;
+It(8.5); doc.text(t('Técnica: ')+(V(inst['texp-tecnica'])||'80 kv 200 ma'),W/2,y+4.8,{align:'center'}); y+=7;
 const tCols=[30,42,42,56];
 ['Ms','kv','ms',t('Resultado')].forEach((h,ci)=>cell(mg+tCols.slice(0,ci).reduce((a,b)=>a+b,0),y,tCols[ci],7,h,true,true,8,'center'));
 y+=7;
@@ -4147,7 +4147,7 @@ const kv=V(inst[`texp-${ri+1}-kv`]);
 const msRes=V(inst[`texp-${ri+1}-ms`]);
 if(ms==='' && !kv && !msRes) return;
 const apto=inst[`texp-${ri+1}-apto`]!==undefined?inst[`texp-${ri+1}-apto`]:true;
-const aptoTxt=ms===''?'':(apto?'apto':'no apto');
+const aptoTxt=ms===''?'':(apto?t('apto'):t('no apto'));
 cell(mg,y,tCols[0],8,String(ms),ms===''?false:true,true,9,'center');
 cell(mg+tCols[0],y,tCols[1],8,kv,false,false,9,'center');
 cell(mg+tCols[0]+tCols[1],y,tCols[2],8,msRes,false,false,9,'center');
@@ -4165,11 +4165,11 @@ const kvW=14, coW=32, colW=Math.floor((cw-kvW-coW)/5);
 const tot=kvW+coW+colW*5;
 const offX=mg+(cw-tot)/2;
 cell(offX,y,kvW,8,'KV',true,true,8,'center');
-cell(offX+kvW,y,coW,8,'Corte (mm)',true,true,8,'center');
+cell(offX+kvW,y,coW,8,t('Corte (mm)'),true,true,8,'center');
 ['6X4,80','3X4,80','40X0,60','2X6,00','1X10,00'].forEach((c,ci)=>{
 cell(offX+kvW+coW+ci*colW,y,colW,8,c,true,true,7.5,'center');
 }); y+=8;
-const fiLabels=['Nominal\n(mGy/100mAs)','Tolerancia\n(mGy/100mAs)','DLP\n(mGycm)','Resultado\n(mGy/100mAs)'];
+const fiLabels=[t('Nominal')+'\n(mGy/100mAs)',t('Tolerancia')+'\n(mGy/100mAs)','DLP\n(mGycm)',t('Resultado')+'\n(mGy/100mAs)'];
 const fiKeys=['nom','tol','dlp','res'];
 const fiH=11, blkH=fiH*4;
 [80,100,120,140].forEach(kv=>{
@@ -5488,6 +5488,21 @@ const TRANSLATIONS = {
     'Que se adjunta a este Certificado una hoja de datos técnicos por cada uno de los equipos y sus componentes.': 'Que se adjunta a este Certificado una hoja de datos técnicos por cada uno de los equipos y sus componentes.',
     'Que toda la documentación aportada en relación con los equipos corresponde a los equipos concretos a suministrar e instalar.': 'Que toda la documentación aportada en relación con los equipos corresponde a los equipos concretos a suministrar e instalar.',
     '[Nombre del representante de la EVAT]': '[Nombre del representante de la EVAT]',
+    'Técnica: ': 'Técnica: ',
+    'apto': 'apto',
+    'no apto': 'no apto',
+    'Corte (mm)': 'Corte (mm)',
+    'Nominal': 'Nominal',
+    '120KV, 280mA, 1 x 10,00mm, foco grueso, 0,5seg': '120KV, 280mA, 1 x 10,00mm, foco grueso, 0,5seg',
+    '120 KV, foco fino, 160mA, 1sec, 6x0,6mm': '120 KV, foco fino, 160mA, 1sec, 6x0,6mm',
+    '120KV, 180mA, 1 x 2,00mm, foco fino, 0,5seg': '120KV, 180mA, 1 x 2,00mm, foco fino, 0,5seg',
+    'Este Documento y las Pruebas de Aceptacion que en el se describen tienen la finalidad de documentar ante el cliente que el sistema radiografico se ha instalado correctamente y que cumple con todas las especificaciones de venta.': 'Este Documento y las Pruebas de Aceptación que en él se describen tienen la finalidad de documentar ante el cliente que el sistema radiográfico se ha instalado correctamente y que cumple con todas las especificaciones de venta.',
+    'Siguiendo las pautas de la normativa vigente, Real Decreto 1976/1999, las pruebas de aceptacion de los equipos seran realizadas por el suministrador del equipo en presencia de un representante del comprador tecnicamente cualificado, y los resultados se reflejaran en el presente documento. Este documento supone un Control de Calidad inicial y constituye una referencia para posteriores verificaciones. Las pruebas de aceptacion se ajustan a normas internacionales y nacionales, Protocolo Espanol de Control de Calidad en Radiodiagnostico.': 'Siguiendo las pautas de la normativa vigente, Real Decreto 1976/1999, las pruebas de aceptación de los equipos serán realizadas por el suministrador del equipo en presencia de un representante del comprador técnicamente cualificado, y los resultados se reflejarán en el presente documento. Este documento supone un Control de Calidad inicial y constituye una referencia para posteriores verificaciones. Las pruebas de aceptación se ajustan a normas internacionales y nacionales, Protocolo Español de Control de Calidad en Radiodiagnóstico.',
+    'Todos los parametros medidos y los resultados obtenidos deberan estar de acuerdo con los especificados en el Contrato de Compra y dentro de las tolerancias indicadas en las Fichas de Producto, no pudiendo ser superiores a las indicadas en el Anexo III del Real Decreto 1976/1999.': 'Todos los parámetros medidos y los resultados obtenidos deberán estar de acuerdo con los especificados en el Contrato de Compra y dentro de las tolerancias indicadas en las Fichas de Producto, no pudiendo ser superiores a las indicadas en el Anexo III del Real Decreto 1976/1999.',
+    '(segun Protocolo Espanol de Control de Calidad en Radiodiagnostico - SEFM-SEPR 2002 rev 1)': '(según Protocolo Español de Control de Calidad en Radiodiagnóstico - SEFM-SEPR 2002 rev 1)',
+    'Electrómetro': 'Electrómetro',
+    'Kilovoltímetro': 'Kilovoltímetro',
+    'Medidor de tiempo': 'Medidor de tiempo',
   },
   en: {
     // Ficha Técnica
@@ -5614,6 +5629,21 @@ const TRANSLATIONS = {
     'Que se adjunta a este Certificado una hoja de datos técnicos por cada uno de los equipos y sus componentes.': 'That a technical data sheet for each item of equipment and its components is attached to this Certificate.',
     'Que toda la documentación aportada en relación con los equipos corresponde a los equipos concretos a suministrar e instalar.': 'That all documentation provided in relation to the equipment corresponds to the specific equipment to be supplied and installed.',
     '[Nombre del representante de la EVAT]': '[Name of the EVAT representative]',
+    'Técnica: ': 'Technique: ',
+    'apto': 'PASS',
+    'no apto': 'FAIL',
+    'Corte (mm)': 'Slice thickness (mm)',
+    'Nominal': 'Nominal',
+    '120KV, 280mA, 1 x 10,00mm, foco grueso, 0,5seg': '120KV, 280mA, 1 x 10.00mm, large focus, 0.5sec',
+    '120 KV, foco fino, 160mA, 1sec, 6x0,6mm': '120 KV, fine focus, 160mA, 1sec, 6x0.6mm',
+    '120KV, 180mA, 1 x 2,00mm, foco fino, 0,5seg': '120KV, 180mA, 1 x 2.00mm, fine focus, 0.5sec',
+    'Este Documento y las Pruebas de Aceptacion que en el se describen tienen la finalidad de documentar ante el cliente que el sistema radiografico se ha instalado correctamente y que cumple con todas las especificaciones de venta.': 'This Document and the Acceptance Tests described herein are intended to document to the customer that the radiographic system has been correctly installed and meets all sales specifications.',
+    'Siguiendo las pautas de la normativa vigente, Real Decreto 1976/1999, las pruebas de aceptacion de los equipos seran realizadas por el suministrador del equipo en presencia de un representante del comprador tecnicamente cualificado, y los resultados se reflejaran en el presente documento. Este documento supone un Control de Calidad inicial y constituye una referencia para posteriores verificaciones. Las pruebas de aceptacion se ajustan a normas internacionales y nacionales, Protocolo Espanol de Control de Calidad en Radiodiagnostico.': 'In accordance with current regulations, Real Decreto 1976/1999 (Spanish Royal Decree), the acceptance tests of the equipment shall be carried out by the equipment supplier in the presence of a technically qualified representative of the buyer, and the results shall be recorded in this document. This document constitutes an initial Quality Control and provides a reference for subsequent checks. The acceptance tests comply with international and national standards, the Spanish Quality Control Protocol in Radiodiagnostics.',
+    'Todos los parametros medidos y los resultados obtenidos deberan estar de acuerdo con los especificados en el Contrato de Compra y dentro de las tolerancias indicadas en las Fichas de Producto, no pudiendo ser superiores a las indicadas en el Anexo III del Real Decreto 1976/1999.': 'All measured parameters and results obtained must be in accordance with those specified in the Purchase Contract and within the tolerances indicated in the Product Data Sheets, and may not exceed those indicated in Annex III of Real Decreto 1976/1999 (Spanish Royal Decree).',
+    '(segun Protocolo Espanol de Control de Calidad en Radiodiagnostico - SEFM-SEPR 2002 rev 1)': '(according to the Spanish Quality Control Protocol in Radiodiagnostics - SEFM-SEPR 2002 rev 1)',
+    'Electrómetro': 'Electrometer',
+    'Kilovoltímetro': 'Kilovoltmeter',
+    'Medidor de tiempo': 'Timer',
   },
   de: {
     // Ficha Técnica
@@ -5740,6 +5770,21 @@ const TRANSLATIONS = {
     'Que se adjunta a este Certificado una hoja de datos técnicos por cada uno de los equipos y sus componentes.': 'Dass dieser Bescheinigung für jedes Gerät und seine Komponenten ein technisches Datenblatt beigefügt ist.',
     'Que toda la documentación aportada en relación con los equipos corresponde a los equipos concretos a suministrar e instalar.': 'Dass die gesamte vorgelegte Dokumentation den konkreten zu liefernden und zu installierenden Geräten entspricht.',
     '[Nombre del representante de la EVAT]': '[Name des EVAT-Vertreters]',
+    'Técnica: ': 'Technik: ',
+    'apto': 'BESTANDEN',
+    'no apto': 'NICHT BESTANDEN',
+    'Corte (mm)': 'Schichtdicke (mm)',
+    'Nominal': 'Nominal',
+    '120KV, 280mA, 1 x 10,00mm, foco grueso, 0,5seg': '120KV, 280mA, 1 x 10,00mm, Großbrennfleck, 0,5s',
+    '120 KV, foco fino, 160mA, 1sec, 6x0,6mm': '120 KV, Feinbrennfleck, 160mA, 1s, 6x0,6mm',
+    '120KV, 180mA, 1 x 2,00mm, foco fino, 0,5seg': '120KV, 180mA, 1 x 2,00mm, Feinbrennfleck, 0,5s',
+    'Este Documento y las Pruebas de Aceptacion que en el se describen tienen la finalidad de documentar ante el cliente que el sistema radiografico se ha instalado correctamente y que cumple con todas las especificaciones de venta.': 'Dieses Dokument und die darin beschriebenen Abnahmeprüfungen dienen dazu, dem Kunden gegenüber zu dokumentieren, dass das Röntgensystem ordnungsgemäß installiert wurde und allen Verkaufsspezifikationen entspricht.',
+    'Siguiendo las pautas de la normativa vigente, Real Decreto 1976/1999, las pruebas de aceptacion de los equipos seran realizadas por el suministrador del equipo en presencia de un representante del comprador tecnicamente cualificado, y los resultados se reflejaran en el presente documento. Este documento supone un Control de Calidad inicial y constituye una referencia para posteriores verificaciones. Las pruebas de aceptacion se ajustan a normas internacionales y nacionales, Protocolo Espanol de Control de Calidad en Radiodiagnostico.': 'Gemäß der geltenden Vorschrift Real Decreto 1976/1999 (spanisches Königliches Dekret) werden die Abnahmeprüfungen der Geräte vom Gerätelieferanten in Anwesenheit eines fachlich qualifizierten Vertreters des Käufers durchgeführt, und die Ergebnisse werden in diesem Dokument festgehalten. Dieses Dokument stellt eine Erstqualitätskontrolle dar und dient als Referenz für spätere Prüfungen. Die Abnahmeprüfungen entsprechen internationalen und nationalen Normen, dem Spanischen Protokoll zur Qualitätskontrolle in der Röntgendiagnostik.',
+    'Todos los parametros medidos y los resultados obtenidos deberan estar de acuerdo con los especificados en el Contrato de Compra y dentro de las tolerancias indicadas en las Fichas de Producto, no pudiendo ser superiores a las indicadas en el Anexo III del Real Decreto 1976/1999.': 'Alle gemessenen Parameter und erzielten Ergebnisse müssen mit den im Kaufvertrag festgelegten Werten übereinstimmen und innerhalb der in den Produktdatenblättern angegebenen Toleranzen liegen; sie dürfen die in Anhang III des Real Decreto 1976/1999 (spanisches Königliches Dekret) angegebenen Werte nicht überschreiten.',
+    '(segun Protocolo Espanol de Control de Calidad en Radiodiagnostico - SEFM-SEPR 2002 rev 1)': '(gemäß dem Spanischen Protokoll zur Qualitätskontrolle in der Röntgendiagnostik - SEFM-SEPR 2002 rev 1)',
+    'Electrómetro': 'Elektrometer',
+    'Kilovoltímetro': 'Kilovoltmeter',
+    'Medidor de tiempo': 'Zeitmesser',
   }
 };
 
