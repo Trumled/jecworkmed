@@ -3817,7 +3817,6 @@ if (!window.jspdf) { notify('Cargando librería PDF...','info'); return; }
 const { jsPDF } = window.jspdf;
 const doc = new jsPDF({orientation:'portrait',unit:'mm',format:'a4'});
 const W=210, mg=15, cw=W-mg*2;
-const empP = getEmpresaPrincipal();
 const empD = getEmpresaData(inst.empresa);
 const tecD = getTecnicoData(inst.tecnico);
 const V = x => String(x||'');
@@ -3879,13 +3878,7 @@ const pTkv     = V(inst['pru-tkv'])        || V(inst.tkv);
 const pTma     = V(inst['pru-tma'])        || V(inst.tma);
 const pTanio   = V(inst['pru-tanio'])      || V(inst.tanio);
 {
-let y=20;
-const en=V(empP.nombre).split(' '), mid=Math.ceil(en.length/2);
-doc.rect(mg,y,85,22,'S');
-B(11); doc.text(en.slice(0,mid).join(' '),mg+4,y+9);
-N(9);  doc.text(en.slice(mid).join(' '),mg+4,y+16);
-doc.rect(mg+85,y,cw-85,22,'S');
-y+=55;
+let y=45;
 titulo(t('PRUEBAS DE ACEPTACION'),y,44); y+=26;
 titulo('',y-2,0); 
 N(13); doc.text(t('(Conforme R.D. 1085/2009)'),W/2,y+10,{align:'center'});
