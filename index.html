@@ -4217,6 +4217,10 @@ function rtfEscape(str) {
   }
   return out;
 }
+// Para texto DENTRO de celdas de tabla: un salto de línea no debe crear un párrafo nuevo (se ve roto en Word), así que se convierte en espacio.
+function rtfEscapeCell(str) {
+  return rtfEscape(String(str===undefined||str===null?'':str).replace(/\n+/g,' '));
+}
 function rtfPar(text, opts) {
   opts = opts||{};
   let fmt = '\\pard ';
@@ -4224,26 +4228,45 @@ function rtfPar(text, opts) {
   if(opts.size) fmt += '\\fs'+opts.size+' ';
   if(opts.bold) fmt += '\\b ';
   if(opts.italic) fmt += '\\i ';
-  return '{'+fmt+rtfEscape(text)+'\\par}\n';
+  if(opts.underline) fmt += '\\brdrb\\brdrs\\brdrw10\\brsp40 ';
+  return '{'+fmt+rtfEscapeCell(text)+'\\par}\n';
+}
+function rtfTitulo(text, opts) {
+  // Título de sección: negrita + línea inferior, como en el PDF (titulo()/secHeader())
+  opts = opts||{};
+  return rtfPar(text, Object.assign({bold:true, underline:true, size:opts.size||22}, opts));
 }
 function rtfSpace(twips){ return '{\\pard\\sa0\\sb0\\fs'+Math.max(4,Math.round((twips||120)/10))+' \\par}\n'; }
+// Paleta de color RTF (índices 1..4): 1=negro, 2=blanco, 3=gris claro (etiquetas, como en el PDF), 4=gris oscuro (cabeceras de sección, como secHeader() del PDF)
+const RTF_COLORTBL = '{\\colortbl;\\red0\\green0\\blue0;\\red255\\green255\\blue255;\\red224\\green224\\blue224;\\red60\\green60\\blue60;}';
 function rtfTable(rows, widths, opts) {
-  // rows: array of arrays of cell strings. widths: array of column widths in twips.
-  // opts: {headerRow: index of header row to bold+shade, align: array of 'left'/'center' per column}
+  // rows: array de arrays de strings. widths: anchos de columna en twips.
+  // opts: {headerRow: índice de fila cabecera (gris claro+negrita), darkRows: [índices de fila estilo barra oscura+texto blanco, como secHeader], align: array 'left'/'center' por columna, labelCol: índice de columna que actúa de etiqueta (gris claro+negrita, como las cajas del PDF)}
   opts = opts||{};
   let out = '';
   rows.forEach((row, ri)=>{
-    const isHeader = opts.headerRow!==undefined ? ri===opts.headerRow : false;
+    const isHeader = opts.headerRow!==undefined && ri===opts.headerRow;
+    const isDark = opts.darkRows && opts.darkRows.indexOf(ri)!==-1;
     let trow = '\\trowd\\trgaph80\\trleft0\\trqc';
     let pos=0;
-    widths.forEach(w=>{ pos+=w; trow += (isHeader?'\\clshdng10000\\clcbpat16\\clcbpatraw16':'')+'\\clbrdrt\\brdrs\\clbrdrl\\brdrs\\clbrdrb\\brdrs\\clbrdrr\\brdrs\\cellx'+pos; });
+    widths.forEach((w,ci)=>{
+      pos+=w;
+      const isLabelCellDef = opts.labelCol!==undefined && ci===opts.labelCol && !isHeader && !isDark;
+      let shade = '';
+      if(isDark) shade='\\clshdng0\\clcbpat4\\clcbpatraw4';
+      else if(isHeader) shade='\\clshdng0\\clcbpat3\\clcbpatraw3';
+      else if(isLabelCellDef) shade='\\clshdng0\\clcbpat3\\clcbpatraw3';
+      trow += shade+'\\clbrdrt\\brdrs\\brdrw10\\clbrdrl\\brdrs\\brdrw10\\clbrdrb\\brdrs\\brdrw10\\clbrdrr\\brdrs\\brdrw10\\cellx'+pos;
+    });
     trow += '\n';
     row.forEach((cellTxt,ci)=>{
+      const isLabelCell = opts.labelCol!==undefined && ci===opts.labelCol && !isHeader && !isDark;
       let cf = '\\pard\\intbl';
       if(opts.align && opts.align[ci]==='center') cf += '\\qc';
-      if(isHeader) cf += '\\b';
+      if(isHeader || isDark || isLabelCell) cf += '\\b';
       cf += ' \\fs18 ';
-      trow += cf+rtfEscape(cellTxt)+(isHeader?'\\b0':'')+'\\cell ';
+      let cellColor = isDark ? '\\cf2 ' : '\\cf1 ';
+      trow += cf+cellColor+rtfEscapeCell(cellTxt)+((isHeader||isDark||isLabelCell)?'\\b0':'')+'\\cell ';
     });
     trow += '\\row\n';
     out += trow;
@@ -4251,7 +4274,7 @@ function rtfTable(rows, widths, opts) {
   return out;
 }
 function rtfDoc(bodyRtf) {
-  return '{\\rtf1\\ansi\\ansicpg1252\\deff0\\deflang3082{\\fonttbl{\\f0 Calibri;}}\\viewkind4\\uc1\\pard\\f0\\fs20\n'+bodyRtf+'}';
+  return '{\\rtf1\\ansi\\ansicpg1252\\deff0\\deflang3082{\\fonttbl{\\f0 Calibri;}}'+RTF_COLORTBL+'\\viewkind4\\uc1\\pard\\f0\\fs20\n'+bodyRtf+'}';
 }
 function downloadRTF(filename, bodyRtf) {
   const blob = new Blob([rtfDoc(bodyRtf)], {type:'application/rtf'});
@@ -4266,10 +4289,10 @@ function sanitizeFilename(name){
   return String(name||'documento').replace(/[\/\\:*?"<>|]/g,'-');
 }
 function rtfLabelRow(items) {
-  // items: array of [label, value] pairs -> one two-column table row per item
+  // items: array de [label, value] -> una fila de tabla de 2 columnas por item, con la etiqueta en gris claro+negrita (como las cajas del PDF)
   let out='';
   items.forEach(([lb,val])=>{
-    out += rtfTable([[lb,val||'']],[2600,6600],{align:['left','left']});
+    out += rtfTable([[lb,val||'']],[2600,6600],{align:['left','left'],labelCol:0});
   });
   return out;
 }
@@ -4281,19 +4304,19 @@ const emp = getEmpresaData(i.empresa);
 const tec = getTecnicoData(i.tecnico);
 const v = x=>String(x||'');
 let b='';
-b += rtfPar(t('FICHA DE DATOS TÉCNICOS'),{bold:true,size:32,align:'center'});
+b += rtfPar(t('FICHA DE DATOS TÉCNICOS'),{bold:true,size:32,align:'center',underline:true});
 b += rtfSpace(200);
 b += rtfLabelRow([[t('DATO DE LA INSTALACIÓN'),v(i.cliente)],[t('POBLACIÓN'),v(i.localidad)],[t('PROVINCIA'),v(i.provincia)],[t('TELÉFONO'),v(i.telefono)]]);
 b += rtfSpace(120);
 b += rtfLabelRow([[t('INSTALADOR'),v(emp.nombre||i.empresa)],[t('CIF/NIF'),v(emp.cif)],[t('CÓDIGO DE AUTORIZACIÓN: '),v(emp.codAuth)],[t('TÉCNICO'),v(i.tecnico)],[t('DNI'),v(tec.dni)],[t('FECHA DE NACIMIENTO: '),v(tec.fechaNac)]]);
 b += rtfSpace(200);
-b += rtfPar(t('EQUIPO'),{bold:true,size:22});
+b += rtfTitulo(t('EQUIPO'));
 b += rtfLabelRow([[t('N DE EQUIPO'),v(i.neq)],[t('FIJO / MÓVIL'),t(v(i.fijomovil))],[t('TIPO'),t(v(i.tipo))],[t('FABRICANTE'),v(i.fabricante)],[t('PAÍS'),v(i.pais)],[t('CÓDIGO ORGANISMOS\nNOTIFICADOR'),v(i.codorg)],[t('DENOMINACIÓN'),v(i.denom)]]);
 b += rtfSpace(200);
-b += rtfPar(t('SISTEMA'),{bold:true,size:22});
+b += rtfTitulo(t('SISTEMA'));
 b += rtfLabelRow([[t('MODELO'),v(i.modelo)],[t('CÓDIGO ORGANISMO'),v(i.codfab)],[t('N SERIE'),v(i.nserie)],['KV max',v(i.kv)],['Ma max',v(i.ma)],[t('AÑO DE FABRICACIÓN'),v(i.anio)]]);
 b += rtfSpace(200);
-b += rtfPar(t('TUBO'),{bold:true,size:22});
+b += rtfTitulo(t('TUBO'));
 b += rtfLabelRow([[t('MARCA/MODELO'),v(i.tmod)+(i.tcod?' / '+v(i.tcod):'')],[t('N DE SERIE'),v(i.tnserie)],['KV max',v(i.tkv)],['Ma max',v(i.tma)],[t('AÑO DE FABRICACIÓN'),v(i.tanio)]]);
 b += rtfSpace(300);
 b += rtfPar(t('En Las Palmas de Gran Canaria a ')+formatDate(i.fecha),{});
@@ -4310,7 +4333,7 @@ let b='';
 b += rtfPar(t('ANEXO II'),{bold:true,size:30,align:'center'});
 b += rtfPar(t('Certificado de conformidad de los equipos para su registro (EVAT)'),{bold:true,size:22,align:'center'});
 b += rtfSpace(200);
-b += rtfPar(t('DATOS DE LA INSTALACIÓN'),{bold:true,size:22});
+b += rtfTitulo(t('DATOS DE LA INSTALACIÓN'));
 b += rtfLabelRow([
 [t('NOMBRE DEL TITULAR:'),V(i.a2_titular)],
 [t('NIF:'),V(i.a2_nif)],
@@ -4322,7 +4345,7 @@ b += rtfLabelRow([
 [t('NOMBRE DE LA INSTALACION')+' '+t('(si es diferente al titular)'),V(i.a2_nomins||'')],
 ]);
 b += rtfSpace(200);
-b += rtfPar(t('DATOS DE CONFORMIDAD'),{bold:true,size:22});
+b += rtfTitulo(t('DATOS DE CONFORMIDAD'));
 const dirName = V(i.director)||'____________________';
 const empName = V(i.empresa)||'____________________';
 b += rtfPar(t('D. ')+dirName+t(', en calidad de representante de la EVAT. ')+empName+' '+t('con fines de registro de la instalación, ')+t('CERTIFICO:'),{});
@@ -4401,42 +4424,43 @@ const pTkv     = V(inst['pru-tkv'])        || V(inst.tkv);
 const pTma     = V(inst['pru-tma'])        || V(inst.tma);
 const pTanio   = V(inst['pru-tanio'])      || V(inst.tanio);
 let b='';
-b += rtfPar(t('PRUEBAS DE ACEPTACION'),{bold:true,size:36,align:'center'});
+b += rtfPar(t('PRUEBAS DE ACEPTACION'),{bold:true,size:36,align:'center',underline:true});
 if(t('(Conforme R.D. 1085/2009)')) b += rtfPar(t('(Conforme R.D. 1085/2009)'),{align:'center'});
 b += rtfPar(pNombre.toUpperCase(),{bold:true,size:26,align:'center'});
 b += rtfPar(pDir.toUpperCase(),{align:'center'});
 b += rtfPar((pCp+' '+pLoc).trim().toUpperCase(),{align:'center'});
 b += rtfSpace(300);
-b += rtfPar(t('DETALLE DE DATOS COMPLETOS DE LA SALA'),{bold:true,size:22});
+b += rtfTitulo(t('DETALLE DE DATOS COMPLETOS DE LA SALA'));
 b += rtfLabelRow([[t('INSTALADOR'),pInst],[t('CIF/NIF'),pCif],[t('COD. AUTORIZACION'),pAuth],[t('TÉCNICO'),pTec],[t('DNI'),pDni],[t('FECHA NAC.'),pFnac]]);
 b += rtfSpace(120);
-b += rtfPar(t('EQUIPO'),{bold:true,size:20});
+b += rtfTitulo(t('EQUIPO'),{size:20});
 b += rtfLabelRow([[t('N EQUIPO'),pNeq],[t('FIJO/MOVIL'),t(pFM)],[t('TIPO'),t(pTipo)],[t('FABRICANTE'),pFab],[t('PAIS'),pPais],[t('DENOMINACION'),pDenom]]);
 b += rtfSpace(120);
-b += rtfPar(t('SISTEMA'),{bold:true,size:20});
+b += rtfTitulo(t('SISTEMA'),{size:20});
 b += rtfLabelRow([[t('MARCA/MODELO'),pSisMod],[t('COD.ORG.NOTIF. CE FAB.'),pSisCod],[t('N SERIE'),pNserie],['KV max',pKv],['mA max',pMa],[t('ANO FAB.'),pAnio]]);
 b += rtfSpace(120);
-b += rtfPar(t('TUBO'),{bold:true,size:20});
+b += rtfTitulo(t('TUBO'),{size:20});
 b += rtfLabelRow([[t('MARCA/MODELO'),pTubMod],[t('COD.ORG.NOTIF. CE FAB.'),pTubCod],[t('N SERIE'),pTnserie],['KV max',pTkv],['mA max',pTma],[t('ANO FAB.'),pTanio]]);
 b += rtfSpace(300);
-b += rtfPar(t('PRUEBAS DE ACEPTACION'),{bold:true,size:22});
+b += rtfTitulo(t('PRUEBAS DE ACEPTACION'));
 [t('Este Documento y las Pruebas de Aceptacion que en el se describen tienen la finalidad de documentar ante el cliente que el sistema radiografico se ha instalado correctamente y que cumple con todas las especificaciones de venta.'),
 t('Siguiendo las pautas de la normativa vigente, Real Decreto 1976/1999, las pruebas de aceptacion de los equipos seran realizadas por el suministrador del equipo en presencia de un representante del comprador tecnicamente cualificado, y los resultados se reflejaran en el presente documento. Este documento supone un Control de Calidad inicial y constituye una referencia para posteriores verificaciones. Las pruebas de aceptacion se ajustan a normas internacionales y nacionales, Protocolo Espanol de Control de Calidad en Radiodiagnostico.'),
 t('Todos los parametros medidos y los resultados obtenidos deberan estar de acuerdo con los especificados en el Contrato de Compra y dentro de las tolerancias indicadas en las Fichas de Producto, no pudiendo ser superiores a las indicadas en el Anexo III del Real Decreto 1976/1999.')
 ].forEach(p=>{ b += rtfPar(p,{}); b += rtfSpace(80); });
 b += rtfSpace(200);
-b += rtfPar(t('EQUIPOS DE MEDIDA UTILIZADOS'),{bold:true,size:22});
+b += rtfTitulo(t('EQUIPOS DE MEDIDA UTILIZADOS'));
 const eqArr=inst['eq-medida']||[];
 const eqHead=[t('DESCRIPCION'),t('MARCA'),t('MODELO'),t('N SERIE'),t('FECHA CAL.'),t('ORGANISMO')];
 const eqRows=[eqHead];
 eqArr.forEach(eq=>{ if(!V(eq.tipo)&&!V(eq.desc)) return; eqRows.push([t(V(eq.tipo))||V(eq.desc),V(eq.marca),V(eq.modelo),V(eq.serie),V(eq.fcal),V(eq.org)]); });
 if(eqRows.length>1) b += rtfTable(eqRows,[2200,1500,1500,1800,1300,1400],{headerRow:0,align:['left','left','left','left','center','center']});
 b += rtfSpace(200);
-b += rtfPar(t('INFORME TECNICO DE RESULTADOS'),{bold:true,size:22});
+b += rtfTitulo(t('INFORME TECNICO DE RESULTADOS'));
 b += rtfPar(t('(segun Protocolo Espanol de Control de Calidad en Radiodiagnostico - SEFM-SEPR 2002 rev 1)'),{italic:true,size:16});
 const inclPDF=(key)=>inst['pdf-'+key]!==false;
 const infRows=[[t('CODIGO'),t('DESCRIPCION'),t('RESULTADO'),t('TOLERANCIA')]];
-const addSec=(txt)=>infRows.push([t(txt),'','','']);
+const infDark=[];
+const addSec=(txt)=>{ infDark.push(infRows.length); infRows.push([t(txt),'','','']); };
 addSec('PARAMETROS GEOMETRICOS');
 if(inclPDF('dl001')) infRows.push(['DL001',t('Minima distancia foco-piel'),V(inst['pr-dl001'])||'OK','20cm Tp>60kV / 10cm Tp<60kV']);
 if(inclPDF('dl002')) infRows.push(['DL002',t('Tamano del campo en el extremo del localizador'),V(inst['pr-dl002'])||'OK','< 6cm']);
@@ -4448,32 +4472,32 @@ if(inclPDF('dl006')) infRows.push(['*DL006',t('Exactitud y reproducibilidad del 
 addSec('RENDIMIENTO');
 if(inclPDF('dl007')) infRows.push(['*DL007',t('Reproducibilidad'),V(inst['pr-dl007'])||t('Ver ANEXO I'),'<10%']);
 if(inclPDF('dl008')) infRows.push(['DL008',t('Linealidad dosis con tiempo'),V(inst['pr-dl008'])||t('Ver ANEXO I'),'10%']);
-b += rtfTable(infRows,[1100,4000,2000,2100],{headerRow:0,align:['left','left','center','center']});
+b += rtfTable(infRows,[1100,4000,2000,2100],{headerRow:0,darkRows:infDark,align:['left','left','center','center']});
 b += rtfSpace(200);
-b += rtfPar(t('ANEXO I'),{bold:true,size:24,align:'center'});
+b += rtfPar(t('ANEXO I'),{bold:true,size:24,align:'center',underline:true});
 if(inst['chk-cont']!==false){
-b += rtfPar(t('CONTROL DE CALIDAD DE CONTRASTE'),{bold:true,size:20});
+b += rtfTitulo(t('CONTROL DE CALIDAD DE CONTRASTE'),{size:20});
 b += rtfPar(t(V(inst['a1-cont-params'])||'120KV, 280mA, 1 x 10,00mm, foco grueso, 0,5seg'),{italic:true});
 b += rtfTable([['','CT Air (HV)',t('Escala de contrastes')],[t('Referencia'),'- 1.000,00','1,92e - 004'],[t('Tolerancia'),'+/- 10,00','+/- 3,00e-006'],[t('Resultados'),V(inst['a1-cont-res-hu']),V(inst['a1-cont-res-ec'])]],[2500,3300,3400],{headerRow:0,align:['left','center','center']});
 b += rtfSpace(120);
 }
 if(inst['chk-ruido']!==false){
-b += rtfPar(t('CONTROL DE CALIDAD DE RUIDO'),{bold:true,size:20});
+b += rtfTitulo(t('CONTROL DE CALIDAD DE RUIDO'),{size:20});
 b += rtfPar(t(V(inst['a1-ruido-params'])||'120 KV, foco fino, 160mA, 1sec, 6x0,6mm'),{italic:true});
 const rRows=[['',t('Referencia'),'',t('Tolerancia'),'',t('Resultado'),''],['','HU','KV','HU','KV','HU','KV']];
 const rFijo=[['KV (1)','19,6','140,00','+/-1,95','-14,0'],['KV (2)','18,00','80,00','+/-1,80','-8,0'],['KV (3)','13,50','100,00','+/-1,35','-10,0'],['KV (4)','11,50','120,00','+/-1,15','-12,0'],['KV (5)','10,70','140,00','+/-1,07','-14,0']];
 rFijo.forEach((r,ri)=>{ rRows.push([r[0],r[1],r[2],r[3],r[4],V(inst[`a1-r${ri+1}-res-hu`]),V(inst[`a1-r${ri+1}-res-kv`])]); });
-b += rtfTable(rRows,[1200,1300,1300,1300,1300,1300,1300],{align:['left','center','center','center','center','center','center']});
+b += rtfTable(rRows,[1200,1300,1300,1300,1300,1300,1300],{headerRow:0,align:['left','center','center','center','center','center','center']});
 b += rtfSpace(120);
 }
 if(inst['chk-centr']!==false){
-b += rtfPar(t('CONTROL DE CENTRAJE DE COLIMACION'),{bold:true,size:20});
+b += rtfTitulo(t('CONTROL DE CENTRAJE DE COLIMACION'),{size:20});
 b += rtfPar(t(V(inst['a1-centr-params'])||'120KV, 180mA, 1 x 2,00mm, foco fino, 0,5seg'),{italic:true});
 b += rtfLabelRow([[t('Referencia (mm)'),'0,0'],[t('Tolerancia (mm)'),'+/- 2.0'],[t('Resultado (mm)'),V(inst['a1-centr-res'])]]);
 b += rtfSpace(120);
 }
 if(inst['chk-pch1']!==false){
-b += rtfPar(t('EXACTITUD DE LA TENSION'),{bold:true,size:20});
+b += rtfTitulo(t('EXACTITUD DE LA TENSION'),{size:20});
 const pchRows=[[t('KV FIJADOS'),t('KV MEDIDOS'),'']];
 ['70 KV','80 KV','90 KV','100 KV',''].forEach((kv,n)=>{
 const medido=V(inst[`pch1-${n+1}-medido`]);
@@ -4481,11 +4505,11 @@ const ok=inst[`pch1-${n+1}-ok`]!==undefined?(inst[`pch1-${n+1}-ok`]?'OK':t('NO O
 if(kv==='' && !medido) return;
 pchRows.push([kv,medido,ok]);
 });
-b += rtfTable(pchRows,[2300,2300,2300],{align:['left','center','center']});
+b += rtfTable(pchRows,[2300,2300,2300],{headerRow:0,align:['left','center','center']});
 b += rtfSpace(120);
 }
 if(inst['chk-repr']!==false){
-b += rtfPar(t('REPRODUCTIVIDAD DE LA TENSION'),{bold:true,size:20});
+b += rtfTitulo(t('REPRODUCTIVIDAD DE LA TENSION'),{size:20});
 const reprRows=[['KV',t('TEST 1'),t('TEST 2'),t('TEST 3'),t('TEST 4')]];
 ['70 KV','80 KV','90 KV','100 KV','110 KV',''].forEach((kv,n)=>{
 const vals=[1,2,3,4].map(tt=>V(inst[`repr-${n+1}-t${tt}`]));
@@ -4496,7 +4520,7 @@ b += rtfTable(reprRows,[1400,1900,1900,1900,1900],{headerRow:0,align:['left','ce
 b += rtfSpace(120);
 }
 if(inst['chk-filtr']!==false){
-b += rtfPar(t('FILTRACION CAPA HEMIRREDUCTORA'),{bold:true,size:20});
+b += rtfTitulo(t('FILTRACION CAPA HEMIRREDUCTORA'),{size:20});
 const filtrFijos={75:'2,',100:'3,',125:'4,',150:'5,'};
 const fRows=[[t('TENSION'),'HVL (MMA)']];
 [75,100,125,150].forEach(tension=>{ const dec=V(inst['filtr-'+tension+'-dec']); fRows.push([String(tension),dec?filtrFijos[tension]+dec:'']); });
@@ -4504,12 +4528,12 @@ b += rtfTable(fRows,[3450,3450],{headerRow:0,align:['center','center']});
 b += rtfSpace(120);
 }
 if(inst['chk-rend']!==false){
-b += rtfPar(t('VALOR DEL RENDIMIENTO'),{bold:true,size:20});
+b += rtfTitulo(t('VALOR DEL RENDIMIENTO'),{size:20});
 b += rtfLabelRow([[t('RENDIMIENTO A 80 KV'),'5,'+V(inst['rend-dec'])+' UGY /MA']]);
 b += rtfSpace(120);
 }
 if(inst['chk-texp']!==false){
-b += rtfPar(t('EXACTITUD DEL TIEMPO DE EXPOSICION'),{bold:true,size:20});
+b += rtfTitulo(t('EXACTITUD DEL TIEMPO DE EXPOSICION'),{size:20});
 b += rtfPar(t('Técnica: ')+(V(inst['texp-tecnica'])||'80 kv 200 ma'),{italic:true});
 const tRows=[['Ms','kv','ms',t('Resultado')]];
 [1000,400,40,10,''].forEach((ms,ri)=>{
@@ -4522,7 +4546,7 @@ b += rtfTable(tRows,[1700,1700,1700,1700],{headerRow:0,align:['center','center',
 b += rtfSpace(120);
 }
 if(inst['chk-ctdi']!==false){
-b += rtfPar(t('RESULTADO DE AIRE CTDI'),{bold:true,size:20});
+b += rtfTitulo(t('RESULTADO DE AIRE CTDI'),{size:20});
 const cortes=['6X4,80','3X4,80','40X0,60','2X6,00','1X10,00'];
 const ctdiRows=[['KV',t('Corte (mm)'),...cortes]];
 const fiLabels=[[t('Nominal'),'nom'],[t('Tolerancia'),'tol'],['DLP','dlp'],[t('Resultado'),'res']];
