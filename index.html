@@ -3888,7 +3888,7 @@ doc.rect(mg+85,y,cw-85,22,'S');
 y+=55;
 titulo(t('PRUEBAS DE ACEPTACION'),y,44); y+=26;
 titulo('',y-2,0); 
-N(13); doc.text('(Conforme R.D. 1085/2009)',W/2,y+10,{align:'center'});
+N(13); doc.text(t('(Conforme R.D. 1085/2009)'),W/2,y+10,{align:'center'});
 y+=90;
 B(18); doc.text(pNombre.toUpperCase(),W/2,y,{align:'center'});
 N(11); doc.text(pDir.toUpperCase(),W/2,y+14,{align:'center'});
@@ -5511,6 +5511,7 @@ const TRANSLATIONS = {
     'Arco en C': 'Arco en C',
     'CT Dental': 'CT Dental',
     'Hortopanto': 'Ortopantomógrafo',
+    '(Conforme R.D. 1085/2009)': '(Conforme R.D. 1085/2009)',
   },
   en: {
     // Ficha Técnica
@@ -5660,6 +5661,7 @@ const TRANSLATIONS = {
     'Arco en C': 'C-arm',
     'CT Dental': 'Dental CT',
     'Hortopanto': 'Panoramic X-ray Unit (OPG)',
+    '(Conforme R.D. 1085/2009)': '(In accordance with R.D. 1085/2009)',
   },
   de: {
     // Ficha Técnica
@@ -5795,9 +5797,9 @@ const TRANSLATIONS = {
     '120 KV, foco fino, 160mA, 1sec, 6x0,6mm': '120 KV, Feinbrennfleck, 160mA, 1s, 6x0,6mm',
     '120KV, 180mA, 1 x 2,00mm, foco fino, 0,5seg': '120KV, 180mA, 1 x 2,00mm, Feinbrennfleck, 0,5s',
     'Este Documento y las Pruebas de Aceptacion que en el se describen tienen la finalidad de documentar ante el cliente que el sistema radiografico se ha instalado correctamente y que cumple con todas las especificaciones de venta.': 'Dieses Dokument und die darin beschriebenen Abnahmeprüfungen dienen dazu, dem Kunden gegenüber zu dokumentieren, dass das Röntgensystem ordnungsgemäß installiert wurde und allen Verkaufsspezifikationen entspricht.',
-    'Siguiendo las pautas de la normativa vigente, Real Decreto 1976/1999, las pruebas de aceptacion de los equipos seran realizadas por el suministrador del equipo en presencia de un representante del comprador tecnicamente cualificado, y los resultados se reflejaran en el presente documento. Este documento supone un Control de Calidad inicial y constituye una referencia para posteriores verificaciones. Las pruebas de aceptacion se ajustan a normas internacionales y nacionales, Protocolo Espanol de Control de Calidad en Radiodiagnostico.': 'Gemäß der geltenden Vorschrift Real Decreto 1976/1999 (spanisches Königliches Dekret) werden die Abnahmeprüfungen der Geräte vom Gerätelieferanten in Anwesenheit eines fachlich qualifizierten Vertreters des Käufers durchgeführt, und die Ergebnisse werden in diesem Dokument festgehalten. Dieses Dokument stellt eine Erstqualitätskontrolle dar und dient als Referenz für spätere Prüfungen. Die Abnahmeprüfungen entsprechen internationalen und nationalen Normen, dem Spanischen Protokoll zur Qualitätskontrolle in der Röntgendiagnostik.',
-    'Todos los parametros medidos y los resultados obtenidos deberan estar de acuerdo con los especificados en el Contrato de Compra y dentro de las tolerancias indicadas en las Fichas de Producto, no pudiendo ser superiores a las indicadas en el Anexo III del Real Decreto 1976/1999.': 'Alle gemessenen Parameter und erzielten Ergebnisse müssen mit den im Kaufvertrag festgelegten Werten übereinstimmen und innerhalb der in den Produktdatenblättern angegebenen Toleranzen liegen; sie dürfen die in Anhang III des Real Decreto 1976/1999 (spanisches Königliches Dekret) angegebenen Werte nicht überschreiten.',
-    '(segun Protocolo Espanol de Control de Calidad en Radiodiagnostico - SEFM-SEPR 2002 rev 1)': '(gemäß dem Spanischen Protokoll zur Qualitätskontrolle in der Röntgendiagnostik - SEFM-SEPR 2002 rev 1)',
+    'Siguiendo las pautas de la normativa vigente, Real Decreto 1976/1999, las pruebas de aceptacion de los equipos seran realizadas por el suministrador del equipo en presencia de un representante del comprador tecnicamente cualificado, y los resultados se reflejaran en el presente documento. Este documento supone un Control de Calidad inicial y constituye una referencia para posteriores verificaciones. Las pruebas de aceptacion se ajustan a normas internacionales y nacionales, Protocolo Espanol de Control de Calidad en Radiodiagnostico.': 'Gemäß den geltenden Vorschriften werden die Abnahmeprüfungen der Geräte vom Gerätelieferanten in Anwesenheit eines fachlich qualifizierten Vertreters des Käufers durchgeführt, und die Ergebnisse werden in diesem Dokument festgehalten. Dieses Dokument stellt eine Erstqualitätskontrolle dar und dient als Referenz für spätere Prüfungen. Die Abnahmeprüfungen entsprechen anerkannten internationalen und nationalen Normen zur Qualitätskontrolle in der Röntgendiagnostik.',
+    'Todos los parametros medidos y los resultados obtenidos deberan estar de acuerdo con los especificados en el Contrato de Compra y dentro de las tolerancias indicadas en las Fichas de Producto, no pudiendo ser superiores a las indicadas en el Anexo III del Real Decreto 1976/1999.': 'Alle gemessenen Parameter und erzielten Ergebnisse müssen mit den im Kaufvertrag festgelegten Werten übereinstimmen und innerhalb der in den Produktdatenblättern angegebenen Toleranzen liegen.',
+    '(segun Protocolo Espanol de Control de Calidad en Radiodiagnostico - SEFM-SEPR 2002 rev 1)': '(gemäß anerkanntem Qualitätskontrollprotokoll für die Röntgendiagnostik)',
     'Electrómetro': 'Elektrometer',
     'Kilovoltímetro': 'Kilovoltmeter',
     'Medidor de tiempo': 'Zeitmesser',
@@ -5809,6 +5811,7 @@ const TRANSLATIONS = {
     'Arco en C': 'C-Bogen',
     'CT Dental': 'Dental-CT',
     'Hortopanto': 'Orthopantomograph (OPG)',
+    '(Conforme R.D. 1085/2009)': '',
   }
 };
 
