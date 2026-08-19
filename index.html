@@ -3297,14 +3297,14 @@ R(mg,y,lW,rH); R(mg+lW,y,cw-lW,rH);
 T(lb,mg+2,y+5.5,8,true); T(vl,mg+lW+3,y+5.5,10,false); y+=rH;
 });
 y+=4;
-[[t('INSTALADOR'),v(emp.nombre||i.empresa)],['CIF/NIF',v(emp.cif)+'     CÓDIGO DE AUTORIZACIÓN: '+v(emp.codAuth)],[t('TÉCNICO'),v(i.tecnico)],['DNI',v(tec.dni)+'     FECHA DE NACIMIENTO: '+v(tec.fechaNac)]].forEach(([lb,vl])=>{
+[[t('INSTALADOR'),v(emp.nombre||i.empresa)],[t('CIF/NIF'),v(emp.cif)+'     '+t('CÓDIGO DE AUTORIZACIÓN: ')+v(emp.codAuth)],[t('TÉCNICO'),v(i.tecnico)],[t('DNI'),v(tec.dni)+'     '+t('FECHA DE NACIMIENTO: ')+v(tec.fechaNac)]].forEach(([lb,vl])=>{
 R(mg,y,lW,rH); R(mg+lW,y,cw-lW,rH);
 T(lb,mg+2,y+5.5,8,true); T(vl,mg+lW+3,y+5.5,9,false); y+=rH;
 });
 y+=6;
 R(mg,y,cw,rH); T(t('EQUIPO'),W/2,y+6,12,true,{align:'center'}); y+=rH;
 const c1=lW,c2=48,c3=cw-lW-48;
-[[t('N DE EQUIPO'),v(i.neq),'',''],[t('FIJO / MÓVIL'),v(i.fijomovil),'',''],[t('TIPO'),v(i.tipo),'',''],[t('FABRICANTE'),v(i.fabricante),'',''],[t('PAÍS'),v(i.pais),'CÓDIGO ORGANISMOS\nNOTIFICADOR',v(i.codorg)],[t('DENOMINACIÓN'),v(i.denom),'','']].forEach(([l,val,l2,v2])=>{
+[[t('N DE EQUIPO'),v(i.neq),'',''],[t('FIJO / MÓVIL'),v(i.fijomovil),'',''],[t('TIPO'),v(i.tipo),'',''],[t('FABRICANTE'),v(i.fabricante),'',''],[t('PAÍS'),v(i.pais),t('CÓDIGO ORGANISMOS\nNOTIFICADOR'),v(i.codorg)],[t('DENOMINACIÓN'),v(i.denom),'','']].forEach(([l,val,l2,v2])=>{
 R(mg,y,c1,rH); R(mg+c1,y,c2,rH);
 T(l,mg+2,y+5.5,8,true); T(val,mg+c1+2,y+5.5,9,false);
 if(l2){R(mg+c1+c2,y,c3/2,rH);R(mg+c1+c2+c3/2,y,c3/2,rH);l2.split('\n').forEach((ln,ix)=>{T(ln,mg+c1+c2+2,y+3+ix*3.5,7,true);});T(v2,mg+c1+c2+c3/2+2,y+5.5,9,false);}
@@ -3331,7 +3331,7 @@ T('KV max',mg+c1+c2+2,y+5.5,8,true);T(v(i.tkv),mg+c1+c2+c3/4+2,y+5.5,9,false);
 T('MA max',mg+c1+c2+c3/2+2,y+5.5,8,true);T(v(i.tma),mg+c1+c2+c3*3/4+2,y+5.5,9,false);y+=rH;
 R(mg,y,c1,rH);R(mg+c1,y,cw-c1,rH);T(t('Año de fabricación'),mg+2,y+5.5,8,true);T(v(i.tanio),mg+c1+2,y+5.5,9,false);y+=rH;
 y+=12;
-T('En Las Palmas de Gran Canaria a '+formatDate(i.fecha),mg,y,10,false);y+=6;
+T(t('En Las Palmas de Gran Canaria a ')+formatDate(i.fecha),mg,y,10,false);y+=6;
 T(v(i.empresa),mg,y,10,false);y+=14;
 T(v(i.director)+'.',mg,y,10,true);
 const _fn='Ficha_Tecnica_'+v(i.cliente).replace(/\s+/g,'_')+'_'+v(i.tipo).replace(/\s+/g,'_')+'.pdf';
@@ -3352,7 +3352,7 @@ const bold = (sz)=>{ doc.setFont('helvetica','bold');   doc.setFontSize(sz||9); 
 const norm = (sz)=>{ doc.setFont('helvetica','normal'); doc.setFontSize(sz||10); };
 const ital = (sz)=>{ doc.setFont('helvetica','italic'); doc.setFontSize(sz||8); };
 bold(15); doc.text(t('ANEXO II'),W/2,y,{align:'center'}); y+=7;
-bold(12); doc.text('Certificado de conformidad de los equipos para su registro (EVAT)',W/2,y,{align:'center'}); y+=12;
+bold(12); doc.text(t('Certificado de conformidad de los equipos para su registro (EVAT)'),W/2,y,{align:'center'}); y+=12;
 const s1Top = y;
 let iy = s1Top + 8;
 bold(9); doc.text(t('DATOS DE LA INSTALACIÓN'),mg+3,iy);
@@ -3362,7 +3362,7 @@ norm(8); bold(8); doc.text(t('NOMBRE DEL TITULAR:'),mg+3,iy);
 const lbT=doc.getTextWidth(t('NOMBRE DEL TITULAR:'))+2;
 norm(10); doc.text(V(i.a2_titular),mg+3+lbT,iy);
 ln(mg+3+lbT,iy+1,mg+cw-3,iy+1); iy+=8;
-bold(8); doc.text('NIF:',mg+3,iy);
+bold(8); doc.text(t('NIF:'),mg+3,iy);
 norm(10); doc.text(V(i.a2_nif),mg+12,iy);
 ln(mg+12,iy+1,mg+60,iy+1);
 bold(8); doc.text(t('TLFNO/E-MAIL:'),mg+63,iy);
@@ -3373,7 +3373,7 @@ bold(8); doc.text(t('DIRECCIÓN'),mg+3,iy);
 const lbD=doc.getTextWidth(t('DIRECCIÓN'))+3;
 norm(10); doc.text(V(i.a2_dir),mg+3+lbD,iy);
 ln(mg+3+lbD,iy+1,mg+cw-3,iy+1); iy+=8;
-bold(8); doc.text('C.P.',mg+3,iy);
+bold(8); doc.text(t('C.P.'),mg+3,iy);
 norm(10); doc.text(V(i.a2_cp),mg+12,iy);
 ln(mg+12,iy+1,mg+36,iy+1);
 bold(8); doc.text(t('LOCALIDAD'),mg+39,iy);
@@ -3385,7 +3385,7 @@ const lbPr=doc.getTextWidth(t('PROVINCIA'))+2;
 norm(10); doc.text(V(i.a2_prov),mg+121+lbPr,iy);
 ln(mg+121+lbPr,iy+1,mg+cw-3,iy+1); iy+=8;
 bold(8); doc.text(t('NOMBRE DE LA INSTALACION'),mg+3,iy);
-ital(7); doc.text('(si es diferente al titular)',mg+3,iy+4);
+ital(7); doc.text(t('(si es diferente al titular)'),mg+3,iy+4);
 const nominsX = mg+3+doc.getTextWidth('NOMBRE DE LA INSTALACION    ');
 norm(10); doc.text(V(i.a2_nomins||''),nominsX,iy);
 ln(nominsX,iy+1,mg+cw-3,iy+1); iy+=6;
@@ -3397,14 +3397,14 @@ let cy = s2Top + 8;
 bold(9); doc.text(t('DATOS DE CONFORMIDAD'),mg+3,cy);
 const dctw=doc.getTextWidth(t('DATOS DE CONFORMIDAD')); ln(mg+3,cy+1,mg+3+dctw,cy+1);
 cy+=9;
-norm(10); doc.text('D. ',mg+5,cy);
-const prefW=doc.getTextWidth('D. ');
+norm(10); doc.text(t('D. '),mg+5,cy);
+const prefW=doc.getTextWidth(t('D. '));
 bold(10); const dirName=V(i.director)||'                              ';
 doc.text(dirName,mg+5+prefW,cy);
 const dw=doc.getTextWidth(dirName);
 ln(mg+5+prefW,cy+1,mg+5+prefW+dw,cy+1);
 norm(10);
-const afterDir=', en calidad de representante de la EVAT. ';
+const afterDir=t(', en calidad de representante de la EVAT. ');
 doc.text(afterDir,mg+5+prefW+dw,cy);
 const adw=doc.getTextWidth(afterDir);
 const empName=V(i.empresa)||'                              ';
@@ -3416,19 +3416,19 @@ bold(10); doc.text(empName,afterX,cy);
 cy+=5; bold(10); doc.text(empName,mg+5,cy);
 }
 cy+=6;
-norm(9.5); doc.text('con fines de registro de la instalación, ',mg+5,cy);
-const cfW=doc.getTextWidth('con fines de registro de la instalación, ');
+norm(9.5); doc.text(t('con fines de registro de la instalación, '),mg+5,cy);
+const cfW=doc.getTextWidth(t('con fines de registro de la instalación, '));
 bold(9.5); doc.text(t('CERTIFICO:'),mg+5+cfW,cy);
 cy+=7;
-norm(9); doc.text('- Que los equipos adquiridos por el titular para la instalación arriba citada son los siguientes:',mg+7,cy);
+norm(9); doc.text(t('- Que los equipos adquiridos por el titular para la instalación arriba citada son los siguientes:'),mg+7,cy);
 cy+=4;
 ital(7.5);
-const nota='(1) Especificar por separado Generadores y Tubos y, en el caso de que formen parte de un sistema integrado completo, indicar también su nombre.';
+const nota=t('(1) Especificar por separado Generadores y Tubos y, en el caso de que formen parte de un sistema integrado completo, indicar también su nombre.');
 const notaL=doc.splitTextToSize(nota,cw-14);
 doc.text(notaL,mg+7,cy); cy+=notaL.length*3.5+3;
 const colW=[16,32,70,46]; 
 const tX=mg+9, rH=7;
-const headers=['EQUIPO N\u00BA',t('MARCA'),t('MODELO'),'N\u00BAMERO DE SERIE'];
+const headers=[t('EQUIPO Nº'),t('MARCA'),t('MODELO'),t('NÚMERO DE SERIE')];
 let tx=tX;
 bold(8);
 headers.forEach((h,idx)=>{ box(tx,cy,colW[idx],rH); doc.text(h,tx+colW[idx]/2,cy+5,{align:'center'}); tx+=colW[idx]; });
@@ -3451,7 +3451,7 @@ tx+=colW[idx];
 cy+=rH;
 });
 cy+=4;
-norm(9); doc.text('- Que estos equipos provienen de:',mg+7,cy); cy+=6;
+norm(9); doc.text(t('- Que estos equipos provienen de:'),mg+7,cy); cy+=6;
 const esNueva=(i.procedencia==='nueva'||!i.procedencia);
 box(mg+14,cy-4.5,4.5,4.5);
 if(esNueva){bold(9);doc.text('X',mg+15.3,cy-0.8);norm(9);}
@@ -3459,11 +3459,11 @@ doc.text(t('Nueva adquisición'),mg+21,cy-0.5); cy+=6;
 box(mg+14,cy-4.5,4.5,4.5);
 if(!esNueva){bold(9);doc.text('X',mg+15.3,cy-0.8);norm(9);}
 const irxTxt = (!esNueva && V(i.pr_irx)) ? ' '+V(i.pr_irx) : '';
-doc.text('Traslado desde otra instalación ya registrada como'+irxTxt,mg+21,cy-0.5); cy+=7;
+doc.text(t('Traslado desde otra instalación ya registrada como')+irxTxt,mg+21,cy-0.5); cy+=7;
 const bullets=[
-'Que estos equipos cumplen los requisitos legales necesarios para poder ser inscritos en el Registro de instalaciones de radiodiagnóstico médico.',
-'Que se adjunta a este Certificado una hoja de datos técnicos por cada uno de los equipos y sus componentes.',
-'Que toda la documentación aportada en relación con los equipos corresponde a los equipos concretos a suministrar e instalar.',
+t('Que estos equipos cumplen los requisitos legales necesarios para poder ser inscritos en el Registro de instalaciones de radiodiagnóstico médico.'),
+t('Que se adjunta a este Certificado una hoja de datos técnicos por cada uno de los equipos y sus componentes.'),
+t('Que toda la documentación aportada en relación con los equipos corresponde a los equipos concretos a suministrar e instalar.'),
 ];
 bullets.forEach(b=>{
 norm(9);
@@ -3481,17 +3481,24 @@ const fechaStr=(function(){
 if(!i.fecha) return '_____ de __________ de _____';
 const p=i.fecha.split('-');
 if(p.length!==3) return i.fecha;
-const meses=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
-const mes = meses[parseInt(p[1],10)-1]||p[1];
+const lang = window.LANG || 'es';
+const mesesES=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+const mesesEN=['January','February','March','April','May','June','July','August','September','October','November','December'];
+const mesesDE=['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'];
+const mesesArr = lang==='en'?mesesEN:(lang==='de'?mesesDE:mesesES);
+const mes = mesesArr[parseInt(p[1],10)-1]||p[1];
+const dia = parseInt(p[2],10);
+if(lang==='en') return mes+' '+dia+', '+p[0];
+if(lang==='de') return dia+'. '+mes+' '+p[0];
 return p[2]+' de '+mes+' de '+p[0];
 })();
-doc.text('En Las Palmas de Gran Canaria, a '+fechaStr,mg+5,s3Top+11);
+doc.text(t('En Las Palmas de Gran Canaria, a ')+fechaStr,mg+5,s3Top+11);
 const sigX=mg+cw-76, sigLineY=s3Top+34;
 ln(sigX,sigLineY,mg+cw-5,sigLineY);
 bold(10); const sigName=V(i.director)||'                              ';
 const sigW=doc.getTextWidth(sigName);
 doc.text(sigName,sigX+(71-sigW)/2,sigLineY-5);
-norm(7.5); doc.text('[Nombre del representante de la EVAT]',sigX,sigLineY+4);
+norm(7.5); doc.text(t('[Nombre del representante de la EVAT]'),sigX,sigLineY+4);
 const _an='Anexo_II_'+V(i.cliente).replace(/\s+/g,'_')+'_'+V(i.tipo).replace(/\s+/g,'_')+'.pdf';
 showPreview(doc,'Anexo II — '+V(i.cliente),()=>{doc.save(_an);notify('Anexo II descargado ✓','success');});
 notify('Anexo II generado \u2713','success');
@@ -3887,7 +3894,7 @@ N(11); doc.text((pCp+' '+pLoc).trim().toUpperCase(),W/2,y+22,{align:'center'});
 doc.addPage();
 {
 let y=18;
-titulo('DETALLE DE DATOS COMPLETOS DE LA SALA',y,11); y+=12;
+titulo(t('DETALLE DE DATOS COMPLETOS DE LA SALA'),y,11); y+=12;
 const lw=50, rH=8, fw=cw;
 const rowGray=(lbl,val,y2)=>{ cell(mg,y2,lw,rH,lbl,true,true,8); cell(mg+lw,y2,fw-lw,rH,val,false,false,9); };
 const rowSplit=(l1,v1,w1,l2,v2,y2)=>{
@@ -3896,11 +3903,11 @@ cell(mg+lw+w1,y2,(fw-lw-w1)/2,rH,l2,true,true,7); cell(mg+lw+w1+(fw-lw-w1)/2,y2,
 };
 secHeader(mg,y,fw,8,t('INSTALADOR')); y+=8;
 rowGray(t('INSTALADOR'),pInst,y); y+=rH;
-rowSplit('CIF/NIF',pCif,(fw-lw)/2,t('COD. AUTORIZACION'),pAuth,y); y+=rH;
-rowGray('TECNICO',pTec,y); y+=rH;
-rowSplit('DNI',pDni,(fw-lw)/2,t('FECHA NAC.'),pFnac,y); y+=rH+5;
+rowSplit(t('CIF/NIF'),pCif,(fw-lw)/2,t('COD. AUTORIZACION'),pAuth,y); y+=rH;
+rowGray(t('TÉCNICO'),pTec,y); y+=rH;
+rowSplit(t('DNI'),pDni,(fw-lw)/2,t('FECHA NAC.'),pFnac,y); y+=rH+5;
 secHeader(mg,y,fw,8,t('EQUIPO')); y+=8;
-[['N EQUIPO',pNeq],[t('FIJO/MOVIL'),pFM],[t('TIPO'),pTipo],
+[[t('N EQUIPO'),pNeq],[t('FIJO/MOVIL'),pFM],[t('TIPO'),pTipo],
 [t('FABRICANTE'),pFab],[t('PAIS'),pPais],[t('DENOMINACION'),pDenom]].forEach(([l,v])=>{
 rowGray(l,v,y); y+=rH;
 });
@@ -3909,21 +3916,21 @@ const mw=42, sw=(fw-mw)/3*2, vw=(fw-mw)/3;
 secHeader(mg,y,fw,7,t('SISTEMA')); y+=7;
 cell(mg,y,mw,rH*1.6,t('MARCA/MODELO'),true,true,8);
 cell(mg+mw,y,sw/2,rH*1.6,pSisMod,false,false,9);
-cell(mg+mw+sw/2,y,sw/2,rH*1.6,'COD.ORG.NOTIF. CE FAB.',true,true,7);
+cell(mg+mw+sw/2,y,sw/2,rH*1.6,t('COD.ORG.NOTIF. CE FAB.'),true,true,7);
 cell(mg+mw+sw,y,vw,rH*1.6,pSisCod,false,false,9); y+=rH*1.6;
 cell(mg,y,mw,rH,t('N SERIE'),true,true,8); cell(mg+mw,y,sw/3,rH,pNserie,false,false,9);
 cell(mg+mw+sw/3,y,sw/6,rH,'KV max',true,true,7); cell(mg+mw+sw/3+sw/6,y,sw/6,rH,pKv,false,false,9);
 cell(mg+mw+sw*2/3,y,sw/6,rH,'mA max',true,true,7); cell(mg+mw+sw*2/3+sw/6,y,vw,rH,pMa,false,false,9); y+=rH;
-cell(mg,y,mw,rH,'ANO FAB.',true,true,8); cell(mg+mw,y,fw-mw,rH,pAnio,false,false,9); y+=rH+3;
+cell(mg,y,mw,rH,t('ANO FAB.'),true,true,8); cell(mg+mw,y,fw-mw,rH,pAnio,false,false,9); y+=rH+3;
 secHeader(mg,y,fw,7,t('TUBO')); y+=7;
 cell(mg,y,mw,rH*1.6,t('MARCA/MODELO'),true,true,8);
 cell(mg+mw,y,sw/2,rH*1.6,pTubMod,false,false,9);
-cell(mg+mw+sw/2,y,sw/2,rH*1.6,'COD.ORG.NOTIF. CE FAB.',true,true,7);
+cell(mg+mw+sw/2,y,sw/2,rH*1.6,t('COD.ORG.NOTIF. CE FAB.'),true,true,7);
 cell(mg+mw+sw,y,vw,rH*1.6,pTubCod,false,false,9); y+=rH*1.6;
 cell(mg,y,mw,rH,t('N SERIE'),true,true,8); cell(mg+mw,y,sw/3,rH,pTnserie,false,false,9);
 cell(mg+mw+sw/3,y,sw/6,rH,'KV max',true,true,7); cell(mg+mw+sw/3+sw/6,y,sw/6,rH,pTkv,false,false,9);
 cell(mg+mw+sw*2/3,y,sw/6,rH,'mA max',true,true,7); cell(mg+mw+sw*2/3+sw/6,y,vw,rH,pTma,false,false,9); y+=rH;
-cell(mg,y,mw,rH,'ANO FAB.',true,true,8); cell(mg+mw,y,fw-mw,rH,pTanio,false,false,9);
+cell(mg,y,mw,rH,t('ANO FAB.'),true,true,8); cell(mg+mw,y,fw-mw,rH,pTanio,false,false,9);
 }
 doc.addPage();
 {
@@ -3967,8 +3974,8 @@ cell(tx,y,eC[ix],8,v,false,false,8.5); tx+=eC[ix];
 for(let n=0;n<3;n++){tx=mg;eC.forEach(w=>{cell(tx,y,w,8,'',false,false);tx+=w;});y+=8;}
 }
 y+=8;
-B(10); doc.text('INFORME TECNICO DE RESULTADOS',mg,y);
-const iw=doc.getTextWidth('INFORME TECNICO DE RESULTADOS');
+B(10); doc.text(t('INFORME TECNICO DE RESULTADOS'),mg,y);
+const iw=doc.getTextWidth(t('INFORME TECNICO DE RESULTADOS'));
 doc.setLineWidth(0.4); doc.line(mg,y+1,mg+iw,y+1); doc.setLineWidth(0.2);
 It(8); doc.text('(segun Protocolo Espanol de Control de Calidad en Radiodiagnostico - SEFM-SEPR 2002 rev 1)',mg,y+5);
 y+=12;
@@ -4012,10 +4019,10 @@ secHeader(mg,y,aw,8,t('CONTROL DE CALIDAD DE CONTRASTE')); y+=8;
 fillGR(); doc.rect(mg,y,aw,7,'FD');
 It(8.5); doc.text(V(inst['a1-cont-params'])||'120KV, 280mA, 1 x 10,00mm, foco grueso, 0,5seg',W/2,y+4.8,{align:'center'}); y+=7;
 const cLw=50,cHUw=72,cECw=58;
-cell(mg,y,cLw,8,'',true,false); cell(mg+cLw,y,cHUw,8,'CT Air (HV)',true,true,8.5,'center'); cell(mg+cLw+cHUw,y,cECw,8,'Escala de contrastes',true,true,8,'center'); y+=8;
-[['Referencia','- 1.000,00','1,92e - 004',true],
+cell(mg,y,cLw,8,'',true,false); cell(mg+cLw,y,cHUw,8,'CT Air (HV)',true,true,8.5,'center'); cell(mg+cLw+cHUw,y,cECw,8,t('Escala de contrastes'),true,true,8,'center'); y+=8;
+[[t('Referencia'),'- 1.000,00','1,92e - 004',true],
 [t('Tolerancia'),'+/- 10,00','+/- 3,00e-006',true],
-['Resultados',V(inst['a1-cont-res-hu']),V(inst['a1-cont-res-ec']),false]
+[t('Resultados'),V(inst['a1-cont-res-hu']),V(inst['a1-cont-res-ec']),false]
 ].forEach(([l,hu,ec,gray])=>{
 cell(mg,y,cLw,8,l,true,true,8.5); cell(mg+cLw,y,cHUw,8,hu,gray,false,9,'center'); cell(mg+cLw+cHUw,y,cECw,8,ec,gray,false,9,'center'); y+=8;
 });
@@ -4027,7 +4034,7 @@ fillGR(); doc.rect(mg,y,aw,7,'FD');
 It(8.5); doc.text(V(inst['a1-ruido-params'])||'120 KV, foco fino, 160mA, 1sec, 6x0,6mm',W/2,y+4.8,{align:'center'}); y+=7;
 const rKw=20,rCw=Math.floor((aw-rKw)/6);
 cell(mg,y,rKw,6,'',true,false);
-cell(mg+rKw,y,rCw*2,6,'Referencia',true,true,8,'center');
+cell(mg+rKw,y,rCw*2,6,t('Referencia'),true,true,8,'center');
 cell(mg+rKw+rCw*2,y,rCw*2,6,t('Tolerancia'),true,true,8,'center');
 cell(mg+rKw+rCw*4,y,rCw*2,6,t('Resultado'),true,true,8,'center'); y+=6;
 cell(mg,y,rKw,6,'',true,false);
@@ -4056,7 +4063,7 @@ secHeader(mg,y,aw,8,t('CONTROL DE CENTRAJE DE COLIMACION')); y+=8;
 fillGR(); doc.rect(mg,y,aw,7,'FD');
 It(8.5); doc.text(V(inst['a1-centr-params'])||'120KV, 180mA, 1 x 2,00mm, foco fino, 0,5seg',W/2,y+4.8,{align:'center'}); y+=7;
 const cenLw=55,cenVw=aw-cenLw;
-[['Referencia (mm)','0,0',true],['Tolerancia (mm)','+/- 2.0',true],['Resultado (mm)',V(inst['a1-centr-res']),false]].forEach(([l,v,gray])=>{
+[[t('Referencia (mm)'),'0,0',true],[t('Tolerancia (mm)'),'+/- 2.0',true],[t('Resultado (mm)'),V(inst['a1-centr-res']),false]].forEach(([l,v,gray])=>{
 cell(mg,y,cenLw,8,l,true,true,8.5); cell(mg+cenLw,y,cenVw,8,v,gray,false,9,'center'); y+=8;
 });
 } 
@@ -4083,7 +4090,7 @@ const reprW=aw;
 secHeader(mg,y,reprW,8,t('REPRODUCTIVIDAD DE LA TENSION')); y+=8;
 const reprKw=30, reprCw=Math.floor((reprW-reprKw)/4);
 cell(mg,y,reprKw,7,'KV',true,true,8.5,'center');
-['TEST 1','TEST 2','TEST 3','TEST 4'].forEach((t,ti)=>cell(mg+reprKw+ti*reprCw,y,reprCw,7,t,true,true,8.5,'center'));
+['TEST 1','TEST 2','TEST 3','TEST 4'].map(lbl=>t(lbl)).forEach((lbl,ti)=>cell(mg+reprKw+ti*reprCw,y,reprCw,7,lbl,true,true,8.5,'center'));
 y+=7;
 const reprKVs=['70 KV','80 KV','90 KV','100 KV','110 KV',''];
 reprKVs.forEach((kv,n)=>{
@@ -4115,9 +4122,9 @@ y+=8;
 if((inst['chk-rend']!==false&&(document.getElementById('chk-rend')?document.getElementById('chk-rend').checked:true))){
 checkPage(40);
 y+=8;
-secHeader(mg,y,aw,8,'VALOR DEL RENDIMIENTO'); y+=8;
+secHeader(mg,y,aw,8,t('VALOR DEL RENDIMIENTO')); y+=8;
 const rLw=Math.floor(aw/2), rVw=aw-rLw;
-cell(mg,y,rLw,9,'RENDIMIENTO A 80 KV',true,true,8.5,'center');
+cell(mg,y,rLw,9,t('RENDIMIENTO A 80 KV'),true,true,8.5,'center');
 const rendVal='5,' + V(inst['rend-dec']) + ' UGY /MA';
 cell(mg+rLw,y,rVw,9,rendVal,false,false,10,'center');
 y+=9;
@@ -4125,7 +4132,7 @@ y+=9;
 if((inst['chk-texp']!==false&&(document.getElementById('chk-texp')?document.getElementById('chk-texp').checked:true))){
 checkPage(80);
 y+=8;
-secHeader(mg,y,aw,8,'EXACTITUD DEL TIEMPO DE EXPOSICION'); y+=8;
+secHeader(mg,y,aw,8,t('EXACTITUD DEL TIEMPO DE EXPOSICION')); y+=8;
 fillGR(); doc.rect(mg,y,aw,7,'FD');
 It(8.5); doc.text('Técnica: '+(V(inst['texp-tecnica'])||'80 kv 200 ma'),W/2,y+4.8,{align:'center'}); y+=7;
 const tCols=[30,42,42,56];
@@ -5381,6 +5388,7 @@ const TRANSLATIONS = {
     'N DE SERIE': 'N DE SERIE',
     'Año de fabricación': 'Año de fabricación',
     'En Las Palmas de Gran Canaria a ': 'En Las Palmas de Gran Canaria a ',
+    'En Las Palmas de Gran Canaria, a ': 'En Las Palmas de Gran Canaria, a ',
     'CIF/NIF': 'CIF/NIF',
     'CÓDIGO DE AUTORIZACIÓN: ': 'CÓDIGO DE AUTORIZACIÓN: ',
     'FECHA DE NACIMIENTO: ': 'FECHA DE NACIMIENTO: ',
@@ -5448,6 +5456,33 @@ const TRANSLATIONS = {
     'N EQUIPO': 'N EQUIPO',
     'ANEXO I': 'ANEXO I',
     'Ver ANEXO I': 'Ver ANEXO I',
+    'DETALLE DE DATOS COMPLETOS DE LA SALA': 'DETALLE DE DATOS COMPLETOS DE LA SALA',
+    'INFORME TECNICO DE RESULTADOS': 'INFORME TECNICO DE RESULTADOS',
+    'VALOR DEL RENDIMIENTO': 'VALOR DEL RENDIMIENTO',
+    'RENDIMIENTO A 80 KV': 'RENDIMIENTO A 80 KV',
+    'EXACTITUD DEL TIEMPO DE EXPOSICION': 'EXACTITUD DEL TIEMPO DE EXPOSICION',
+    'Referencia': 'Referencia',
+    'Referencia (mm)': 'Referencia (mm)',
+    'Tolerancia (mm)': 'Tolerancia (mm)',
+    'Resultado (mm)': 'Resultado (mm)',
+    'Resultados': 'Resultados',
+    'Escala de contrastes': 'Escala de contrastes',
+    'TEST 1': 'TEST 1', 'TEST 2': 'TEST 2', 'TEST 3': 'TEST 3', 'TEST 4': 'TEST 4',
+    'Certificado de conformidad de los equipos para su registro (EVAT)': 'Certificado de conformidad de los equipos para su registro (EVAT)',
+    'NIF:': 'NIF:',
+    'C.P.': 'C.P.',
+    '(si es diferente al titular)': '(si es diferente al titular)',
+    'D. ': 'D. ',
+    ', en calidad de representante de la EVAT. ': ', en calidad de representante de la EVAT. ',
+    'con fines de registro de la instalación, ': 'con fines de registro de la instalación, ',
+    '- Que los equipos adquiridos por el titular para la instalación arriba citada son los siguientes:': '- Que los equipos adquiridos por el titular para la instalación arriba citada son los siguientes:',
+    '(1) Especificar por separado Generadores y Tubos y, en el caso de que formen parte de un sistema integrado completo, indicar también su nombre.': '(1) Especificar por separado Generadores y Tubos y, en el caso de que formen parte de un sistema integrado completo, indicar también su nombre.',
+    'EQUIPO Nº': 'EQUIPO Nº',
+    '- Que estos equipos provienen de:': '- Que estos equipos provienen de:',
+    'Que estos equipos cumplen los requisitos legales necesarios para poder ser inscritos en el Registro de instalaciones de radiodiagnóstico médico.': 'Que estos equipos cumplen los requisitos legales necesarios para poder ser inscritos en el Registro de instalaciones de radiodiagnóstico médico.',
+    'Que se adjunta a este Certificado una hoja de datos técnicos por cada uno de los equipos y sus componentes.': 'Que se adjunta a este Certificado una hoja de datos técnicos por cada uno de los equipos y sus componentes.',
+    'Que toda la documentación aportada en relación con los equipos corresponde a los equipos concretos a suministrar e instalar.': 'Que toda la documentación aportada en relación con los equipos corresponde a los equipos concretos a suministrar e instalar.',
+    '[Nombre del representante de la EVAT]': '[Nombre del representante de la EVAT]',
   },
   en: {
     // Ficha Técnica
@@ -5458,7 +5493,7 @@ const TRANSLATIONS = {
     'TELÉFONO': 'PHONE',
     'INSTALADOR': 'INSTALLER',
     'TÉCNICO': 'TECHNICIAN',
-    'DNI': 'ID',
+    'DNI': 'National ID No. (DNI)',
     'EQUIPO': 'EQUIPMENT',
     'N DE EQUIPO': 'EQUIPMENT No.',
     'FIJO / MÓVIL': 'FIXED / MOBILE',
@@ -5481,13 +5516,14 @@ const TRANSLATIONS = {
     'N DE SERIE': 'SERIAL No.',
     'Año de fabricación': 'Manufacturing year',
     'En Las Palmas de Gran Canaria a ': 'In Las Palmas de Gran Canaria on ',
-    'CIF/NIF': 'VAT No.',
+    'En Las Palmas de Gran Canaria, a ': 'In Las Palmas de Gran Canaria, ',
+    'CIF/NIF': 'Tax ID No. (NIF)',
     'CÓDIGO DE AUTORIZACIÓN: ': 'AUTHORIZATION CODE: ',
     'FECHA DE NACIMIENTO: ': 'DATE OF BIRTH: ',
     // Anexo II
     'ANEXO II': 'ANNEX II',
     'NOMBRE DEL TITULAR:': 'HOLDER NAME:',
-    'NIF:': 'VAT No.:',
+    'NIF:': 'Tax ID (NIF):',
     'DIRECCIÓN': 'ADDRESS',
     'C.P.': 'ZIP',
     'LOCALIDAD': 'CITY',
@@ -5506,10 +5542,10 @@ const TRANSLATIONS = {
     'CONTROL DE CALIDAD DE RUIDO': 'NOISE QUALITY CONTROL',
     'CONTROL DE CENTRAJE DE COLIMACION': 'COLLIMATION CENTRING CONTROL',
     'RESULTADO DE AIRE CTDI': 'AIR CTDI RESULT',
-    'EXACTITUD DE LA TENSION': 'VOLTAGE ACCURACY',
-    'REPRODUCTIVIDAD DE LA TENSION': 'VOLTAGE REPRODUCIBILITY',
-    'FILTRACION CAPA HEMIRREDUCTORA': 'HALF-VALUE LAYER FILTRATION',
-    'RENDIMIENTO': 'OUTPUT',
+    'EXACTITUD DE LA TENSION': 'TUBE VOLTAGE (kVp) ACCURACY',
+    'REPRODUCTIVIDAD DE LA TENSION': 'TUBE VOLTAGE (kVp) REPRODUCIBILITY',
+    'FILTRACION CAPA HEMIRREDUCTORA': 'FILTRATION - HALF-VALUE LAYER (HVL)',
+    'RENDIMIENTO': 'TUBE OUTPUT',
     'TIEMPO DE EXPOSICION': 'EXPOSURE TIME',
     'RESULTADO': 'RESULT',
     'TOLERANCIA': 'TOLERANCE',
@@ -5521,7 +5557,7 @@ const TRANSLATIONS = {
     'CALIDAD DEL HAZ': 'BEAM QUALITY',
     'HVL (MMA)': 'HVL (MMA)',
     'PARAMETROS GEOMETRICOS': 'GEOMETRIC PARAMETERS',
-    'Firma del Director': 'Director Signature',
+    'Firma del Director': "Director's Signature",
     'TENSION': 'VOLTAGE',
     'KV FIJADOS': 'SET KV',
     'KV MEDIDOS': 'MEASURED KV',
@@ -5547,6 +5583,32 @@ const TRANSLATIONS = {
     'N EQUIPO': 'EQUIP. No.',
     'ANEXO I': 'ANNEX I',
     'Ver ANEXO I': 'See ANNEX I',
+    'DETALLE DE DATOS COMPLETOS DE LA SALA': 'FULL ROOM DATA DETAILS',
+    'INFORME TECNICO DE RESULTADOS': 'TECHNICAL RESULTS REPORT',
+    'VALOR DEL RENDIMIENTO': 'TUBE OUTPUT VALUE',
+    'RENDIMIENTO A 80 KV': 'OUTPUT AT 80 KV',
+    'EXACTITUD DEL TIEMPO DE EXPOSICION': 'EXPOSURE TIME ACCURACY',
+    'Referencia': 'Reference',
+    'Referencia (mm)': 'Reference (mm)',
+    'Tolerancia (mm)': 'Tolerance (mm)',
+    'Resultado (mm)': 'Result (mm)',
+    'Resultados': 'Results',
+    'Escala de contrastes': 'Contrast Scale',
+    'TEST 1': 'TEST 1', 'TEST 2': 'TEST 2', 'TEST 3': 'TEST 3', 'TEST 4': 'TEST 4',
+    'Certificado de conformidad de los equipos para su registro (EVAT)': 'Certificate of Equipment Conformity for Registration (EVAT)',
+    'C.P.': 'ZIP',
+    '(si es diferente al titular)': '(if different from the holder)',
+    'D. ': 'Mr./Ms. ',
+    ', en calidad de representante de la EVAT. ': ', acting as representative of the EVAT (Authorized Verification Entity). ',
+    'con fines de registro de la instalación, ': 'for the purpose of registering the installation, ',
+    '- Que los equipos adquiridos por el titular para la instalación arriba citada son los siguientes:': '- That the equipment acquired by the holder for the above installation is as follows:',
+    '(1) Especificar por separado Generadores y Tubos y, en el caso de que formen parte de un sistema integrado completo, indicar también su nombre.': '(1) List Generators and Tubes separately; if they are part of a complete integrated system, also indicate its name.',
+    'EQUIPO Nº': 'EQUIPMENT No.',
+    '- Que estos equipos provienen de:': '- That this equipment comes from:',
+    'Que estos equipos cumplen los requisitos legales necesarios para poder ser inscritos en el Registro de instalaciones de radiodiagnóstico médico.': 'That this equipment meets the legal requirements needed to be registered in the Registry of Medical Radiodiagnostic Installations.',
+    'Que se adjunta a este Certificado una hoja de datos técnicos por cada uno de los equipos y sus componentes.': 'That a technical data sheet for each item of equipment and its components is attached to this Certificate.',
+    'Que toda la documentación aportada en relación con los equipos corresponde a los equipos concretos a suministrar e instalar.': 'That all documentation provided in relation to the equipment corresponds to the specific equipment to be supplied and installed.',
+    '[Nombre del representante de la EVAT]': '[Name of the EVAT representative]',
   },
   de: {
     // Ficha Técnica
@@ -5557,7 +5619,7 @@ const TRANSLATIONS = {
     'TELÉFONO': 'TELEFON',
     'INSTALADOR': 'INSTALLATEUR',
     'TÉCNICO': 'TECHNIKER',
-    'DNI': 'AUSWEIS-NR.',
+    'DNI': 'Personalausweis-Nr. (DNI)',
     'EQUIPO': 'GERÄT',
     'N DE EQUIPO': 'GERÄTE-NR.',
     'FIJO / MÓVIL': 'FEST / MOBIL',
@@ -5580,13 +5642,14 @@ const TRANSLATIONS = {
     'N DE SERIE': 'SERIEN-NR.',
     'Año de fabricación': 'Herstellungsjahr',
     'En Las Palmas de Gran Canaria a ': 'In Las Palmas de Gran Canaria am ',
-    'CIF/NIF': 'USt-IdNr.',
+    'En Las Palmas de Gran Canaria, a ': 'In Las Palmas de Gran Canaria, den ',
+    'CIF/NIF': 'Steuernummer (NIF)',
     'CÓDIGO DE AUTORIZACIÓN: ': 'GENEHMIGUNGSCODE: ',
     'FECHA DE NACIMIENTO: ': 'GEBURTSDATUM: ',
     // Anexo II
     'ANEXO II': 'ANHANG II',
     'NOMBRE DEL TITULAR:': 'INHABERNAME:',
-    'NIF:': 'USt-IdNr.:',
+    'NIF:': 'Steuernummer (NIF):',
     'DIRECCIÓN': 'ADRESSE',
     'C.P.': 'PLZ',
     'LOCALIDAD': 'STADT',
@@ -5598,17 +5661,17 @@ const TRANSLATIONS = {
     'NÚMERO DE SERIE': 'SERIENNUMMER',
     'Nueva adquisición': 'Neuerwerb',
     'Traslado desde otra instalación ya registrada como': 'Verlegung von einer anderen Installation registriert als',
-    'CERTIFICO:': 'ICH BESTÄTIGE:',
+    'CERTIFICO:': 'HIERMIT BESCHEINIGE ICH:',
     // Pruebas
     'PRUEBAS DE ACEPTACION': 'ABNAHMEPRÜFUNGEN',
     'CONTROL DE CALIDAD DE CONTRASTE': 'KONTRASTQUALITÄTSKONTROLLE',
     'CONTROL DE CALIDAD DE RUIDO': 'RAUSCHQUALITÄTSKONTROLLE',
     'CONTROL DE CENTRAJE DE COLIMACION': 'KOLLIMATIONSZENTRIER-KONTROLLE',
     'RESULTADO DE AIRE CTDI': 'LUFT-CTDI-ERGEBNIS',
-    'EXACTITUD DE LA TENSION': 'SPANNUNGSGENAUIGKEIT',
-    'REPRODUCTIVIDAD DE LA TENSION': 'SPANNUNGSREPRODUKTION',
-    'FILTRACION CAPA HEMIRREDUCTORA': 'HALBWERTSCHICHTFILTERUNG',
-    'RENDIMIENTO': 'LEISTUNG',
+    'EXACTITUD DE LA TENSION': 'GENAUIGKEIT DER RÖHRENSPANNUNG',
+    'REPRODUCTIVIDAD DE LA TENSION': 'REPRODUZIERBARKEIT DER RÖHRENSPANNUNG',
+    'FILTRACION CAPA HEMIRREDUCTORA': 'FILTERUNG - HALBWERTSCHICHTDICKE (HVL)',
+    'RENDIMIENTO': 'RÖHRENAUSBEUTE (DOSISAUSBEUTE)',
     'TIEMPO DE EXPOSICION': 'BELICHTUNGSZEIT',
     'RESULTADO': 'ERGEBNIS',
     'TOLERANCIA': 'TOLERANZ',
@@ -5646,6 +5709,32 @@ const TRANSLATIONS = {
     'N EQUIPO': 'GERÄT-NR.',
     'ANEXO I': 'ANHANG I',
     'Ver ANEXO I': 'Siehe ANHANG I',
+    'DETALLE DE DATOS COMPLETOS DE LA SALA': 'VOLLSTÄNDIGE RAUMDATEN',
+    'INFORME TECNICO DE RESULTADOS': 'TECHNISCHER ERGEBNISBERICHT',
+    'VALOR DEL RENDIMIENTO': 'WERT DER RÖHRENAUSBEUTE',
+    'RENDIMIENTO A 80 KV': 'AUSBEUTE BEI 80 KV',
+    'EXACTITUD DEL TIEMPO DE EXPOSICION': 'GENAUIGKEIT DER BELICHTUNGSZEIT',
+    'Referencia': 'Referenz',
+    'Referencia (mm)': 'Referenz (mm)',
+    'Tolerancia (mm)': 'Toleranz (mm)',
+    'Resultado (mm)': 'Ergebnis (mm)',
+    'Resultados': 'Ergebnisse',
+    'Escala de contrastes': 'Kontrastskala',
+    'TEST 1': 'TEST 1', 'TEST 2': 'TEST 2', 'TEST 3': 'TEST 3', 'TEST 4': 'TEST 4',
+    'Certificado de conformidad de los equipos para su registro (EVAT)': 'Konformitätsbescheinigung der Geräte für die Registrierung (EVAT)',
+    'C.P.': 'PLZ',
+    '(si es diferente al titular)': '(falls abweichend vom Inhaber)',
+    'D. ': 'Herr/Frau ',
+    ', en calidad de representante de la EVAT. ': ', in seiner/ihrer Eigenschaft als Vertreter der EVAT (zugelassene Prüfstelle). ',
+    'con fines de registro de la instalación, ': 'zum Zweck der Registrierung der Anlage, ',
+    '- Que los equipos adquiridos por el titular para la instalación arriba citada son los siguientes:': '- Dass die vom Inhaber für die oben genannte Anlage erworbenen Geräte wie folgt sind:',
+    '(1) Especificar por separado Generadores y Tubos y, en el caso de que formen parte de un sistema integrado completo, indicar también su nombre.': '(1) Generatoren und Röhren getrennt angeben; falls sie Teil eines vollständigen integrierten Systems sind, auch dessen Bezeichnung angeben.',
+    'EQUIPO Nº': 'GERÄT NR.',
+    '- Que estos equipos provienen de:': '- Dass diese Geräte stammen aus:',
+    'Que estos equipos cumplen los requisitos legales necesarios para poder ser inscritos en el Registro de instalaciones de radiodiagnóstico médico.': 'Dass diese Geräte die gesetzlichen Anforderungen für die Eintragung in das Register der radiologischen Diagnoseanlagen erfüllen.',
+    'Que se adjunta a este Certificado una hoja de datos técnicos por cada uno de los equipos y sus componentes.': 'Dass dieser Bescheinigung für jedes Gerät und seine Komponenten ein technisches Datenblatt beigefügt ist.',
+    'Que toda la documentación aportada en relación con los equipos corresponde a los equipos concretos a suministrar e instalar.': 'Dass die gesamte vorgelegte Dokumentation den konkreten zu liefernden und zu installierenden Geräten entspricht.',
+    '[Nombre del representante de la EVAT]': '[Name des EVAT-Vertreters]',
   }
 };
 
