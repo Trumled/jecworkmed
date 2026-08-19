@@ -5811,7 +5811,8 @@ const TRANSLATIONS = {
 // Función de traducción — t() en PDFs
 function t(key) {
   const lang = window.LANG || 'es';
-  return (TRANSLATIONS[lang] && TRANSLATIONS[lang][key]) ? TRANSLATIONS[lang][key] : key;
+  const dict = TRANSLATIONS[lang];
+  return (dict && Object.prototype.hasOwnProperty.call(dict, key)) ? dict[key] : key;
 }
 
 </script>
