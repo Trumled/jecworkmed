@@ -1910,6 +1910,7 @@
         <div class="form-group"><label>CP</label><input type="text" id="c-cp"></div>
         <div class="form-group"><label>Localidad</label><input type="text" id="c-loc"></div>
         <div class="form-group"><label>Provincia</label><input type="text" id="c-prov"></div>
+        <div class="form-group"><label>País</label><input type="text" id="c-pais" value="España"></div>
         <div class="form-group"><label>Contacto</label><input type="text" id="c-contacto"></div>
       </div>
     </div>
@@ -2821,6 +2822,7 @@ function openModalCliente() {
 document.getElementById('c-editing-id').value='';
 document.getElementById('modal-cli-title').textContent='Nuevo cliente';
 ['c-nombre','c-nif','c-irx','c-telefono','c-dir','c-cp','c-loc','c-prov','c-contacto'].forEach(id=>setVal(id,''));
+setVal('c-pais','España');
 document.getElementById('modal-cli').classList.add('open');
 }
 function verCliente(id) {
@@ -2881,6 +2883,7 @@ function verCliente(id) {
           ${row('CP', c.cp)}
           ${row('Localidad', c.localidad)}
           ${row('Provincia', c.provincia)}
+          ${row('País', c.pais)}
         </div>
       </div>
       <div class="ficha-section full">
@@ -2898,7 +2901,7 @@ document.getElementById('c-editing-id').value=id;
 document.getElementById('modal-cli-title').textContent='Editar cliente';
 setVal('c-nombre',c.nombre); setVal('c-nif',c.nif); setVal('c-irx',c.irx||''); setVal('c-telefono',c.telefono);
 setVal('c-dir',c.direccion); setVal('c-cp',c.cp); setVal('c-loc',c.localidad);
-setVal('c-prov',c.provincia); setVal('c-contacto',c.contacto);
+setVal('c-prov',c.provincia); setVal('c-pais',c.pais||'España'); setVal('c-contacto',c.contacto);
 document.getElementById('modal-cli').classList.add('open');
 }
 function saveCliente() {
@@ -2906,7 +2909,7 @@ const editId=document.getElementById('c-editing-id').value;
 const c={id:editId||String(Date.now()),nombre:getVal('c-nombre'),nif:getVal('c-nif'),
 irx:getVal('c-irx'),
 telefono:getVal('c-telefono'),direccion:getVal('c-dir'),cp:getVal('c-cp'),
-localidad:getVal('c-loc'),provincia:getVal('c-prov'),contacto:getVal('c-contacto')};
+localidad:getVal('c-loc'),provincia:getVal('c-prov'),pais:getVal('c-pais'),contacto:getVal('c-contacto')};
 if (!c.nombre) { alert('El nombre es obligatorio'); return; }
 if (editId) { const idx=db.clientes.findIndex(x=>x.id===editId); if(idx>=0) db.clientes[idx]=c; }
 else db.clientes.push(c);
