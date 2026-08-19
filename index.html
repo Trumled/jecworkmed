@@ -3307,7 +3307,7 @@ T(lb,mg+2,y+5.5,8,true); T(vl,mg+lW+3,y+5.5,9,false); y+=rH;
 y+=6;
 R(mg,y,cw,rH); T(t('EQUIPO'),W/2,y+6,12,true,{align:'center'}); y+=rH;
 const c1=lW,c2=48,c3=cw-lW-48;
-[[t('N DE EQUIPO'),v(i.neq),'',''],[t('FIJO / MÓVIL'),v(i.fijomovil),'',''],[t('TIPO'),v(i.tipo),'',''],[t('FABRICANTE'),v(i.fabricante),'',''],[t('PAÍS'),v(i.pais),t('CÓDIGO ORGANISMOS\nNOTIFICADOR'),v(i.codorg)],[t('DENOMINACIÓN'),v(i.denom),'','']].forEach(([l,val,l2,v2])=>{
+[[t('N DE EQUIPO'),v(i.neq),'',''],[t('FIJO / MÓVIL'),t(v(i.fijomovil)),'',''],[t('TIPO'),t(v(i.tipo)),'',''],[t('FABRICANTE'),v(i.fabricante),'',''],[t('PAÍS'),v(i.pais),t('CÓDIGO ORGANISMOS\nNOTIFICADOR'),v(i.codorg)],[t('DENOMINACIÓN'),v(i.denom),'','']].forEach(([l,val,l2,v2])=>{
 R(mg,y,c1,rH); R(mg+c1,y,c2,rH);
 T(l,mg+2,y+5.5,8,true); T(val,mg+c1+2,y+5.5,9,false);
 if(l2){R(mg+c1+c2,y,c3/2,rH);R(mg+c1+c2+c3/2,y,c3/2,rH);l2.split('\n').forEach((ln,ix)=>{T(ln,mg+c1+c2+2,y+3+ix*3.5,7,true);});T(v2,mg+c1+c2+c3/2+2,y+5.5,9,false);}
@@ -3910,7 +3910,7 @@ rowSplit(t('CIF/NIF'),pCif,(fw-lw)/2,t('COD. AUTORIZACION'),pAuth,y); y+=rH;
 rowGray(t('TÉCNICO'),pTec,y); y+=rH;
 rowSplit(t('DNI'),pDni,(fw-lw)/2,t('FECHA NAC.'),pFnac,y); y+=rH+5;
 secHeader(mg,y,fw,8,t('EQUIPO')); y+=8;
-[[t('N EQUIPO'),pNeq],[t('FIJO/MOVIL'),pFM],[t('TIPO'),pTipo],
+[[t('N EQUIPO'),pNeq],[t('FIJO/MOVIL'),t(pFM)],[t('TIPO'),t(pTipo)],
 [t('FABRICANTE'),pFab],[t('PAIS'),pPais],[t('DENOMINACION'),pDenom]].forEach(([l,v])=>{
 rowGray(l,v,y); y+=rH;
 });
@@ -5503,6 +5503,14 @@ const TRANSLATIONS = {
     'Electrómetro': 'Electrómetro',
     'Kilovoltímetro': 'Kilovoltímetro',
     'Medidor de tiempo': 'Medidor de tiempo',
+    'Fijo': 'Fijo',
+    'Móvil': 'Móvil',
+    'Equipo de RX': 'Equipo de RX',
+    'CT': 'CT',
+    'Mamografo': 'Mamógrafo',
+    'Arco en C': 'Arco en C',
+    'CT Dental': 'CT Dental',
+    'Hortopanto': 'Ortopantomógrafo',
   },
   en: {
     // Ficha Técnica
@@ -5644,6 +5652,14 @@ const TRANSLATIONS = {
     'Electrómetro': 'Electrometer',
     'Kilovoltímetro': 'Kilovoltmeter',
     'Medidor de tiempo': 'Timer',
+    'Fijo': 'Fixed',
+    'Móvil': 'Mobile',
+    'Equipo de RX': 'X-ray Equipment',
+    'CT': 'CT',
+    'Mamografo': 'Mammography Unit',
+    'Arco en C': 'C-arm',
+    'CT Dental': 'Dental CT',
+    'Hortopanto': 'Panoramic X-ray Unit (OPG)',
   },
   de: {
     // Ficha Técnica
@@ -5785,6 +5801,14 @@ const TRANSLATIONS = {
     'Electrómetro': 'Elektrometer',
     'Kilovoltímetro': 'Kilovoltmeter',
     'Medidor de tiempo': 'Zeitmesser',
+    'Fijo': 'Fest',
+    'Móvil': 'Mobil',
+    'Equipo de RX': 'Röntgengerät',
+    'CT': 'CT',
+    'Mamografo': 'Mammographiegerät',
+    'Arco en C': 'C-Bogen',
+    'CT Dental': 'Dental-CT',
+    'Hortopanto': 'Orthopantomograph (OPG)',
   }
 };
 
