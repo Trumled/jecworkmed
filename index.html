@@ -2714,8 +2714,11 @@ document.getElementById('view-actions').innerHTML = `
 <button class="btn btn-sm" style="padding:3px 10px;font-size:11px;font-weight:${(window.LANG||'es')==='de'?'700':'normal'}" onclick="setPdfLang('de');this.parentNode.querySelectorAll('button').forEach(b=>b.style.fontWeight='normal');this.style.fontWeight='700'" title="Deutsch">🇩🇪 DE</button>
 </div>
 <button class="btn btn-sm btn-dark" onclick="imprimirFicha('${i.id}')">🖨 Ficha Técnica</button>
+<button class="btn btn-sm btn-outline" onclick="exportarFichaWord('${i.id}')" title="Descargar en Word (editable)">📝 Word</button>
 <button class="btn btn-sm btn-dark" onclick="imprimirAnexo('${i.id}')">🖨 Anexo II</button>
+<button class="btn btn-sm btn-outline" onclick="exportarAnexoWord('${i.id}')" title="Descargar en Word (editable)">📝 Word</button>
 <button class="btn btn-sm btn-dark" onclick="imprimirPruebas('${i.id}')">🖨 Pruebas</button>
+<button class="btn btn-sm btn-outline" onclick="exportarPruebasWord('${i.id}')" title="Descargar en Word (editable)">📝 Word</button>
 <button class="btn btn-sm btn-green" onclick="imprimirTodo('${i.id}')">📄 Todo</button>
 </div>`;
 document.getElementById('view-body').innerHTML = `
@@ -4197,6 +4200,342 @@ imprimirFicha(id);
 setTimeout(()=>imprimirAnexo(id),600);
 setTimeout(()=>imprimirPruebas(id),1200);
 }
+
+// ===== EXPORTACIÓN A WORD (.rtf — se abre y edita de forma nativa en Word) =====
+function rtfEscape(str) {
+  str = String(str===undefined||str===null?'':str);
+  let out = '';
+  for (let i=0;i<str.length;i++){
+    const c = str[i];
+    const code = str.charCodeAt(i);
+    if (c==='\\') out += '\\\\';
+    else if (c==='{') out += '\\{';
+    else if (c==='}') out += '\\}';
+    else if (c==='\n') out += '\\par ';
+    else if (code > 126) { out += '\\u'+(code>32767?code-65536:code)+'?'; }
+    else out += c;
+  }
+  return out;
+}
+function rtfPar(text, opts) {
+  opts = opts||{};
+  let fmt = '\\pard ';
+  if(opts.align==='center') fmt += '\\qc ';
+  if(opts.size) fmt += '\\fs'+opts.size+' ';
+  if(opts.bold) fmt += '\\b ';
+  if(opts.italic) fmt += '\\i ';
+  return '{'+fmt+rtfEscape(text)+'\\par}\n';
+}
+function rtfSpace(twips){ return '{\\pard\\sa0\\sb0\\fs'+Math.max(4,Math.round((twips||120)/10))+' \\par}\n'; }
+function rtfTable(rows, widths, opts) {
+  // rows: array of arrays of cell strings. widths: array of column widths in twips.
+  // opts: {headerRow: index of header row to bold+shade, align: array of 'left'/'center' per column}
+  opts = opts||{};
+  let out = '';
+  rows.forEach((row, ri)=>{
+    const isHeader = opts.headerRow!==undefined ? ri===opts.headerRow : false;
+    let trow = '\\trowd\\trgaph80\\trleft0\\trqc';
+    let pos=0;
+    widths.forEach(w=>{ pos+=w; trow += (isHeader?'\\clshdng10000\\clcbpat16\\clcbpatraw16':'')+'\\clbrdrt\\brdrs\\clbrdrl\\brdrs\\clbrdrb\\brdrs\\clbrdrr\\brdrs\\cellx'+pos; });
+    trow += '\n';
+    row.forEach((cellTxt,ci)=>{
+      let cf = '\\pard\\intbl';
+      if(opts.align && opts.align[ci]==='center') cf += '\\qc';
+      if(isHeader) cf += '\\b';
+      cf += ' \\fs18 ';
+      trow += cf+rtfEscape(cellTxt)+(isHeader?'\\b0':'')+'\\cell ';
+    });
+    trow += '\\row\n';
+    out += trow;
+  });
+  return out;
+}
+function rtfDoc(bodyRtf) {
+  return '{\\rtf1\\ansi\\ansicpg1252\\deff0\\deflang3082{\\fonttbl{\\f0 Calibri;}}\\viewkind4\\uc1\\pard\\f0\\fs20\n'+bodyRtf+'}';
+}
+function downloadRTF(filename, bodyRtf) {
+  const blob = new Blob([rtfDoc(bodyRtf)], {type:'application/rtf'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = filename;
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  setTimeout(()=>URL.revokeObjectURL(url), 4000);
+  notify('Documento Word descargado ✓','success');
+}
+function rtfLabelRow(items) {
+  // items: array of [label, value] pairs -> one two-column table row per item
+  let out='';
+  items.forEach(([lb,val])=>{
+    out += rtfTable([[lb,val||'']],[2600,6600],{align:['left','left']});
+  });
+  return out;
+}
+
+function exportarFichaWord(id) {
+const i = db.instalaciones.find(x=>x.id===id); if(!i) return;
+const emp = getEmpresaData(i.empresa);
+const tec = getTecnicoData(i.tecnico);
+const v = x=>String(x||'');
+let b='';
+b += rtfPar(t('FICHA DE DATOS TÉCNICOS'),{bold:true,size:32,align:'center'});
+b += rtfSpace(200);
+b += rtfLabelRow([[t('DATO DE LA INSTALACIÓN'),v(i.cliente)],[t('POBLACIÓN'),v(i.localidad)],[t('PROVINCIA'),v(i.provincia)],[t('TELÉFONO'),v(i.telefono)]]);
+b += rtfSpace(120);
+b += rtfLabelRow([[t('INSTALADOR'),v(emp.nombre||i.empresa)],[t('CIF/NIF'),v(emp.cif)],[t('CÓDIGO DE AUTORIZACIÓN: '),v(emp.codAuth)],[t('TÉCNICO'),v(i.tecnico)],[t('DNI'),v(tec.dni)],[t('FECHA DE NACIMIENTO: '),v(tec.fechaNac)]]);
+b += rtfSpace(200);
+b += rtfPar(t('EQUIPO'),{bold:true,size:22});
+b += rtfLabelRow([[t('N DE EQUIPO'),v(i.neq)],[t('FIJO / MÓVIL'),t(v(i.fijomovil))],[t('TIPO'),t(v(i.tipo))],[t('FABRICANTE'),v(i.fabricante)],[t('PAÍS'),v(i.pais)],[t('CÓDIGO ORGANISMOS\nNOTIFICADOR'),v(i.codorg)],[t('DENOMINACIÓN'),v(i.denom)]]);
+b += rtfSpace(200);
+b += rtfPar(t('SISTEMA'),{bold:true,size:22});
+b += rtfLabelRow([[t('MARCA/MODELO'),v(i.fabricante)+(i.modelo?' / '+v(i.modelo):'')],[t('CÓDIGO ORGANISMO'),v(i.codfab)],[t('N SERIE'),v(i.nserie)],['KV max',v(i.kv)],['Ma max',v(i.ma)],[t('AÑO DE FABRICACIÓN'),v(i.anio)]]);
+b += rtfSpace(200);
+b += rtfPar(t('TUBO'),{bold:true,size:22});
+b += rtfLabelRow([[t('MARCA/MODELO'),v(i.tmod)+(i.tcod?' / '+v(i.tcod):'')],[t('N DE SERIE'),v(i.tnserie)],['KV max',v(i.tkv)],['Ma max',v(i.tma)],[t('AÑO DE FABRICACIÓN'),v(i.tanio)]]);
+b += rtfSpace(300);
+b += rtfPar(t('En Las Palmas de Gran Canaria a ')+formatDate(i.fecha),{});
+const _fn='Ficha_Tecnica_'+v(i.cliente).replace(/\s+/g,'_')+'_'+v(i.tipo).replace(/\s+/g,'_')+'.rtf';
+downloadRTF(_fn, b);
+}
+
+function exportarAnexoWord(id) {
+const i = db.instalaciones.find(x=>x.id===id); if(!i) return;
+const V = x=>x||'';
+let b='';
+b += rtfPar(t('ANEXO II'),{bold:true,size:30,align:'center'});
+b += rtfPar(t('Certificado de conformidad de los equipos para su registro (EVAT)'),{bold:true,size:22,align:'center'});
+b += rtfSpace(200);
+b += rtfPar(t('DATOS DE LA INSTALACIÓN'),{bold:true,size:22});
+b += rtfLabelRow([
+[t('NOMBRE DEL TITULAR:'),V(i.a2_titular)],
+[t('NIF:'),V(i.a2_nif)],
+[t('TLFNO/E-MAIL:'),V(i.a2_tlfmail)],
+[t('DIRECCIÓN'),V(i.a2_dir)],
+[t('C.P.'),V(i.a2_cp)],
+[t('LOCALIDAD'),V(i.a2_loc)],
+[t('PROVINCIA'),V(i.a2_prov)],
+[t('NOMBRE DE LA INSTALACION')+' '+t('(si es diferente al titular)'),V(i.a2_nomins||'')],
+]);
+b += rtfSpace(200);
+b += rtfPar(t('DATOS DE CONFORMIDAD'),{bold:true,size:22});
+const dirName = V(i.director)||'____________________';
+const empName = V(i.empresa)||'____________________';
+b += rtfPar(t('D. ')+dirName+t(', en calidad de representante de la EVAT. ')+empName+' '+t('con fines de registro de la instalación, ')+t('CERTIFICO:'),{});
+b += rtfPar(t('- Que los equipos adquiridos por el titular para la instalación arriba citada son los siguientes:'),{});
+b += rtfSpace(80);
+const eqRows = [[t('EQUIPO Nº'),t('MARCA'),t('MODELO'),t('NÚMERO DE SERIE')]];
+[['1',V(i.a2_e1m),V(i.a2_e1mo),V(i.a2_e1s)],['2',V(i.a2_e2m),V(i.a2_e2mo),V(i.a2_e2s)]].forEach(r=>{ if(r[1]||r[2]||r[3]) eqRows.push(r); });
+b += rtfTable(eqRows,[1400,2600,2800,2400],{headerRow:0,align:['center','center','center','center']});
+b += rtfSpace(120);
+const esNueva=(i.procedencia==='nueva'||!i.procedencia);
+b += rtfPar(t('- Que estos equipos provienen de:'),{});
+b += rtfPar((esNueva?'☒ ':'☐ ')+t('Nueva adquisición'),{});
+const irxTxt = (!esNueva && V(i.pr_irx)) ? ' '+V(i.pr_irx) : '';
+b += rtfPar((!esNueva?'☒ ':'☐ ')+t('Traslado desde otra instalación ya registrada como')+irxTxt,{});
+b += rtfSpace(120);
+[t('Que estos equipos cumplen los requisitos legales necesarios para poder ser inscritos en el Registro de instalaciones de radiodiagnóstico médico.'),
+t('Que se adjunta a este Certificado una hoja de datos técnicos por cada uno de los equipos y sus componentes.'),
+t('Que toda la documentación aportada en relación con los equipos corresponde a los equipos concretos a suministrar e instalar.')
+].forEach(txt=>{ b += rtfPar('- '+txt,{}); });
+b += rtfSpace(300);
+const fechaStr=(function(){
+if(!i.fecha) return '_____ de __________ de _____';
+const p=i.fecha.split('-'); if(p.length!==3) return i.fecha;
+const lang = window.LANG || 'es';
+const mesesES=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+const mesesEN=['January','February','March','April','May','June','July','August','September','October','November','December'];
+const mesesDE=['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'];
+const mesesArr = lang==='en'?mesesEN:(lang==='de'?mesesDE:mesesES);
+const mes = mesesArr[parseInt(p[1],10)-1]||p[1]; const dia = parseInt(p[2],10);
+if(lang==='en') return mes+' '+dia+', '+p[0];
+if(lang==='de') return dia+'. '+mes+' '+p[0];
+return p[2]+' de '+mes+' de '+p[0];
+})();
+b += rtfPar(t('En Las Palmas de Gran Canaria, a ')+fechaStr,{});
+b += rtfSpace(400);
+b += rtfPar('____________________________',{align:'center'});
+b += rtfPar(dirName,{bold:true,align:'center'});
+b += rtfPar(t('[Nombre del representante de la EVAT]'),{italic:true,align:'center'});
+const _an='Anexo_II_'+V(i.cliente).replace(/\s+/g,'_')+'_'+V(i.tipo).replace(/\s+/g,'_')+'.rtf';
+downloadRTF(_an, b);
+}
+
+function exportarPruebasWord(id) {
+const inst = db.instalaciones.find(x=>x.id===id); if(!inst) return;
+const empD = getEmpresaData(inst.empresa);
+const tecD = getTecnicoData(inst.tecnico);
+const V = x => String(x||'');
+const pNombre  = V(inst['pru-nombre'])     || V(inst.cliente);
+const pDir     = V(inst['pru-dir'])        || V((db.clientes.find(c=>c.nombre===inst.cliente)||{}).direccion);
+const pCp      = V(inst['pru-cp'])         || V((db.clientes.find(c=>c.nombre===inst.cliente)||{}).cp);
+const pLoc     = V(inst['pru-loc'])        || V(inst.localidad);
+const pInst    = V(inst['pru-instalador']) || V(inst.empresa);
+const pCif     = V(inst['pru-cif'])        || V(empD.cif);
+const pAuth    = V(inst['pru-codauth'])    || V(empD.codAuth);
+const pTec     = V(inst['pru-tecnico'])    || V(inst.tecnico);
+const pDni     = V(inst['pru-dni'])        || V(tecD.dni);
+const pFnac    = V(inst['pru-fnac'])       || V(tecD.fechaNac);
+const pNeq     = V(inst['pru-neq'])        || V(inst.neq);
+const pFM      = V(inst['pru-fijomovil'])  || V(inst.fijomovil);
+const pTipo    = V(inst['pru-tipo'])       || V(inst.tipo);
+const pFab     = V(inst['pru-fabricante']) || V(inst.fabricante);
+const pPais    = V(inst['pru-pais'])       || V(inst.pais);
+const pDenom   = V(inst['pru-denom'])      || V(inst.denom);
+const pSisMod  = V(inst['pru-sistema-modelo'])  || (V(inst.fabricante)+(inst.modelo?' / '+V(inst.modelo):''));
+const pSisCod  = V(inst['pru-sistema-codorg'])  || V(inst.codfab);
+const pNserie  = V(inst['pru-nserie'])     || V(inst.nserie);
+const pKv      = V(inst['pru-kv'])         || V(inst.kv);
+const pMa      = V(inst['pru-ma'])         || V(inst.ma);
+const pAnio    = V(inst['pru-anio'])       || V(inst.anio);
+const pTubMod  = V(inst['pru-tubo-modelo'])|| (V(inst.tmod)+(inst.tcod?' / '+V(inst.tcod):''));
+const pTubCod  = V(inst['pru-tubo-codorg']);
+const pTnserie = V(inst['pru-tnserie'])    || V(inst.tnserie);
+const pTkv     = V(inst['pru-tkv'])        || V(inst.tkv);
+const pTma     = V(inst['pru-tma'])        || V(inst.tma);
+const pTanio   = V(inst['pru-tanio'])      || V(inst.tanio);
+let b='';
+b += rtfPar(t('PRUEBAS DE ACEPTACION'),{bold:true,size:36,align:'center'});
+if(t('(Conforme R.D. 1085/2009)')) b += rtfPar(t('(Conforme R.D. 1085/2009)'),{align:'center'});
+b += rtfPar(pNombre.toUpperCase(),{bold:true,size:26,align:'center'});
+b += rtfPar(pDir.toUpperCase(),{align:'center'});
+b += rtfPar((pCp+' '+pLoc).trim().toUpperCase(),{align:'center'});
+b += rtfSpace(300);
+b += rtfPar(t('DETALLE DE DATOS COMPLETOS DE LA SALA'),{bold:true,size:22});
+b += rtfLabelRow([[t('INSTALADOR'),pInst],[t('CIF/NIF'),pCif],[t('COD. AUTORIZACION'),pAuth],[t('TÉCNICO'),pTec],[t('DNI'),pDni],[t('FECHA NAC.'),pFnac]]);
+b += rtfSpace(120);
+b += rtfPar(t('EQUIPO'),{bold:true,size:20});
+b += rtfLabelRow([[t('N EQUIPO'),pNeq],[t('FIJO/MOVIL'),t(pFM)],[t('TIPO'),t(pTipo)],[t('FABRICANTE'),pFab],[t('PAIS'),pPais],[t('DENOMINACION'),pDenom]]);
+b += rtfSpace(120);
+b += rtfPar(t('SISTEMA'),{bold:true,size:20});
+b += rtfLabelRow([[t('MARCA/MODELO'),pSisMod],[t('COD.ORG.NOTIF. CE FAB.'),pSisCod],[t('N SERIE'),pNserie],['KV max',pKv],['mA max',pMa],[t('ANO FAB.'),pAnio]]);
+b += rtfSpace(120);
+b += rtfPar(t('TUBO'),{bold:true,size:20});
+b += rtfLabelRow([[t('MARCA/MODELO'),pTubMod],[t('COD.ORG.NOTIF. CE FAB.'),pTubCod],[t('N SERIE'),pTnserie],['KV max',pTkv],['mA max',pTma],[t('ANO FAB.'),pTanio]]);
+b += rtfSpace(300);
+b += rtfPar(t('PRUEBAS DE ACEPTACION'),{bold:true,size:22});
+[t('Este Documento y las Pruebas de Aceptacion que en el se describen tienen la finalidad de documentar ante el cliente que el sistema radiografico se ha instalado correctamente y que cumple con todas las especificaciones de venta.'),
+t('Siguiendo las pautas de la normativa vigente, Real Decreto 1976/1999, las pruebas de aceptacion de los equipos seran realizadas por el suministrador del equipo en presencia de un representante del comprador tecnicamente cualificado, y los resultados se reflejaran en el presente documento. Este documento supone un Control de Calidad inicial y constituye una referencia para posteriores verificaciones. Las pruebas de aceptacion se ajustan a normas internacionales y nacionales, Protocolo Espanol de Control de Calidad en Radiodiagnostico.'),
+t('Todos los parametros medidos y los resultados obtenidos deberan estar de acuerdo con los especificados en el Contrato de Compra y dentro de las tolerancias indicadas en las Fichas de Producto, no pudiendo ser superiores a las indicadas en el Anexo III del Real Decreto 1976/1999.')
+].forEach(p=>{ b += rtfPar(p,{}); b += rtfSpace(80); });
+b += rtfSpace(200);
+b += rtfPar(t('EQUIPOS DE MEDIDA UTILIZADOS'),{bold:true,size:22});
+const eqArr=inst['eq-medida']||[];
+const eqHead=[t('DESCRIPCION'),t('MARCA'),t('MODELO'),t('N SERIE'),t('FECHA CAL.'),t('ORGANISMO')];
+const eqRows=[eqHead];
+eqArr.forEach(eq=>{ if(!V(eq.tipo)&&!V(eq.desc)) return; eqRows.push([t(V(eq.tipo))||V(eq.desc),V(eq.marca),V(eq.modelo),V(eq.serie),V(eq.fcal),V(eq.org)]); });
+if(eqRows.length>1) b += rtfTable(eqRows,[2200,1500,1500,1800,1300,1400],{headerRow:0,align:['left','left','left','left','center','center']});
+b += rtfSpace(200);
+b += rtfPar(t('INFORME TECNICO DE RESULTADOS'),{bold:true,size:22});
+b += rtfPar(t('(segun Protocolo Espanol de Control de Calidad en Radiodiagnostico - SEFM-SEPR 2002 rev 1)'),{italic:true,size:16});
+const inclPDF=(key)=>inst['pdf-'+key]!==false;
+const infRows=[[t('CODIGO'),t('DESCRIPCION'),t('RESULTADO'),t('TOLERANCIA')]];
+const addSec=(txt)=>infRows.push([t(txt),'','','']);
+addSec('PARAMETROS GEOMETRICOS');
+if(inclPDF('dl001')) infRows.push(['DL001',t('Minima distancia foco-piel'),V(inst['pr-dl001'])||'OK','20cm Tp>60kV / 10cm Tp<60kV']);
+if(inclPDF('dl002')) infRows.push(['DL002',t('Tamano del campo en el extremo del localizador'),V(inst['pr-dl002'])||'OK','< 6cm']);
+addSec('CALIDAD DEL HAZ');
+if(inclPDF('dl003')) infRows.push(['*DL003',t('Exactitud y reproducibilidad de la tension'),V(inst['pr-dl003'])||t('Ver ANEXO I'),'Exactitud < +/-10%']);
+if(inclPDF('dl004')) infRows.push(['DL004',t('Filtracion. Capa Hemirreductora'),V(inst['pr-dl004'])||'','>1,5mmAl (TP<70Kv) / >2,5mmAl (TP>70Kv)']);
+addSec('TIEMPO DE EXPOSICION');
+if(inclPDF('dl006')) infRows.push(['*DL006',t('Exactitud y reproducibilidad del tiempo de exposicion'),V(inst['pr-dl006'])||t('Ver ANEXO I'),'Exactitud <+/-20% / Reprod.<10%']);
+addSec('RENDIMIENTO');
+if(inclPDF('dl007')) infRows.push(['*DL007',t('Reproducibilidad'),V(inst['pr-dl007'])||t('Ver ANEXO I'),'<10%']);
+if(inclPDF('dl008')) infRows.push(['DL008',t('Linealidad dosis con tiempo'),V(inst['pr-dl008'])||t('Ver ANEXO I'),'10%']);
+b += rtfTable(infRows,[1100,4000,2000,2100],{headerRow:0,align:['left','left','center','center']});
+b += rtfSpace(200);
+b += rtfPar(t('ANEXO I'),{bold:true,size:24,align:'center'});
+if(inst['chk-cont']!==false){
+b += rtfPar(t('CONTROL DE CALIDAD DE CONTRASTE'),{bold:true,size:20});
+b += rtfPar(t(V(inst['a1-cont-params'])||'120KV, 280mA, 1 x 10,00mm, foco grueso, 0,5seg'),{italic:true});
+b += rtfTable([['','CT Air (HV)',t('Escala de contrastes')],[t('Referencia'),'- 1.000,00','1,92e - 004'],[t('Tolerancia'),'+/- 10,00','+/- 3,00e-006'],[t('Resultados'),V(inst['a1-cont-res-hu']),V(inst['a1-cont-res-ec'])]],[2500,3300,3400],{headerRow:0,align:['left','center','center']});
+b += rtfSpace(120);
+}
+if(inst['chk-ruido']!==false){
+b += rtfPar(t('CONTROL DE CALIDAD DE RUIDO'),{bold:true,size:20});
+b += rtfPar(t(V(inst['a1-ruido-params'])||'120 KV, foco fino, 160mA, 1sec, 6x0,6mm'),{italic:true});
+const rRows=[['',t('Referencia'),'',t('Tolerancia'),'',t('Resultado'),''],['','HU','KV','HU','KV','HU','KV']];
+const rFijo=[['KV (1)','19,6','140,00','+/-1,95','-14,0'],['KV (2)','18,00','80,00','+/-1,80','-8,0'],['KV (3)','13,50','100,00','+/-1,35','-10,0'],['KV (4)','11,50','120,00','+/-1,15','-12,0'],['KV (5)','10,70','140,00','+/-1,07','-14,0']];
+rFijo.forEach((r,ri)=>{ rRows.push([r[0],r[1],r[2],r[3],r[4],V(inst[`a1-r${ri+1}-res-hu`]),V(inst[`a1-r${ri+1}-res-kv`])]); });
+b += rtfTable(rRows,[1200,1300,1300,1300,1300,1300,1300],{align:['left','center','center','center','center','center','center']});
+b += rtfSpace(120);
+}
+if(inst['chk-centr']!==false){
+b += rtfPar(t('CONTROL DE CENTRAJE DE COLIMACION'),{bold:true,size:20});
+b += rtfPar(t(V(inst['a1-centr-params'])||'120KV, 180mA, 1 x 2,00mm, foco fino, 0,5seg'),{italic:true});
+b += rtfLabelRow([[t('Referencia (mm)'),'0,0'],[t('Tolerancia (mm)'),'+/- 2.0'],[t('Resultado (mm)'),V(inst['a1-centr-res'])]]);
+b += rtfSpace(120);
+}
+if(inst['chk-pch1']!==false){
+b += rtfPar(t('EXACTITUD DE LA TENSION'),{bold:true,size:20});
+const pchRows=[[t('KV FIJADOS'),t('KV MEDIDOS'),'']];
+['70 KV','80 KV','90 KV','100 KV',''].forEach((kv,n)=>{
+const medido=V(inst[`pch1-${n+1}-medido`]);
+const ok=inst[`pch1-${n+1}-ok`]!==undefined?(inst[`pch1-${n+1}-ok`]?'OK':t('NO OK')):(n<4?'OK':'');
+if(kv==='' && !medido) return;
+pchRows.push([kv,medido,ok]);
+});
+b += rtfTable(pchRows,[2300,2300,2300],{align:['left','center','center']});
+b += rtfSpace(120);
+}
+if(inst['chk-repr']!==false){
+b += rtfPar(t('REPRODUCTIVIDAD DE LA TENSION'),{bold:true,size:20});
+const reprRows=[['KV',t('TEST 1'),t('TEST 2'),t('TEST 3'),t('TEST 4')]];
+['70 KV','80 KV','90 KV','100 KV','110 KV',''].forEach((kv,n)=>{
+const vals=[1,2,3,4].map(tt=>V(inst[`repr-${n+1}-t${tt}`]));
+if(kv==='' && !vals.some(x=>x)) return;
+reprRows.push([kv,...vals]);
+});
+b += rtfTable(reprRows,[1400,1900,1900,1900,1900],{headerRow:0,align:['left','center','center','center','center']});
+b += rtfSpace(120);
+}
+if(inst['chk-filtr']!==false){
+b += rtfPar(t('FILTRACION CAPA HEMIRREDUCTORA'),{bold:true,size:20});
+const filtrFijos={75:'2,',100:'3,',125:'4,',150:'5,'};
+const fRows=[[t('TENSION'),'HVL (MMA)']];
+[75,100,125,150].forEach(tension=>{ const dec=V(inst['filtr-'+tension+'-dec']); fRows.push([String(tension),dec?filtrFijos[tension]+dec:'']); });
+b += rtfTable(fRows,[3450,3450],{headerRow:0,align:['center','center']});
+b += rtfSpace(120);
+}
+if(inst['chk-rend']!==false){
+b += rtfPar(t('VALOR DEL RENDIMIENTO'),{bold:true,size:20});
+b += rtfLabelRow([[t('RENDIMIENTO A 80 KV'),'5,'+V(inst['rend-dec'])+' UGY /MA']]);
+b += rtfSpace(120);
+}
+if(inst['chk-texp']!==false){
+b += rtfPar(t('EXACTITUD DEL TIEMPO DE EXPOSICION'),{bold:true,size:20});
+b += rtfPar(t('Técnica: ')+(V(inst['texp-tecnica'])||'80 kv 200 ma'),{italic:true});
+const tRows=[['Ms','kv','ms',t('Resultado')]];
+[1000,400,40,10,''].forEach((ms,ri)=>{
+const kv=V(inst[`texp-${ri+1}-kv`]); const msRes=V(inst[`texp-${ri+1}-ms`]);
+if(ms==='' && !kv && !msRes) return;
+const apto=inst[`texp-${ri+1}-apto`]!==undefined?inst[`texp-${ri+1}-apto`]:true;
+tRows.push([String(ms),kv,msRes,ms===''?'':(apto?t('apto'):t('no apto'))]);
+});
+b += rtfTable(tRows,[1700,1700,1700,1700],{headerRow:0,align:['center','center','center','center']});
+b += rtfSpace(120);
+}
+if(inst['chk-ctdi']!==false){
+b += rtfPar(t('RESULTADO DE AIRE CTDI'),{bold:true,size:20});
+const cortes=['6X4,80','3X4,80','40X0,60','2X6,00','1X10,00'];
+const ctdiRows=[['KV',t('Corte (mm)'),...cortes]];
+const fiLabels=[[t('Nominal'),'nom'],[t('Tolerancia'),'tol'],['DLP','dlp'],[t('Resultado'),'res']];
+[80,100,120,140].forEach(kv=>{
+fiLabels.forEach(([lbl,key],li)=>{
+const row=[li===0?String(kv):'', lbl];
+for(let ci=1;ci<=5;ci++){ row.push(V(inst[`ctdi-${kv}-${key}-${ci}`])); }
+ctdiRows.push(row);
+});
+});
+b += rtfTable(ctdiRows,[900,1900,1240,1240,1240,1240,1240],{headerRow:0,align:['center','left','center','center','center','center','center']});
+b += rtfSpace(120);
+}
+b += rtfSpace(300);
+b += rtfPar('____________________________',{align:'center'});
+b += rtfPar(V(inst.director),{bold:true,align:'center'});
+b += rtfPar(t('Firma del Director'),{align:'center'});
+const _pname='Pruebas_Aceptacion_'+V(inst.cliente).replace(/\s+/g,'_')+'_'+V(inst.tipo).replace(/\s+/g,'_')+'.rtf';
+downloadRTF(_pname, b);
+}
+
 const TIPOS_FIJOS = ['Electrómetro','Kilovoltímetro','Medidor de tiempo'];
 function buildEqSelect(selectedIdx, rowIdx) {
 const opts = db.config.equiposMedidaConfig||[];
